@@ -13,7 +13,7 @@ class StoreOperationRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,16 @@ class StoreOperationRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'motif'=>'required|string',
+            'montant'=>'required|numeric'
+        ];
+    }
+
+    public function messages()
+    {
+        return 
+        [
+            'montant.numeric'=>'Ce champ doit contenir un numérique'
         ];
     }
 }
