@@ -26,7 +26,7 @@ class StoreMatiereRequest extends FormRequest
         return [
 
             'libelle'=>'required|string'
-            
+        
         ];
     }
 }
