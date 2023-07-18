@@ -13,7 +13,7 @@ class StoreCycleRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,18 @@ class StoreCycleRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
+        return 
+        [
+            "libelle"=>"required|string",
+            "droit"=>"required|numeric"
+        ];
+    }
+
+    public function messages()
+    {
+        return
+        [
+            "droit.numeric"=>"Ce Champ doit contenir un chiffre"
         ];
     }
 }

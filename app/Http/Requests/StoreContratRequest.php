@@ -13,7 +13,7 @@ class StoreContratRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,17 @@ class StoreContratRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'libelle'=>'required|string',
+            'dateremboursement'=>'required',
+            'amount'=>'required|numeric'
+        ];
+    }
+
+    public function messages()
+    {
+        return 
+        [
+            "amount.numeric"=>"Ce champ doit contenir un nombre"
         ];
     }
 }

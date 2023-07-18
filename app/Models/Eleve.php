@@ -14,7 +14,6 @@ class Eleve extends Model
     protected $fillable=
     [
         'name',
-        'firstname',
         'date_naiss',
         'adress',
         'inne',

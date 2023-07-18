@@ -13,7 +13,7 @@ class StoreEleveRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,16 @@ class StoreEleveRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "name"=>"required|string",
+            "date_naiss"=>"required|date",
+            "adress"=>"required"
         ];
+    }
+
+    public function messages()
+    {
+        return
+        ["name.string"=>"Ce champ ne contient pas de numérique"];
+        
     }
 }
