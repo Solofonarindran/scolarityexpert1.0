@@ -15,12 +15,13 @@
         // retourner id de la classe qui possède la clé étrangère comme 
         // id de la classe prédecesseur
 
-        public function retournIdSuccesseur($id)
+        public function returnIdSuccesseur($id)
         {
            return $this->model::where('classe_id',$id)->value('id');
         }
 
-
+  
+        
     }
 
 
