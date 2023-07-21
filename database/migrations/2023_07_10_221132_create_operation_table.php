@@ -19,7 +19,7 @@ return new class extends Migration
             $table->float('montant',5,2);
             $table->unsignedSmallInteger('nb')->nullable();
 
-            $table->foreignId('annee_scolaire_id')->constrained('annee_scolaire')
+            $table->foreignId('anneeScolaire_id')->constrained('anneeScolaire')
                                                   ->cascadeOnDelete()
                                                   ->cascadeOnUpdate();
             

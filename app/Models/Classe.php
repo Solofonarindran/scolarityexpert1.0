@@ -39,4 +39,10 @@ class Classe extends Model
     {
         return $this->hasMany(Inscrit::class);
     }
+
+    public function anneeScolaires()
+    {
+        return $this->belongsToMany(AnneeScolaire::class)->withPivot('effectifActu','tauxreussite','dispo');
+    }
+    
 }
