@@ -42,7 +42,8 @@ class Classe extends Model
 
     public function anneeScolaires()
     {
-        return $this->belongsToMany(AnneeScolaire::class)->withPivot('effectifActu','tauxreussite','dispo');
+        return $this->belongsToMany(AnneeScolaire::class)
+                    ->withPivot('effectifActu','tauxreussite','dispo');
     }
     
 }
