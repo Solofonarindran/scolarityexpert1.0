@@ -32,9 +32,22 @@
 
         }
 
+        //Evaluation 
+        //4 ème méthode 
         public function MatiereDispoReclam()
         {
-            
+            $idClasse=2;
+            $anneeId=1;
+            $anneeScoActive=2023;
+            return $this->model::where('classe_id',$idClasse)
+                                ->where('anneeScolaire_id',$anneeId)
+                                ->whereHas('examiners',function(Builder $query)
+                                {
+                                    $query->where('examen_id',$examen_id);
+                                })
+                                ->with($this->relation)
+                                ->get();
+
         }
     }
 

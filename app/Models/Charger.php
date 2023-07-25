@@ -16,7 +16,7 @@ class Charger extends Model
         'matiere_id',
         'classe_id',
         'professeur_id',
-        'annee_scolaire_id',
+        'anneeScolaire_id',
         'coefficient',
         'heurechargerparmois',
         'coutparheure'
