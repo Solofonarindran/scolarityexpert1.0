@@ -35,6 +35,7 @@
         }
 
         //Résultat (note) by id élève  et id examen 
+        //Evaluation particulier
         public function resultatByIdEleve($examen_id,$eleve_id)
         {
             $anneeSco_id=1;// stocker dans la session scolaire active
@@ -46,5 +47,13 @@
                                             
                                         })
                                ->get();
+        }
+
+        public function resultatByExamenId()
+        {
+            $anneeSco_id=1; //stocker dans la session 
+            return $this->model->where('examen_id',$idexam)
+                               ->whereHas('charger',fn(Builder $query)=>$query->where('anneeScolaire',$anneeSco_id))
+                               ->with($this->relation);
         }
     }

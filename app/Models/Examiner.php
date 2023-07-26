@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Charger;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Examiner extends Model
 {
@@ -33,5 +34,17 @@ class Examiner extends Model
     public function eleve()
     {
         return $this->belongsTo(Eleve::class);
+    }
+
+
+    //add attribute  to average the note
+
+    protected function averageNote(): Attribute
+    {
+        return Attribute::make(
+             fn()=>$this->charger->avg(
+                fn(Charger $charger)=>$charger->coefficient * $this->note
+            )
+            );
     }
 }
