@@ -49,11 +49,28 @@
                                ->get();
         }
 
+        //Résultat by id exam
+        //Evaluation -Général- par examen
+        //ceci utilise l'attribut averageNote 
         public function resultatByExamenId()
         {
             $anneeSco_id=1; //stocker dans la session 
             return $this->model->where('examen_id',$idexam)
-                               ->whereHas('charger',fn(Builder $query)=>$query->where('anneeScolaire',$anneeSco_id))
-                               ->with($this->relation);
+                               ->whereHas('charger',fn(Builder $query)=>$query->where('anneeScolaire_id',$anneeSco_id))
+                               ->groupBy('eleve_id')
+                               ->with($this->relation)
+                               ->get();
         }
+
+        public function resultatGeneral()
+        {
+            $anneeSco_id=1; //stocker dans la session 
+
+            return $this->model->whereHas('charger',fn(Builder $query)=>$query->where('anneeScolaire_id',$anneeSco_id))
+                               ->groupBy('eleve_id')
+                               ->with($this->relation)
+                               ->get();
+
+        }                       
+        
     }

@@ -38,7 +38,7 @@ class Examiner extends Model
 
 
     //add attribute  to average the note
-
+    
     protected function averageNote(): Attribute
     {
         return Attribute::make(

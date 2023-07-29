@@ -34,6 +34,10 @@ class AnneeScolaire extends Model
         return $this->hasMany(Operation::class);
     }
 
+    public function mouvements()
+    {
+        return $this->hasMany(Mouvement::class);
+    }
     public function classes()
     {
         return $this->belongsToMany(AnneeScolaire::class,'anneeScolaire_classe','classe_id','anneeScolaire_id')

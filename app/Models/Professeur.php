@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Operation;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Professeur extends Model
 {
@@ -33,5 +34,14 @@ class Professeur extends Model
     public function operations()
     {
         return $this->hasMany(Operation::class);
+    }
+
+    public function nbrSalairePayé(): Attribute
+    {
+        return  Attribute::make(
+            fn()=>$this->operations->sum(
+                fn(Operation $operation)=>$operation->nb
+            )
+        );
     }
 }

@@ -14,5 +14,33 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+
+
+    // Read File
+
+    $jsonString = file_get_contents(base_path('/public/data.json'));
+
+    $data = json_decode($jsonString, true);
+
+
+    // Update Key
+
+    $data['country.title'] = "Change Manage Country";
+
+
+    // Write File
+
+    $newJsonString = json_encode($data, JSON_PRETTY_PRINT);
+
+    file_put_contents(base_path('public/data.json'), stripslashes($newJsonString));
+
+
+    // Get Key Value
+
+    dd(__('country.title'));
+
+});
+
+Route::get('/layout/',function(){ 
+    return view('evaluation.optionEtape1');
 });
