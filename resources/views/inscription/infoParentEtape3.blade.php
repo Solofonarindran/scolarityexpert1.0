@@ -9,11 +9,15 @@
     @endsection
 
     @section('breadcrumbParent')
-        Inscription
+        Gérance Inscription
     @endsection
 
     @section('breadcrumbChild')
-        Information de Parents
+        Inscription
+    @endsection
+
+    @section('badge')
+            <sup class='badge badge-warning fw-800' style="letter-spacing:2px;font-size:12px">Infos Parent</sup>
     @endsection
 
     @section('contents')

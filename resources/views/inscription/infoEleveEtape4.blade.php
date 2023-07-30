@@ -9,13 +9,17 @@
     @endsection
 
     @section('breadcrumbParent')
-        Inscription
+        Gérance Inscription
     @endsection
 
     @section('breadcrumbChild')
-        Informations Elève
+        Inscription
     @endsection
-
+    
+    @section('badge')
+            <sup class='badge badge-warning fw-800' style="letter-spacing:2px;font-size:12px">Infos Elève</sup>
+    @endsection
+    
     @section('contents')
 
         <div class="gestion-inscription-etape-3">  

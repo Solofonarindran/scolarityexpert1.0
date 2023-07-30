@@ -5,7 +5,7 @@
     @endsection
 
     @section('style')
-        <link rel="stylesheet" href="/assets/css/custom-css/gestion-inscription-etape-2.css">
+        
     @endsection
 
     @section('breadcrumbParent')
@@ -17,7 +17,7 @@
     @endsection
 
     @section('badge')
-            <sup class='badge badge-primary fw-500'>Recherche</sup>
+            <sup class='badge badge-warning fw-800' style="letter-spacing:2px;font-size:12px">Recherche</sup>
     @endsection
 
     @section('contents')
@@ -27,7 +27,7 @@
             <div id="panel-1" class="panel">
                 <div class="panel-hdr">
                     <h2>
-                        Tableau <span class="fw-300"><i>de Recherche</i></span> <sup class='badge badge-warning fw-800 fs-4' style="letter-spacing: 2px;">Peter Pan</sup>
+                        Tableau <span class="fw-300"><i>de Recherche</i></span> 
                     </h2>
                     <div class="panel-toolbar">
                         <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
