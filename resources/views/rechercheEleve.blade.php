@@ -5,6 +5,8 @@
     @endsection
 
     @section('style')
+
+        <link rel="stylesheet" media="screen, print" href="/assets/css/datagrid/datatables/datatables.bundle.css" />
         
     @endsection
 
