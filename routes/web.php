@@ -42,5 +42,5 @@ Route::get('/', function () {
 });
 
 Route::get('/layout/',function(){ 
-    return view('evaluation.resultat.general.resultatAnnuel');
+    return view('infoReinscription');
 });
