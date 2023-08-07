@@ -17,8 +17,12 @@ return new class extends Migration
             $table->id();
             $table->string('libelle',20);
             $table->unsignedSmallInteger('effectifmax');
-            $table->float('frais_scolaire',5,2);
+            $table->float('frais_scolaire');
             $table->float('bareme',2,2);
+            $table->unsignedSmallInteger('effectifActu')->default(0);
+            $table->float('tauxreussite',2)->default(0.00);
+            $table->boolean('dispo')->default(TRUE);
+            
             $table->foreignId('cycle_id')->constrained('cycle')
                                          ->cascadeOnUpdate()
                                          ->cascadeOnDelete();

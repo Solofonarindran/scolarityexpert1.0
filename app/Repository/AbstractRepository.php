@@ -15,12 +15,18 @@
 
         public function edit($id=null,$array=[])
         {
-            return $this->model::updateOrCreate(['id'=>$id],$array);
+            return $this->model
+                        ->newQuery()
+                        ->updateOrCreate(['id'=>$id],$array);
         }
 
         public function getAll()
         {
-            return $this->model::all();
+            return $this->model
+                        ->newQuery()
+                        ->with($this->relation)
+                        ->get();
+                        
         }
 
         public function delete($id)

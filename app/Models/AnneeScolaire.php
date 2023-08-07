@@ -38,9 +38,9 @@ class AnneeScolaire extends Model
     {
         return $this->hasMany(Mouvement::class);
     }
-    public function classes()
+   /* public function classes()
     {
         return $this->belongsToMany(AnneeScolaire::class,'anneeScolaire_classe','classe_id','anneeScolaire_id')
                     ->withPivot('effectifActu','tauxreussite','dispo');
-    }
+    }*/
 }

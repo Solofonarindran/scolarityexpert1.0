@@ -13,6 +13,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
+Route::get('/classe/dash/','App\Http\Controllers\ClasseController@showDashboard')->name('classe.show');
+Route::post('/classe/add','App\Http\Controllers\ClasseController@edit')->name('classe.edit');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Route::get('/', function () {
 
 
@@ -39,8 +61,4 @@ Route::get('/', function () {
 
     dd(__('country.title'));
 
-});
-
-Route::get('/layout/',function(){ 
-    return view('infoReinscription');
 });

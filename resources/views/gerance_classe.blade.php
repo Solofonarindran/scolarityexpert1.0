@@ -61,7 +61,7 @@
 
                 </div>
                 <div class="classe-card add-card border">
-                    <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target=".example-modal-right-transparent">
+                    <button type="button" id="newPrimaryClass" class="btn btn-outline-warning" data-toggle="modal" data-target=".example-modal-right-transparent">
                              <i class="fa fa-plus"></i>
                     </button>
                     
@@ -107,7 +107,7 @@
 
 
                 </div>
-                <div class="classe-card add-card border">
+                <div class="classe-card add-card border shadow">
                     <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target=".example-modal-right-transparent">
                              <i class="fa fa-plus"></i>
                     </button>
@@ -143,7 +143,13 @@
                                
                                <div class="card-body p-3">
                                
-                               		<form action="" method="post">
+                               		<form action="{{route('classe.edit')}}" method="post">
+                                        @csrf
+                                       <div class="form-group">
+					                        <label class="form-label" for="cycle_id" style="font-weight:bold">Clé du cycle:</label>
+					                        <input type="text" name="cycle_id" id="cycle_id" class="form-control" readonly>
+					                       
+					                    </div>
 					                    <div class="form-group">
 					                        <label class="form-label" for="libelle" style="font-weight:bold">Libellé (Nom):</label>
 					                        <input type="text" name="libelle" id="libelle" class="form-control"  placeholder="8 ème" >
@@ -158,6 +164,11 @@
 					                        <label class="form-label" for="bareme" style="font-weight:bold">Barême de passage :</label>
 					                        <input type="number" name="bareme" max="12" min="9" id="bareme" class="form-control" placeholder="10">
 					                       
+					                    </div>
+                                        <div class="form-group">
+					                        <label class="form-label" for="effectifmax" style="font-weight:bold">Effectif max :</label>
+					                        <input type="number" name="effectifmax" id="effectifmax" class="form-control" placeholder="20">
+					                      
 					                    </div>
 					                    <div class="form-group">
 					                        <label class="form-label" for="phone" style="font-weight:bold">Classe Prédecesseur :</label>
@@ -230,12 +241,10 @@
 					                    </div>
 					                    <div class="form-group">
 					                        <label class="form-label" for="phone" style="font-weight:bold">Classe Prédecesseur :</label>
-					                        <select class="form-control" id="example-select">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>  
-                                                <option>5</option>
+					                        <select class="form-control" name="classe_id" id="example-select">
+                                                <option value="">1</option>
+                                                <option value="">2</option>
+                                               
                                             </select>
 					                      
 					                    </div>
@@ -256,5 +265,20 @@
                 </div>
             </div>
         </div>
+
+    @endsection
+
+    @section('script')
+
+        <script>
+            $(document).ready(function()
+            {
+                $(document).on('click','#newPrimaryClass',function()
+                {
+                    $('input:text[name=cycle_id]').val(1)
+                
+                })
+            })
+        </script>
 
     @endsection

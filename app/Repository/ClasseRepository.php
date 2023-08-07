@@ -12,6 +12,27 @@
             $this->relation=['classe','cycle','chargers','inscrits'];
         }
 
+        //retourner les classes de primaire
+        public function getPrimaryClass()
+        {
+            return $this->model
+                        ->newQuery()
+                        ->where('cycle_id',1)
+                        ->with($this->relation)
+                        ->get();
+        }
+
+         //retourner les classes de sécondaire
+         public function getSecondaryClass()
+         {
+             return $this->model
+                         ->newQuery()
+                         ->where('cycle_id',2)
+                         ->with($this->relation)
+                         ->get();
+         }
+
+
         // retourner la classe qui possède la clé étrangère comme 
         // id de la classe prédecesseur
 

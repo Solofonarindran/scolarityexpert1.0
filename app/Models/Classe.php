@@ -40,10 +40,10 @@ class Classe extends Model
         return $this->hasMany(Inscrit::class);
     }
 
-    public function anneeScolaires()
+   /* public function anneeScolaires()
     {
         return $this->belongsToMany(AnneeScolaire::class,'anneeScolaire_classe','classe_id','anneeScolaire_id')
                     ->withPivot('effectifActu','tauxreussite','dispo');
-    }
+    } */
     
 }

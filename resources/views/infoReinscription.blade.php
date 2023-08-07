@@ -59,7 +59,7 @@
                 <div class="etudiant-info-perso shadow etudiant-discipline">
                     <h3 class="person-item-details">
                         <i class="fal fa-paste"></i>
-                        INFROMATIONS DISCIPLINAIRE
+                        INFORMATIONS DISCIPLINAIRE
                     </h3>
                     <ul style="list-style-type: none;">
                         <li><i class="fal fa-chevron-right mr-3"></i> 1<sup>ère</sup> avertissement du 06 Juin 2011

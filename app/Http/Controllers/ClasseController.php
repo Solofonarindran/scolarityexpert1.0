@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Repository\ClasseRepository;
+use App\Models\Classe;
 use App\Http\Requests\StoreClasseRequest;
 use App\Http\Requests\UpdateClasseRequest;
-use App\Models\Classe;
 
 class ClasseController extends Controller
 {
@@ -13,72 +14,39 @@ class ClasseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    protected $repo;
+
+    public function __construct(ClasseRepository $classeRepo)
+    {
+        $this->repo=$classeRepo;
+    }
+
     public function index()
     {
-        //
+        
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+   
+    public function edit(StoreClasseRequest $request,$id=null)
+    {
+        $request->validated();
+        
+        $this->repo->edit($id,$request->input());
+        return to_route('classe.show');
+    }
+
+ 
+    public function showDashboard(Classe $classe)
     {
         //
+        $primarys=$this->repo->getPrimaryClass();
+       // $secondarys=$this->repo->getSecondaryClass();
+
+        //dd($primarys);
+        return view('gerance_classe');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreClasseRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreClasseRequest $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Classe  $classe
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Classe $classe)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Classe  $classe
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Classe $classe)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateClasseRequest  $request
-     * @param  \App\Models\Classe  $classe
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateClasseRequest $request, Classe $classe)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Classe  $classe
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Classe $classe)
     {
         //
