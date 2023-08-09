@@ -9,7 +9,7 @@
 
         public function getById($id)
         {
-            return $this->model::find($id)->with($this->relation);
+            return $this->model::find($id);
 
         }
 

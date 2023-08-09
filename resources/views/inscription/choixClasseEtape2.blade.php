@@ -31,7 +31,7 @@
                 <div class="scolarity-price">
                     <div class="price-section">
                         <h4><strong>Droit</strong></h4>
-                        <span>250.000 <sup>Ar</sup></span>
+                        <span>{{$cycle->droit}} <sup>Ar</sup></span>
                     </div>
                     <div class="price-section">
                         <h4><strong>Ecolage</strong></h4>
@@ -42,19 +42,21 @@
                 <div class="user-total-pay">
                     <span>TOTAL: <strong>255.000Ar</strong></span>
                 </div>
-                <form action="#" class="form-select">
+                <form action="{{route('Inscri.parent')}}" method="post" class="form-select">
+                    @csrf
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Veuillez choisir une classe: <span>08 places
                                 disponnibles</span></label>
-                        <select class="form-control" id="exampleFormControlSelect1">
-                            <option>4eme B</option>
-                            <option>2nd</option>
-                            <option>1ere D</option>
+                        <select name="classe_id" class="form-control" id="selectClasseDispo">
+                            @foreach ($classes as $classe)
+                               <option value="{{$classe->id}}">{{$classe->libelle}}</option>
+                            @endforeach
+                            
                         </select>
                     </div>
                     <div class="confirmation-button text-center">
                         <button class="btn  btn-outline-danger">Annuler</button>
-                        <button class="btn btn-primary ml-4">Confirmer</button>
+                        <button type="submit" class="btn btn-primary ml-4">Confirmer</button>
 
                     </div>
                 </form>
@@ -62,5 +64,50 @@
             
         </div> 
        
+
+    @endsection
+
+    @section('script')
+
+        <script>
+            $(document).ready(function()
+            {
+                var id=$('select[name=classeDispo] option').filter(':selected').val()
+                console.log(id)
+
+                
+                $.ajax({
+                    type:'POST',
+                    url:'/inscription/Classe', 
+                    dataType:'json',
+                    data:{
+                        "id":id
+                    },
+                    success:function(response){
+
+                        console.log(response)
+                    }
+                })
+
+                $('#selectClasseDispo').on('change',function(){
+                    var id=$('select[name=classeDispo] option').filter(':selected').val()
+
+                    $.ajax({
+                    type:'POST',
+                    url:'/inscription/Classe', 
+                    dataType:'json',
+                    data:{
+                        "id":id
+                    },
+                    success:function(response){
+
+                      console.log(response)
+                    }
+                })
+                    
+                })
+                
+            })
+        </script>
 
     @endsection

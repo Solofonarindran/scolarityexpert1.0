@@ -2,82 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Repository\GeniteurRepository;
 use App\Models\Geniteur;
 use Illuminate\Http\Request;
 
 class GeniteurController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    protected $parent;
+
+    public function __construct(GeniteurRepository $parent)
     {
-        //
+        $this->parent=$parent;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function createParentInscrit(StoreParentRequest $request)
     {
-        //
+        $request->validated();
+        $this->parent->edit(null,$request->input());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Geniteur  $geniteur
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Geniteur $geniteur)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Geniteur  $geniteur
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Geniteur $geniteur)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Geniteur  $geniteur
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Geniteur $geniteur)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Geniteur  $geniteur
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Geniteur $geniteur)
     {
         //

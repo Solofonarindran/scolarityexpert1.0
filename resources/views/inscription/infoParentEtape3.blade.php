@@ -25,6 +25,7 @@
         <div class="gestion-inscription-etape-3">  
             
             <section class="person-info-section shadow">
+                
                 <h2 class="card-title">
                     <i class="fa fa-user-friends"></i>
                     INFORMATION SUR LES PARENTS
@@ -42,7 +43,10 @@
                     <div class="tab-content p-3">
                         <div class="tab-pane fade active show" id="tab_direction-1" role="tabpanel">
                             <form action="" method="post">
-
+                                <div class="form-group">
+                                    <label for="exampleFormControlInput1">Clef de la Classe choisie: </label>
+                                    <input type="text" value="{{$data['classe_id']}}" name="classe_id" class="form-control" id="exampleFormControlInput1" disabled>
+                                </div>
                                 <div class="form-group">
                                     <label for="exampleFormControlInput1">Nom: </label>
                                     <input type="name" class="form-control" id="exampleFormControlInput1"
@@ -89,9 +93,14 @@
 
                                 <div class="form-group ">
                                     <label for="exampleFormControlInput1">Identifiant: </label>
-                                    <input type="name" class="form-control" id="exampleFormControlInput1"
-                                        placeholder="Rakoto, rabe,...">
+                                    <input type="text" name="parent_id" class="form-control" id="exampleFormControlInput1" disabled>
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="exampleFormControlInput1">Clef de la Classe choisie: </label>
+                                    <input type="text" value="{{$data['classe_id']}}" name="classe_id" class="form-control" id="exampleFormControlInput1" disabled>
+                                </div>
+
                                 <div class="form-group">
                                     <label for="exampleFormControlInput1">Nom: </label>
                                     <input type="name" class="form-control" id="exampleFormControlInput1"

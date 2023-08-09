@@ -11,14 +11,4 @@
             $this->relation=['classes'];
 
         }
-
-        //return classes par id cycle
-        //function 1 gérance Inscription
-        public function getClassesDispo($id)
-        {
-            return $this->model::find($id)->classes()
-                                          ->whereHas('anneeScolaire_classe',function(Builder $query){
-                                            $query->where('dispo',TRUE);
-                                          });
-        }
     }

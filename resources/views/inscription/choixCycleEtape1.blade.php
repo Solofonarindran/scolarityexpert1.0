@@ -31,13 +31,13 @@
                 </div>
                 <h2 class="choix-card-title">choix du cycle</h2>
                 <div class="choix-action">
-                    <button type="button" class="btn btn-outline-warning">Primaire
+                    <a href="{{route('Inscri.ClasseDispo',['id'=>1])}}" class="btn btn-outline-warning mr-4">Primaire
                         <span class="badge bg-warning-200 ml-2">4</span>
-                    </button>
+                    </a>
                    
-                    <button type="button" class="btn btn-outline-default">Sécondaire
+                    <a href="{{route('Inscri.ClasseDispo',['id'=>2])}}" class="btn btn-outline-default ml-4">Sécondaire
                         <span class="badge bg-warning-200 ml-2">4</span>
-                    </button>
+                    </a>
                 </div>
             </div>
         </div> 

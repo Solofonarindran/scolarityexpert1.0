@@ -13,6 +13,7 @@
         }
 
         //retourner les classes de primaire
+        //Dashboard classe
         public function getPrimaryClass()
         {
             return $this->model
@@ -23,6 +24,7 @@
         }
 
          //retourner les classes de sécondaire
+         //Dashboard classe
          public function getSecondaryClass()
          {
              return $this->model
@@ -31,6 +33,19 @@
                          ->with($this->relation)
                          ->get();
          }
+
+
+          //return classes par id cycle
+        //function 1 gérance Inscription
+        public function getClassesDispo($id)
+        {
+            return $this->model
+                        ->newQuery()
+                        ->where('cycle_id',$id)
+                        ->where('dispo',TRUE)
+                        ->with($this->relation)
+                        ->get();                                         
+        }
 
 
         // retourner la classe qui possède la clé étrangère comme 

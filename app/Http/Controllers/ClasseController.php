@@ -23,27 +23,37 @@ class ClasseController extends Controller
 
     public function index()
     {
-        
+        $this->repo->getById($id);
     }
 
    
-    public function edit(StoreClasseRequest $request,$id=null)
+    public function store(StoreClasseRequest $request,$id=null)
     {
         $request->validated();
-        
+
         $this->repo->edit($id,$request->input());
         return to_route('classe.show');
     }
 
+    public function update(UpdateClasseRequest $request)
+    {
+        $request->validated();
+
+        $data=$request->input();
+        $id=$data['id'];
+        $this->repo->edit($id,$data);
+
+        return to_route('classe.show');
+    }
  
     public function showDashboard(Classe $classe)
     {
         //
         $primarys=$this->repo->getPrimaryClass();
-       // $secondarys=$this->repo->getSecondaryClass();
+        $secondarys=$this->repo->getSecondaryClass();
 
-        //dd($primarys);
-        return view('gerance_classe');
+        
+        return view('gerance_classe',compact('primarys','secondarys'));
     }
 
 

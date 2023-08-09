@@ -39,13 +39,13 @@
         </div>
         <ul id="js-nav-menu" class="nav-menu">
             <li>
-                <a href="#" title="Application Intel">
+                <a href="#" title="Dashboard">
                     <i class="fas fa-tachometer-alt"></i>
                     <span class="nav-link-text" data-i18n="nav.application_intel">Tableau de Bord</span>
                 </a>
             </li>
             <li>
-                <a href="#" title="Theme Settings">
+                <a href="{{route('classe.show')}}" title="Admin Classe">
                     <i class="fa fa-graduation-cap"></i>
                     <span class="nav-link-text" data-i18n="nav.theme_settings">Gérance de Classe</span>
                 </a>
@@ -59,7 +59,7 @@
                 </a>
                 <ul>
                     <li>
-                        <a href="#" title="Alerts" data-filter-tags="ui components alerts">
+                        <a href="{{route('Inscri.ChoixCycle')}}" title="Inscription" data-filter-tags="ui components alerts">
                             <span class="nav-link-text"
                                 data-i18n="nav.ui_components_alerts">Inscription</span>
                         </a>

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateClasseRequest extends FormRequest
+class StoreEleveRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,22 +23,20 @@ class UpdateClasseRequest extends FormRequest
      */
     public function rules()
     {
-        return
-         [
-            'id'=>'required',
-            'libelle'=>'required|string',
-            'effectifmax'=>'required|numeric',
-            'bareme'=>'required|numeric'
-
+        return [
+            "name_father"=>"required|string",
+            "name_mother"=>"required|string",
+            "adress"=>"required",
+            "cin_father"=>"required|numeric",
+            "cin_mother"=>"required|numeric",
+            "phone"=>"required"
         ];
     }
 
     public function messages()
     {
         return
-        [
-            'effectifmax.numeric'=>'Ce Champ n\'accepte qu\'un nombre',
-            'bareme.numeric'=>'Ce Champ n\'accepte qu\'un nombre'
-        ];
+        ["name.string"=>"Ce champ ne contient pas de numérique"];
+        
     }
 }
