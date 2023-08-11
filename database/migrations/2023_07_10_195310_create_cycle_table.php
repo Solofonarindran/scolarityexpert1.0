@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('cycle', function (Blueprint $table) {
             $table->id();
             $table->string('libelle',70);
-            $table->float('droit',6,2);
+            $table->float('droit');
+            $table->float('frais_scolaire');
             $table->timestamps();
         });
     }

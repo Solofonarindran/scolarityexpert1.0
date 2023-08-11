@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('name_mother',70);
             $table->string('firstname_mother',70);
             $table->string('adress',70);
-            $table->string('cin_father',12);
-            $table->string('cin_mother',12);
+            $table->string('profession_mother',70);
+            $table->string('profession_father',70);
             $table->string('phone',15);
             $table->timestamps();
         });

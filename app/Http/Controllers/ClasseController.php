@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Repository\ClasseRepository;
 use App\Models\Classe;
+use Illuminate\Http\Request;
+use App\Repository\ClasseRepository;
 use App\Http\Requests\StoreClasseRequest;
 use App\Http\Requests\UpdateClasseRequest;
 
@@ -49,13 +50,23 @@ class ClasseController extends Controller
     public function showDashboard(Classe $classe)
     {
         //
+        $prescolaires=$this->repo->getPrescoClass();
         $primarys=$this->repo->getPrimaryClass();
         $secondarys=$this->repo->getSecondaryClass();
 
         
-        return view('gerance_classe',compact('primarys','secondarys'));
+        return view('gerance_classe',compact('prescolaires','primarys','secondarys'));
     }
 
+
+
+    //ajax gerance_classe.js
+    public function getByIdAjax(Request $request)
+    {
+        $id=$request->input('id');
+        $response=$this->repo->getClassesPred($id);
+        return response()->json($response);
+    }
 
     public function destroy(Classe $classe)
     {

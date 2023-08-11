@@ -27,7 +27,6 @@ class StoreClasseRequest extends FormRequest
          [
             'libelle'=>'required|string',
             'effectifmax'=>'required|numeric',
-            'frais_scolaire'=>'required|numeric',
             'bareme'=>'required|numeric'
 
         ];
@@ -38,7 +37,6 @@ class StoreClasseRequest extends FormRequest
         return
         [
             'effectifmax.numeric'=>'Ce Champ n\'accepte qu\'un nombre',
-            'frais_scolaire.numeric'=>'Ce Champ n\'accepte qu\'un chiffre',
             'bareme.numeric'=>'Ce Champ n\'accepte qu\'un nombre'
         ];
     }

@@ -12,7 +12,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <!-- Remove Tap Highlight on Windows Phone IE -->
     <meta name="msapplication-tap-highlight" content="no" />
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    @yield('token')
 
     <!-- base css -->
        @include('partials.assets.baseStyle')

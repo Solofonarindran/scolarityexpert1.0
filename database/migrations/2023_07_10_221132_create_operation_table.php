@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('operation', function (Blueprint $table) {
             $table->id();
             $table->string('motif',50);
-            $table->float('montant',5,2);
+            $table->float('montant');
             $table->unsignedSmallInteger('nb')->nullable();
 
             $table->foreignId('anneeScolaire_id')->constrained('anneeScolaire')

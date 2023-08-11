@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Repository\GeniteurRepository;
 use App\Models\Geniteur;
 use Illuminate\Http\Request;
+use App\Repository\GeniteurRepository;
+use App\Http\Requests\StoreGeniteurRequest;
 
 class GeniteurController extends Controller
 {
@@ -15,10 +16,13 @@ class GeniteurController extends Controller
         $this->parent=$parent;
     }
 
-    public function createParentInscrit(StoreParentRequest $request)
+    public function createParentInscrit(StoreGeniteurRequest $request)
     {
         $request->validated();
-        $this->parent->edit(null,$request->input());
+        $data=$this->parent->edit(null,$request->input());
+
+        dd($data);
+        return view('inscription.infoEleveEtape4');
     }
 
     public function destroy(Geniteur $geniteur)

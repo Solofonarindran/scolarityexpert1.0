@@ -12,13 +12,24 @@
             $this->relation=['classe','cycle','chargers','inscrits'];
         }
 
+        //retourner les classes de presco
+        //Dashboard classe
+        public function getPrescoClass()
+        {
+            return $this->model
+                        ->newQuery()
+                        ->where('cycle_id',1)
+                        ->with($this->relation)
+                        ->get();
+        }
+
         //retourner les classes de primaire
         //Dashboard classe
         public function getPrimaryClass()
         {
             return $this->model
                         ->newQuery()
-                        ->where('cycle_id',1)
+                        ->where('cycle_id',2)
                         ->with($this->relation)
                         ->get();
         }
@@ -29,11 +40,11 @@
          {
              return $this->model
                          ->newQuery()
-                         ->where('cycle_id',2)
+                         ->where('cycle_id',3)
                          ->with($this->relation)
                          ->get();
          }
-
+         
 
           //return classes par id cycle
         //function 1 gérance Inscription
@@ -44,6 +55,16 @@
                         ->where('cycle_id',$id)
                         ->where('dispo',TRUE)
                         ->with($this->relation)
+                        ->get();                                         
+        }
+
+        //retourner classes pour prédecesseur 
+        //ajax 
+        public function getClassesPred($id)
+        {
+            return $this->model
+                        ->newQuery()
+                        ->where('cycle_id',$id)
                         ->get();                                         
         }
 

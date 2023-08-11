@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GeniteurController;
+use App\Http\Controllers\InscriptionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,14 +20,20 @@ use Illuminate\Support\Facades\Route;
 Route::get('/classe/dash/','App\Http\Controllers\ClasseController@showDashboard')->name('classe.show');
 Route::post('/classe/add/{id?}','App\Http\Controllers\ClasseController@store')->name('classe.store');
 Route::post('/classe/edit/','App\Http\Controllers\ClasseController@update')->name('classe.edit');
+//route ajax
+Route::post('/Classe/getbyId','App\Http\Controllers\ClasseController@getByIdAjax')->name('classe.ajax');
 
-Route::get('/inscription/cycle','App\Http\Controllers\InscriptionController@ChoixCycle')->name('Inscri.ChoixCycle');
-Route::get('/inscription/ClasseDispo{id?}','App\Http\Controllers\InscriptionController@ClasseDispo')->name('Inscri.ClasseDispo');
-//Route::get('/inscription/idClasse','App\Http\Controllers\InscriptionController@getById')->name('Inscri.Classeid');
-Route::post('/inscription/parent','App\Http\Controllers\InscriptionController@parentForm')->name('Inscri.parent');
 
-//route problème ajax
-//Route::post('/inscription/Classe','App\Http\Controllers\InscriptionController@findId');
+
+Route::get('/ins/cycle','App\Http\Controllers\InscriptionController@ChoixCycle')->name('Inscri.ChoixCycle');
+Route::get('/ins/ClasseDispo{id?}','App\Http\Controllers\InscriptionController@ClasseDispo')->name('Inscri.ClasseDispo');
+
+Route::post('/ins/choixclasse','App\Http\Controllers\InscriptionController@choixclasse')->name('choixclasse');
+Route::post('/ins/parent','App\Http\Controllers\GeniteurController@createParentInscrit')->name('dataparentpost');
+Route::post('/ins/id_parent','App\Http\Controllers\InscriptionController@PassParentId')->name('passidparent');
+Route::post('/eleve/add','App\Http\Controllers\InscriptionController@createEleveInscription')->name('ajouteleveInscrit');
+
+
 
 
 

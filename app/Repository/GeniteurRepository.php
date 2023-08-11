@@ -12,12 +12,4 @@
         }   
         
  
-        //Gérance Inscription 
-        //3 ème méthode
-        
-        public function researchParents($words)
-        {
-           return $this->model::where('name_father','LIKE','%'.$words.'%')
-                              ->orwhere('name_mother','LIKE','%'.$words.'%');  
-        }
     }

@@ -10,19 +10,6 @@ use App\Http\Requests\UpdateEleveRequest;
 class EleveController extends Controller
 {
     
-    protected $repo;
-
-    public function __construct(EleveRepository $eleve)
-    {
-        $this->repo=$eleve;
-    }
-
-    public function createEleveInscription(StoreEleveRequest $request)
-    {
-        $request->validated();
-        $this->repo->edit(null,$request->input());
-    }
-
     
     public function store(StoreEleveRequest $request)
     {

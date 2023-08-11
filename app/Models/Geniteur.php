@@ -9,7 +9,7 @@ class Geniteur extends Model
 {
     use HasFactory;
 
-    protected $table='parent';
+    protected $table='geniteur';
 
     protected $fillable=
     [

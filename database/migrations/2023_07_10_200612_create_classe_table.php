@@ -17,10 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('libelle',20);
             $table->unsignedSmallInteger('effectifmax');
-            $table->float('frais_scolaire');
-            $table->float('bareme',2,2);
+            $table->float('bareme');
             $table->unsignedSmallInteger('effectifActu')->default(0);
-            $table->float('tauxreussite',2)->default(0.00);
+            $table->float('tauxreussite')->default(0);
             $table->boolean('dispo')->default(TRUE);
             
             $table->foreignId('cycle_id')->constrained('cycle')

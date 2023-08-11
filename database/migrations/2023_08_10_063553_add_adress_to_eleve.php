@@ -13,13 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('mouvement', function (Blueprint $table) {
+        Schema::table('eleve', function (Blueprint $table) {
             //
-            $table->unsignedSmallInteger('nb');
-            $table->float('montant');
-            $table->foreignId('inscrit_id')->constrained('inscrit')
-                                           ->cascadeOnDelete()
-                                           ->cascadeOnUpdate();
+            $table->string('adress',70);
         });
     }
 
@@ -30,7 +26,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('mouvement', function (Blueprint $table) {
+        Schema::table('eleve', function (Blueprint $table) {
             //
         });
     }

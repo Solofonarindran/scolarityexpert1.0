@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreEleveRequest extends FormRequest
+class StoreGeniteurRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,8 +27,8 @@ class StoreEleveRequest extends FormRequest
             "name_father"=>"required|string",
             "name_mother"=>"required|string",
             "adress"=>"required",
-            "cin_father"=>"required|numeric",
-            "cin_mother"=>"required|numeric",
+            "profession_father"=>"required",
+            "profession_mother"=>"required",
             "phone"=>"required"
         ];
     }

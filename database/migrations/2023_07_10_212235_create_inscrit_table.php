@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('inscrit', function (Blueprint $table) {
             $table->id();
             $table->unsignedSmallInteger('nb_moisPayé');
-            $table->float('montant_restant',6,2);
+            $table->float('montant_restant');
             $table->boolean('frais_finish')->default(FALSE);
             $table->boolean('tm_finish')->default(FALSE);
             $table->boolean('friandise_finish')->default(FALSE);

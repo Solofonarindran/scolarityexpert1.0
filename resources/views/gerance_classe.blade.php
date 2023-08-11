@@ -4,6 +4,10 @@
         Gérance de Classe
     @endsection
 
+    @section('token')
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+    @endsection
+    
     @section('style')
         <link rel="stylesheet" href="/assets/css/custom-css/gerance-classe-dashboard.css">
     @endsection
@@ -19,10 +23,64 @@
     @section('contents')
 
         <div class="gerance-classe-dasboard">  
+
+            <div class="classe-dashboard">
+                <h1 class="dashboard-name ">
+                    <a href="#" class="badge badge-warning">Préscolaire</a>
+                    <span class="name-separator">/</span>
+                    <span class="name-details"><i class="fa fa-user"></i> 2480</span>
+                    <span class="name-separator">/</span>
+                    <span class="name-details"><i class="fa fa-school"></i> 10</span>
+                    <span class="name-separator">/</span>
+                    <span class="name-details"><i class="fa fa-bullhorn"></i> 203</span>
+                </h1>
+
+                @foreach ($prescolaires as $prescolaire)
+                
+                    <div class="classe-card border shadow">
+
+                        <div class="card-call-to-ation">
+                            <button class="btn_update btn action-btn" id="{{$prescolaire->id}}" data-toggle="modal" data-target=".example-modal-left-transparent"><i class="fa fa-pen"></i></button>
+                            <button class="btn_delete btn action-btn" id="{{$prescolaire->id}}"><i class="fa fa-trash"></i></button>
+                        </div>
+                        <!-- card content  -->
+                        <div class="classe-name">
+                            <h3 id="libelle{{$prescolaire->id}}">{{$prescolaire->libelle}}</h3>
+                            <div class="classe-price" id="frais{{$prescolaire->id}}">
+                                <span id="">{{$prescolaire->cycle->frais_scolaire}} Ar/mois</span>
+                            </div>
+                        </div>
+                        <div class="classe-info">
+                            <div class="info-item" id="max{{$prescolaire->id}}">
+                                <h5><strong>Effectif maximale:</strong></h5>
+                                <span id="{{$prescolaire->effectifmax}}"><i class="fa fa-school"></i>{{$prescolaire->effectifmax}}</span>
+                            </div>
+                            <div class="info-item">
+                                <h5><strong>Etudiant actuel:</strong></h5>
+                                <span><i class="fa fa-user"></i>{{$prescolaire->effectifActu}}</span>
+                            </div>
+                            <div class="info-item">
+                                <h5><strong>Place disponnible:</strong></h5>
+                                <span><i class="fa fa-bullhorn"></i>{{$prescolaire->effectifmax - $prescolaire->effectifActu}}</span>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                @endforeach
+
+                <div class="classe-card add-card border">
+                    <button type="button" id="newPrescoClass" class="newstore btn btn-outline-warning" data-toggle="modal" data-target=".example-modal-right-transparent">
+                             <i class="fa fa-plus"></i>
+                    </button>
+                    
+                </div>
+            </div>
            
             <div class="classe-dashboard">
                 <h1 class="dashboard-name ">
-                    <a href="#" class="badge badge-warning">Primaire</a>
+                    <a href="#" class="badge badge-primary">Primaire</a>
                     <span class="name-separator">/</span>
                     <span class="name-details"><i class="fa fa-user"></i> 2480</span>
                     <span class="name-separator">/</span>
@@ -43,7 +101,7 @@
                         <div class="classe-name">
                             <h3 id="libelle{{$primary->id}}">{{$primary->libelle}}</h3>
                             <div class="classe-price" id="frais{{$primary->id}}">
-                                <span id="{{$primary->frais_scolaire}}">{{$primary->frais_scolaire}} Ar/mois</span>
+                                <span id="">{{$primary->cycle->frais_scolaire}} Ar/mois</span>
                             </div>
                         </div>
                         <div class="classe-info">
@@ -67,7 +125,7 @@
                 @endforeach
 
                 <div class="classe-card add-card border">
-                    <button type="button" id="newPrimaryClass" class="newstore btn btn-outline-warning" data-toggle="modal" data-target=".example-modal-right-transparent">
+                    <button type="button" id="newPrimaryClass" class="newstore btn btn-outline-primary" data-toggle="modal" data-target=".example-modal-right-transparent">
                              <i class="fa fa-plus"></i>
                     </button>
                     
@@ -96,7 +154,7 @@
                         <div class="classe-name">
                             <h3>{{$secondary->libelle}}</h3>
                             <div class="classe-price">
-                                <span>{{$secondary->frais_scolaire}} Ar/mois</span>
+                                <span>{{$secondary->cycle->frais_scolaire}} Ar/mois</span>
                             </div>
                         </div>
                         <div class="classe-info">
@@ -167,11 +225,11 @@
 					                        <input type="text" name="libelle" id="libelle" class="form-control"  placeholder="8 ème" >
 					                       
 					                    </div>
-					                    <div class="form-group">
+					                    <!-- <div class="form-group">
 					                        <label class="form-label" for="frais_scolaire" style="font-weight:bold">Ecolage :</label>
 					                        <input type="number" name="frais_scolaire" id="frais_scolaire" class="form-control" placeholder="35000">
 					                      
-					                    </div>
+					                    </div>-->
 					                    <div class="form-group">
 					                        <label class="form-label" for="bareme" style="font-weight:bold">Barême de passage :</label>
 					                        <input type="number" name="bareme" max="12" min="9" id="bareme" class="form-control" placeholder="10">
@@ -184,11 +242,8 @@
 					                    </div>
 					                    <div class="form-group">
 					                        <label class="form-label" for="phone" style="font-weight:bold">Classe Prédecesseur :</label>
-					                        <select class="form-control" name="classe_id" id="example-select">
-                                                @foreach ($primarys as $primary)
-                                                      <option value="{{$primary->id}}">{{$primary->libelle}}</option> 
-                                                @endforeach
-                                                  
+					                        <select class="form-control" name="classe_id" id="selectClassePred">
+                             
                                             </select>
 					                      
 					                    </div>
@@ -275,11 +330,91 @@
                 </div>
             </div>
         </div>
-
+    
     @endsection
 
     @section('script')
+    
 
-        <script src="/assets/js/customJs/gerance_class.js"></script>
+        <script>
+
+            $(document).ready(function()
+            {
+                $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    })
+
+                $(document).on('click','#newPrescoClass',function(){
+                    $('input:text[name=cycle_id]').val('1')
+                    $('h5 a.badge_ajout_classe').text('Préscolaire')
+
+                  
+                    $.ajax({
+                        type:"post",
+                        url:"{{Route('classe.ajax')}}",
+                        dataType:"json",
+                        data:
+                        {   
+                            "id":1
+                        },
+                        success:function(response){
+                            var option=""
+                            for(const value of response)
+                            {
+                                option+='<option value="'+value.id+'">'+value.libelle+'</option>'
+                                
+                            }
+
+                            $('#selectClassePred').html(option)
+                        }
+
+                    })
+                
+                })
+
+                $(document).on('click','#newPrimaryClass',function(){
+                    $('input:text[name=cycle_id]').val('2')
+                    $('h5 a.badge_ajout_classe').text('Primaire')
+                
+                })
+
+                $(document).on('click','#newSecondaryClass',function(){
+                    $('input:text[name=cycle_id]').val('3')
+                    $('h5 a.badge_ajout_classe').text('Sécondaire')
+                
+                })
+
+                $(document).on('click','.newstore',function(){
+
+                    $('input:text[name=libelle]').val("")
+                    $('input:text[name=effectifmax]').val("")
+
+                    /* $('input:text[name=frais_scolaire]').val("")*/
+                })
+
+                $(document).on('click','.btn_update',function()
+                {
+                    $('h5 a.badge_edit_cycle').text('Modification')
+
+                    //récuperer l'id de la classe à modifier
+                    var id=$(this).attr('id')
+
+                    var libelle=$('h3#libelle'+id).text()
+                    var effectifmax=$('#max'+id+' span').attr('id')
+                    /*var ecolage=$('#frais'+id+' span').attr('id')*/
+
+                    $('input:text[name=id]').val(id)
+                    $('input:text[name=libelle]').val(libelle)
+                    $('input:text[name=effectifmax]').val(effectifmax)
+
+                    /*$('input:text[name=frais_scolaire]').val(ecolage)*/
+
+
+                })
+
+            })
+        </script>
 
     @endsection
