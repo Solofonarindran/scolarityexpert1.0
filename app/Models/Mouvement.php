@@ -15,8 +15,9 @@ class Mouvement extends Model
     [
         'libelle',
         'nb',
-        'amount',
-        'insert_id'
+        'montant',
+        'inscrit_id',
+        'anneeScolaire_id'
     ];
 
     public function inscrit()

@@ -19,14 +19,12 @@ class GeniteurController extends Controller
     public function createParentInscrit(StoreGeniteurRequest $request)
     {
         $request->validated();
-        $data=$this->parent->edit(null,$request->input());
-
-        dd($data);
+        
+        $parent=$this->parent->edit(null,$request->input());
+        $data=$parent->getOriginal();
+        session(['geniteur_id'=>$data['id']]);
+        session()->put('inne',TRUE);
+        session()->save();
         return view('inscription.infoEleveEtape4');
-    }
-
-    public function destroy(Geniteur $geniteur)
-    {
-        //
     }
 }

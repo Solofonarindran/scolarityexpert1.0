@@ -17,30 +17,34 @@ use App\Http\Controllers\InscriptionController;
 
 
 
-Route::get('/classe/dash/','App\Http\Controllers\ClasseController@showDashboard')->name('classe.show');
-Route::post('/classe/add/{id?}','App\Http\Controllers\ClasseController@store')->name('classe.store');
-Route::post('/classe/edit/','App\Http\Controllers\ClasseController@update')->name('classe.edit');
+Route::get('/cl/dash/','App\Http\Controllers\ClasseController@showDashboard')->name('classe.show');
+Route::post('/cl/add/{id?}','App\Http\Controllers\ClasseController@store')->name('classe.store');
+Route::post('/cl/edit/','App\Http\Controllers\ClasseController@update')->name('classe.edit');
 //route ajax
-Route::post('/Classe/getbyId','App\Http\Controllers\ClasseController@getByIdAjax')->name('classe.ajax');
+Route::post('/Cl/getbyId','App\Http\Controllers\ClasseController@getByIdAjax')->name('classe.ajax');
 
 
-
+// route inscription
 Route::get('/ins/cycle','App\Http\Controllers\InscriptionController@ChoixCycle')->name('Inscri.ChoixCycle');
-Route::get('/ins/ClasseDispo{id?}','App\Http\Controllers\InscriptionController@ClasseDispo')->name('Inscri.ClasseDispo');
-
-Route::post('/ins/choixclasse','App\Http\Controllers\InscriptionController@choixclasse')->name('choixclasse');
-Route::post('/ins/parent','App\Http\Controllers\GeniteurController@createParentInscrit')->name('dataparentpost');
-Route::post('/ins/id_parent','App\Http\Controllers\InscriptionController@PassParentId')->name('passidparent');
-Route::post('/eleve/add','App\Http\Controllers\InscriptionController@createEleveInscription')->name('ajouteleveInscrit');
-
+Route::get('/ins/Cl/Dispo{id?}','App\Http\Controllers\InscriptionController@ClasseDispo')->name('Inscri.ClasseDispo');
+Route::post('/ins/cl/','App\Http\Controllers\InscriptionController@choixclasse')->name('classechoisie');
+Route::post('/ins/par/','App\Http\Controllers\GeniteurController@createParentInscrit')->name('postparent');
+Route::post('/ins/id_pat','App\Http\Controllers\InscriptionController@PassParentId')->name('passidparent');
+Route::post('ins/e/add','App\Http\Controllers\EleveController@createEleveInscription')->name('ajouteleveInscrit');
 
 
 
+//route réinscription
+Route::get('/re/search','App\Http\Controllers\ReinscritController@search')->name('reinscri.search');
+Route::get('/re/inf/','App\Http\Controllers\ReinscritController@index')->name('info.reinscri');
 
 
 
 
 
+/*Route::get('/v/',function(){
+    return view('inscription.infoParentEtape3');
+});
 
 
 Route::get('/', function () {
@@ -69,4 +73,7 @@ Route::get('/', function () {
 
     dd(__('country.title'));
 
-});
+});*/
+
+
+

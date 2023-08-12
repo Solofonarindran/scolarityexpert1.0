@@ -23,13 +23,11 @@
     @section('contents')
 
         <div class="gestion-inscription-etape-3">  
-        <?php
-            echo(session('parent_id'));
-        ?>
+       
         <section class="person-info-section shadow">
             <h2 class="card-title">
                 <i class="fa fa-user"></i>
-                INFORMATION SUR L'ETUDIANTS
+                INFORMATION SUR L'ETUDIANT
             </h2>
             <form method="POST" action="{{route('ajouteleveInscrit')}}">
                 @csrf
@@ -45,7 +43,7 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlInput1" style="font-weight:800">Adresse:</label>
-                    <input type="name" class="form-control" id="exampleFormControlInput1"
+                    <input type="name" class="form-control" id="exampleFormControlInput1" name="adress"
                         placeholder="Besavoa,Lot IVN 75 Morarano,...">
                 </div>
 

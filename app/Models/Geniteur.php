@@ -17,8 +17,9 @@ class Geniteur extends Model
         'firstname_father',
         'name_mother',
         'firstname_mother',
-        'CIN_father',
-        'CIN_mother',
+        'profession_mother',
+        'profession_father',
+        'adress',
         'phone'
 
     ];

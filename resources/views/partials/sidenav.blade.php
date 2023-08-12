@@ -65,7 +65,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" title="Accordions" data-filter-tags="ui components accordions">
+                        <a href="{{route('reinscri.search')}}" title="Accordions" data-filter-tags="ui components accordions">
                             <span class="nav-link-text"
                                 data-i18n="nav.ui_components_accordions">Réinscription</span>
                         </a>

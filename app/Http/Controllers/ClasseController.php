@@ -47,7 +47,7 @@ class ClasseController extends Controller
         return to_route('classe.show');
     }
  
-    public function showDashboard(Classe $classe)
+    public function showDashboard()
     {
         //
         $prescolaires=$this->repo->getPrescoClass();

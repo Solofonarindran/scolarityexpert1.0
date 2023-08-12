@@ -15,9 +15,10 @@ class Eleve extends Model
     [
         'name',
         'date_naiss',
+        'firstname',
         'adress',
         'inne',
-        'parent_id'
+        'geniteur_id'
     ];
 
     public function geniteur() 

@@ -14,7 +14,7 @@ class Inscrit extends Model
     protected $fillable=
     [
         'eleve_id',
-        'annee_scolaire_id',
+        'anneeScolaire_id',
         'classe_id',
         'nb_moisPayé',
         'montant_restant',

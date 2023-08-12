@@ -34,7 +34,7 @@
                     <span class="name-separator">/</span>
                     <span class="name-details"><i class="fa fa-bullhorn"></i> 203</span>
                 </h1>
-
+                
                 @foreach ($prescolaires as $prescolaire)
                 
                     <div class="classe-card border shadow">

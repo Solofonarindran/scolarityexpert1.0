@@ -25,30 +25,21 @@ class InscriptionController extends Controller
     protected $eleveRepo;
     protected $geniteurRepo;
 
-    public function __construct(ClasseRepository $classeRepo,EleveRepository $eleveRepo,
-                                CycleRepository $cycleRepo,GeniteurRepository $geniteurRepo)
+    public function __construct(ClasseRepository $classeRepo,CycleRepository $cycleRepo
+                                ,GeniteurRepository $geniteurRepo)
     
     {
         $this->classeRepo=$classeRepo;
         $this->cycleRepo=$cycleRepo;
-        $this->eleveRepo=$eleveRepo;
         $this->geniteurRepo=$geniteurRepo;
     }
+
+    
     public function ChoixCycle()
     {
         return view('inscription.choixCycleEtape1');
     }
 
-
-    
-    //createEleveInscription fin étape
-    public function createEleveInscription(StoreEleveRequest $request)
-    {
-        $request->validated();
-        $this->eleveRepo->edit(null,$request->input());
-        dd($eleveRepo);
-
-    }
 
     //passer geniteur_id stocker dans la session cookies
     public function passParentId(Request $request)
@@ -89,12 +80,9 @@ class InscriptionController extends Controller
     public function ClasseDispo($id)
     {
         $cycle=$this->cycleRepo->getById($id);
-        $classes=$this->classeRepo->getClassesDispo($id);
+        $classes=$this->classeRepo->getClassesDispo($id); 
         return view('inscription.choixClasseEtape2',compact('classes','cycle'));
     }
     
-    public function destroy(Inscrit $inscrit)
-    {
-        //
-    }
+   
 }

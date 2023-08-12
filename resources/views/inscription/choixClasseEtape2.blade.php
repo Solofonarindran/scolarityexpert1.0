@@ -39,10 +39,13 @@
                     </div>
 
                 </div>
+                <?php
+                    session(['total'=>$cycle->droit + $cycle->frais_scolaire]);
+                ?>
                 <div class="user-total-pay">
-                    <span>TOTAL: <strong>255.000Ar</strong></span>
+                    <span>TOTAL: <strong>{{$cycle->droit + $cycle->frais_scolaire}} Ar</strong></span>
                 </div>
-                <form action="{{route('choixclasse')}}" method="post" class="form-select">
+                <form action="{{route('classechoisie')}}" method="post" class="form-select">
                     @csrf
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Veuillez choisir une classe: <span>08 places

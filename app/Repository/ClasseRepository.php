@@ -12,6 +12,14 @@
             $this->relation=['classe','cycle','chargers','inscrits'];
         }
 
+
+        public function incrementEffActu($id)
+        {
+           return $this->model->where('id',$id)
+                              ->increment('effectifActu',1);
+        }
+
+
         //retourner les classes de presco
         //Dashboard classe
         public function getPrescoClass()

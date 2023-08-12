@@ -43,7 +43,7 @@
                     </ul>
                     <div class="tab-content p-3">
                         <div class="tab-pane fade active show" id="tab_direction-1" role="tabpanel">
-                            <form action="{{route('dataparentpost')}}" method="post">
+                            <form action="{{route('postparent')}}" method="post">
                                @csrf
                                 <div class="form-group">
                                     <label for="exampleFormControlInput1">Nom Père: </label>
@@ -74,7 +74,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleFormControlInput1">Adresse:</label>
-                                    <input type="text" class="form-control" id="exampleFormControlInput1"
+                                    <input type="text" class="form-control" id="exampleFormControlInput1" name="adress"
                                         placeholder="Andrainjato, Besavoa, Morarano,...">
                                 </div>
                                 <div class="form-group">
@@ -104,7 +104,7 @@
 
                                 <div class="form-group">
                                     <label for="exampleFormControlInput1">Nom Père: </label>
-                                    <input type="text" name="nomPere" class="form-control" id="exampleFormControlInput1" style="text-transform:uppercase"
+                                    <input type="text" name="father" class="form-control" id="exampleFormControlInput1" style="text-transform:uppercase"
                                         disabled>
                                 </div>
                    
@@ -116,18 +116,18 @@
 
                                 <div class="form-group">
                                     <label for="exampleFormControlInput1">Nom Mère: </label>
-                                    <input type="text" name="nomMere" class="form-control" id="exampleFormControlInput1" style="text-transform:uppercase"
+                                    <input type="text" name="mother" class="form-control" id="exampleFormControlInput1" style="text-transform:uppercase"
                                         disabled>
                                 </div>
                                
                                 <div class="form-group">
                                     <label for="exampleFormControlInput1">Adresse:</label>
                                     <input type="text" class="form-control" id="exampleFormControlInput1"
-                                        name=adress>
+                                        name=adress_dir2>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleFormControlInput1">Profession:</label>
-                                    <input type="text" class="form-control" id="exampleFormControlInput1" name="profession_mother"
+                                    <input type="text" class="form-control" id="exampleFormControlInput1" name="professionMere"
                                         disabled>
                                 </div>
                                 
@@ -136,12 +136,12 @@
                                     @csrf
                                     <div class="form-group ">
                                         <label for="exampleFormControlInput1">Identifiant: </label>
-                                        <input type="text" name="geniteur_id" class="form-control" id="exampleFormControlInput1" hidden>
-                                        <input type="text" name="geniteur_id" class="form-control" id="exampleFormControlInput1" disabled>
+                              
+                                        <input type="text" name="geniteur_id" class="form-control" id="exampleFormControlInput1">
                                     </div>
 
                                     <div class="form-group d-flex justify-content-center">
-                                        <button type="submit" class="btn btn-sm btn-outline-primary">Enregistrer</button>
+                                        <button type="submit" class="btn btn-sm btn-outline-primary">Confirmer</button>
                                     </div>
 
                                 </form>
@@ -198,7 +198,7 @@
                                                 </thead>
                                                 <tbody>
 
-                                                    @foreach ($parents as $parent)
+                                                   @foreach ($parents as $parent)
 
                                                         <tr>
                                                             <td>{{$parent->id}}</td>
@@ -244,9 +244,21 @@
 
             $(document).ready(function(){
                    $(document).on('click','table tbody button#select',function(){
-                        var id=$(this).closest('tr').find('td:first-child')
+                        var tr=$(this).closest('tr')
+                        
+                        var id=tr.find('td:first-child')
+                        var father=tr.find('td:eq(1)')
+                        var mother=tr.find('td:eq(2)')
+                        var adress=tr.find('td:eq(3)')
+                        var profession_mother=tr.find('td:eq(4)')
+                        var profession_father=tr.find('td:eq(5)')
         
                         $('input:text[name=geniteur_id]').val(id.text())
+                        $('input:text[name=father]').val(father.text())
+                        $('input:text[name=mother]').val(mother.text())
+                        $('input:text[name=adress_dir2]').val(adress.text())
+                        $('input:text[name=professionMere]').val(profession_mother.text())
+                        $('input:text[name=professionPere]').val(profession_father.text())
                    }) 
             })
 
