@@ -25,7 +25,7 @@ class ExaminerController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
