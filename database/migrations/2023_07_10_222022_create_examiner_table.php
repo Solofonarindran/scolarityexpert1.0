@@ -25,7 +25,7 @@ return new class extends Migration
                                            ->cascadeOnDelete()
                                            ->cascadeOnUpdate();
             
-            $table->foreignId('eleve_id')->constrained('eleve')
+            $table->foreignId('inscrit_id')->constrained('inscrit')
                                          ->cascadeOnDelete()
                                          ->cascadeOnUpdate();
             $table->timestamps();

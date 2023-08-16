@@ -31,7 +31,6 @@ class ClasseController extends Controller
     public function store(StoreClasseRequest $request,$id=null)
     {
         $request->validated();
-
         $this->repo->edit($id,$request->input());
         return to_route('classe.show');
     }

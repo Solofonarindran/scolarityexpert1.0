@@ -17,7 +17,7 @@ class Mouvement extends Model
         'nb',
         'montant',
         'inscrit_id',
-        'anneeScolaire_id'
+        'anneescolaire_id'
     ];
 
     public function inscrit()
@@ -25,7 +25,7 @@ class Mouvement extends Model
         return $this->belongsTo(Inscrit::class);
     }
 
-    public function anneeScolaire()
+    public function anneescolaire()
     {
         return $this->belongsTo(AnneeScolaire::class);
     }

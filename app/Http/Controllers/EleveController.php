@@ -43,7 +43,7 @@ class EleveController extends Controller
         //chargement de données pour inscription
         $datarequest=[];
         $datarequest['eleve_id']=$data['id'];
-        $datarequest['anneeScolaire_id']=1;
+        $datarequest['anneescolaire_id']=1;
         $datarequest['classe_id']=session()->pull('classe_id');
 
         //ajout inscrit et retourner l'id
@@ -51,13 +51,13 @@ class EleveController extends Controller
         $inscrit=$InscriRepo->edit(null,$datarequest);
         $dataInscrit=$inscrit->getOriginal();
 
-        $classe=$this->classeRepo->incrementEffActu($datarequest['classe_id']);
+        $this->classeRepo->incrementEffActu($datarequest['classe_id']);
 
         
         //enregistrer le mouvement ecolage 1mois + droit
         $dataMouv['inscrit_id']=$dataInscrit['id'];
         $dataMouv['libelle']='Droit + Ecolage 1 mois';
-        $dataMouv['anneeScolaire_id']=1;
+        $dataMouv['anneescolaire_id']=1;
         $dataMouv['montant']=session()->pull('total');
         $mouvRepo->edit(null,$dataMouv);
 

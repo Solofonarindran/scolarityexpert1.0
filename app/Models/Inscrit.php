@@ -14,7 +14,7 @@ class Inscrit extends Model
     protected $fillable=
     [
         'eleve_id',
-        'anneeScolaire_id',
+        'anneescolaire_id',
         'classe_id',
         'nb_moisPayé',
         'montant_restant',
@@ -22,7 +22,8 @@ class Inscrit extends Model
         'tm_finish',
         'friandise_finish',
         'participation_finish',
-        'droit_finish'
+        'droit_finish',
+        'is_reinscrit'
     ];
 
     public function eleve()
@@ -30,9 +31,9 @@ class Inscrit extends Model
         return $this->belongsTo(Eleve::class);
     }
 
-    public function annee_scolaire()
+    public function anneescolaire()
     {
-        return $this->belongsTo(Annee_scolaire::class);
+        return $this->belongsTo(Anneescolaire::class);
     }
 
     public function classe()

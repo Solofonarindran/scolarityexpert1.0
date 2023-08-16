@@ -20,9 +20,9 @@ class Operation extends Model
         'professeur_id'
     ];
 
-    public function annee_scolaire()
+    public function anneeScolaire()
     {
-        return $this->belongsTo(Annee_scolaire::class);
+        return $this->belongsTo(AnneeScolaire::class);
     }
 
     public function professeur()

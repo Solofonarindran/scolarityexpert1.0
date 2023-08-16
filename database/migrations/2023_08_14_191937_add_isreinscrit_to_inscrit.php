@@ -13,12 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('mouvement', function (Blueprint $table) {
+        Schema::table('inscrit', function (Blueprint $table) {
             //
-            $table->foreignId('anneescolaire_id')
-                  ->constrained('anneescolaire')
-                  ->cascadeOnUpdate()
-                  ->cascadeOnDelete();
+            $table->boolean('is_reinscrit')->default(FALSE);
         });
     }
 
@@ -29,7 +26,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('mouvement', function (Blueprint $table) {
+        Schema::table('inscrit', function (Blueprint $table) {
             //
         });
     }

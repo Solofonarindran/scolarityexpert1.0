@@ -17,6 +17,7 @@ class Classe extends Model
         'effectifmax',
         'frais_scolaire',
         'bareme',
+        'classe_id',
         'cycle_id'
     ];
 

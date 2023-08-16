@@ -9,8 +9,12 @@
 
         public function getById($id)
         {
-            return $this->model::find($id);
-
+            return $this->model
+                        ->newQuery()
+                        ->where('id',$id)
+                        ->with($this->relation)
+                        ->get();
+    
         }
 
         public function edit($id=null,$array=[])

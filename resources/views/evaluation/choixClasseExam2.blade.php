@@ -30,27 +30,33 @@
                 </div>
 
                 
-                <form action="#" class="form-select">
+                <form action="{{route('postClasseExam')}}" class="form-select">
+                    @csrf
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Veuillez choisir une classe:</label>
-                        <select class="form-control" id="exampleFormControlSelect1">
-                            <option>4eme B</option>
-                            <option>2nd</option>
-                            <option>1ere D</option>
+                        <select name="classe_id" class="form-control" id="exampleFormControlSelect1">
+                            @foreach($classes as $classe)
+                                 <option value="{{$classe->id}}">{{$classe->libelle}}</option>
+                            @endforeach
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Veuillez choisir l'examen: </label>
-                        <select class="form-control" id="exampleFormControlSelect1">
-                            <option>1er Inter Trimestre</option>
-                            <option>1er Trimestre</option>
-                            <option>2 trimestre</option>
+                        <select name="examen_id" class="form-control" id="exampleFormControlSelect1">
+
+                            <option value="1">1er Inter Trimestre</option>
+                            <option value="2">1er       Trimestre</option>
+                            <option value="3">2ème Inter Trimestre</option>
+                            <option value="4">2ème       Trimestre</option>
+                            <option value="5">3ème Inter Trimestre</option>
+                            <option value="6">3ème       Trimestre</option>
+        
                         </select>
                     </div>
 
                     <div class="confirmation-button text-center">
-                        <button class="btn  btn-outline-danger">Annuler</button>
+                        <button type="reset" class="btn  btn-outline-danger">Annuler</button>
                         <button type="submit" class="btn btn-primary ml-4">Confirmer</button>
 
                     </div>

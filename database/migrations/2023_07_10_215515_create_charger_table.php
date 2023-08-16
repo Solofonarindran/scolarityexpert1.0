@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedSmallInteger('heurechargerparmois');
             $table->float('coutparheure');
+            $table->boolean('dispo')->default(TRUE);
             $table->unsignedSmallInteger('coefficient');
             $table->foreignId('matiere_id')->constrained('matiere')
                                            ->cascadeOnDelete()
@@ -30,9 +31,7 @@ return new class extends Migration
                                               ->cascadeOnDelete()
                                               ->cascadeOnUpdate();
 
-            $table->foreignId('anneeScolaire_id')->constrained('anneeScolaire')
-                                                  ->cascadeOnDelete()
-                                                  ->cascadeOnUpdate();
+           
             $table->timestamps();
         });
     }

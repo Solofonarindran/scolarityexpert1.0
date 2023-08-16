@@ -21,7 +21,7 @@
     @endsection
 
     @section('contents')
-
+        
         <div class="gestion-inscription-etape-2">  
             
             <div class="choix-cycle shadow-lg">
@@ -31,19 +31,19 @@
                 <div class="scolarity-price">
                     <div class="price-section">
                         <h4><strong>Droit</strong></h4>
-                        <span>{{$cycle->droit}} <sup>Ar</sup></span>
+                        <span>{{$cycle[0]->droit}} <sup>Ar</sup></span>
                     </div>
                     <div class="price-section">
                         <h4><strong>Ecolage</strong></h4>
-                        <span>{{$cycle->frais_scolaire}} <sup>Ar</sup></span>
+                        <span>{{$cycle[0]->frais_scolaire}} <sup>Ar</sup></span>
                     </div>
 
                 </div>
                 <?php
-                    session(['total'=>$cycle->droit + $cycle->frais_scolaire]);
+                    session(['total'=>$cycle[0]->droit + $cycle[0]->frais_scolaire]);
                 ?>
                 <div class="user-total-pay">
-                    <span>TOTAL: <strong>{{$cycle->droit + $cycle->frais_scolaire}} Ar</strong></span>
+                    <span>TOTAL: <strong>{{$cycle[0]->droit + $cycle[0]->frais_scolaire}} Ar</strong></span>
                 </div>
                 <form action="{{route('classechoisie')}}" method="post" class="form-select">
                     @csrf

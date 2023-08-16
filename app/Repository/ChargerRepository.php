@@ -10,7 +10,7 @@
         public function __construct(Charger $charger)
         {
             $this->model=$charger;
-            $this->relation=['matiere','classe','professeur','annee_scolaire','examiners'];
+            $this->relation=['matiere','classe','professeur','anneeScolaire','examiners'];
         }
 
         // Evaluation 
@@ -22,7 +22,7 @@
             $anneeId=1; //stocker dans la session 
 
             return $this->model::where('classe_id',$idClasse)
-                               ->where('anneeScolaire_id',$anneeId)
+                               ->where('anneescolaire_id',$anneeId)
                                ->whereDoesntHave('examiners',function(Builder $query)
                                {
                                     $query->where('examen_id',$examen_id);
@@ -40,7 +40,7 @@
             $anneeId=1;
             $anneeScoActive=2023;
             return $this->model::where('classe_id',$idClasse)
-                                ->where('anneeScolaire_id',$anneeId)
+                                ->where('anneescolaire_id',$anneeId)
                                 ->whereHas('examiners',function(Builder $query)
                                 {
                                     $query->where('examen_id',$examen_id);

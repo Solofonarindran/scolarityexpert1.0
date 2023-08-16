@@ -1,8 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\GeniteurController;
-use App\Http\Controllers\InscriptionController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -36,44 +35,20 @@ Route::post('ins/e/add','App\Http\Controllers\EleveController@createEleveInscrip
 
 //route réinscription
 Route::get('/re/search','App\Http\Controllers\ReinscritController@search')->name('reinscri.search');
-Route::get('/re/inf/','App\Http\Controllers\ReinscritController@index')->name('info.reinscri');
+Route::get('/re/inf/','ReinscritController@index')->name('info.reinscri');
+Route::post('/re/p_id/','App\Http\Controllers\ReinscritController@getClasseSuiv')->name('classeSuiv');
+Route::post('/re/e/add/','App\Http\Controllers\ReinscritController@store')->name('ajoutReinscrit');
 
 
+//route evaluation
+Route::get('/ev/opt/','App\Http\Controllers\EvaluationController@index')->name('option');
+Route::get('/ev/opt/ch{opt?}/opt','App\Http\Controllers\EvaluationController@choixClasseExam')->name('choix.classe.exam');
+Route::post('/ev/opt/pst/','App\Http\Controllers\EvaluationController@postClasseExam')->name('postClasseExam');
 
 
-
-/*Route::get('/v/',function(){
-    return view('inscription.infoParentEtape3');
+Route::get('/',function(){
+    return view('financière.fraisScolaire');
 });
-
-
-Route::get('/', function () {
-
-
-    // Read File
-
-    $jsonString = file_get_contents(base_path('/public/data.json'));
-
-    $data = json_decode($jsonString, true);
-
-
-    // Update Key
-
-    $data['country.title'] = "Change Manage Country";
-
-
-    // Write File
-
-    $newJsonString = json_encode($data, JSON_PRETTY_PRINT);
-
-    file_put_contents(base_path('public/data.json'), stripslashes($newJsonString));
-
-
-    // Get Key Value
-
-    dd(__('country.title'));
-
-});*/
 
 
 

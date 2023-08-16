@@ -80,7 +80,9 @@ class InscriptionController extends Controller
     public function ClasseDispo($id)
     {
         $cycle=$this->cycleRepo->getById($id);
-        $classes=$this->classeRepo->getClassesDispo($id); 
+    
+        $classes=$this->classeRepo->getClassesDispo($id);
+        
         return view('inscription.choixClasseEtape2',compact('classes','cycle'));
     }
     

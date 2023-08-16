@@ -19,6 +19,14 @@
                               ->increment('effectifActu',1);
         }
 
+        //return la classe qui a le prédecesseur
+        public function getByForeignIdClass($id)
+        {
+            return $this->model->newQuery()
+                                ->where('classe_id',$id)
+                                ->with(['classe','cycle'])
+                                ->get();
+        }
 
         //retourner les classes de presco
         //Dashboard classe

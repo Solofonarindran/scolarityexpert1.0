@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('mouvement', function (Blueprint $table) {
+        Schema::table('contrat', function (Blueprint $table) {
             //
-            $table->foreignId('anneescolaire_id')
-                  ->constrained('anneescolaire')
+            $table->foreignId('inscrit_id')
+                  ->constrained('inscrit')
                   ->cascadeOnUpdate()
                   ->cascadeOnDelete();
         });
@@ -29,7 +29,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('mouvement', function (Blueprint $table) {
+        Schema::table('contrat', function (Blueprint $table) {
             //
         });
     }

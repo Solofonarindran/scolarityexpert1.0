@@ -39,13 +39,13 @@
         </div>
         <ul id="js-nav-menu" class="nav-menu">
             <li>
-                <a href="#" title="Dashboard">
+                <a href="#" title="Dashboard" data-filter-tags="tableau bord">
                     <i class="fas fa-tachometer-alt"></i>
                     <span class="nav-link-text" data-i18n="nav.application_intel">Tableau de Bord</span>
                 </a>
             </li>
             <li>
-                <a href="{{route('classe.show')}}" title="Admin Classe">
+                <a href="{{route('classe.show')}}" title="Admin Classe" data-filter-tags="classe">
                     <i class="fa fa-graduation-cap"></i>
                     <span class="nav-link-text" data-i18n="nav.theme_settings">Gérance de Classe</span>
                 </a>
@@ -53,7 +53,7 @@
 
             <li class="nav-title">Groupe d'action</li>
             <li>
-                <a href="#" title="UI Components" data-filter-tags="ui components">
+                <a href="#" title="Inscription" data-filter-tags="inscription">
                     <i class="fa fa-user-plus"></i>
                     <span class="nav-link-text" data-i18n="nav.ui_components">Gérance d'Inscription</span>
                 </a>
@@ -65,7 +65,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{route('reinscri.search')}}" title="Accordions" data-filter-tags="ui components accordions">
+                        <a href="{{route('reinscri.search')}}" title="Accordions" data-filter-tags="réinscription">
                             <span class="nav-link-text"
                                 data-i18n="nav.ui_components_accordions">Réinscription</span>
                         </a>
@@ -73,29 +73,29 @@
                 </ul>
             </li>
             <li>
-                <a href="#" title="Utilities" data-filter-tags="utilities">
+                <a href="#" title="Utilities" data-filter-tags="evaluation">
                     <i class="fa fa-clipboard"></i>
                     <span class="nav-link-text" data-i18n="nav.utilities">Evaluation</span>
                 </a>
                 <ul>
                     <li>
-                        <a href="utilities_color_pallet.html" title="Color Pallet"
-                            data-filter-tags="utilities color pallet">
+                        <a href="#" title="Programme"
+                            data-filter-tags="programme scolaire">
                             <span class="nav-link-text" data-i18n="nav.utilities_color_pallet">Programme
                                 Scolaire</span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="utilities_spacing.html" title="Spacing"
-                            data-filter-tags="utilities spacing">
+                        <a href="{{route('option')}}" title="Spacing"
+                            data-filter-tags="gestion de note">
                             <span class="nav-link-text" data-i18n="nav.utilities_spacing">Gestion des
                                 Notes</span>
                         </a>
                     </li>
                     <li>
                         <a href="utilities_typography.html" title="Typography"
-                            data-filter-tags="utilities typography fonts headings bold lead colors sizes link text states list styles truncate alignment">
+                            data-filter-tags="résultats">
                             <span class="nav-link-text"
                                 data-i18n="nav.utilities_typography">Résultats</span>
                         </a>
@@ -103,14 +103,14 @@
                 </ul>
             </li>
             <li>
-                <a href="#" title="Utilities" data-filter-tags="utilities">
+                <a href="#" title="Utilities" data-filter-tags="finance">
                     <i class="fa fa-chart-line"></i>
                     <span class="nav-link-text" data-i18n="nav.utilities">Gérance Financière</span>
                 </a>
                 <ul>
                     <li>
                         <a href="utilities_color_pallet.html" title="Color Pallet"
-                            data-filter-tags="utilities color pallet">
+                            data-filter-tags="ecolage frais scolaire">
                             <span class="nav-link-text" data-i18n="nav.utilities_color_pallet">Frais
                                 Scolaire</span>
                         </a>
@@ -118,14 +118,14 @@
 
                     <li>
                         <a href="utilities_spacing.html" title="Spacing"
-                            data-filter-tags="utilities spacing">
+                            data-filter-tags="salariés payement">
                             <span class="nav-link-text" data-i18n="nav.utilities_spacing">Salariés</span>
                         </a>
                     </li>
 
                     <li>
                         <a href="utilities_spacing.html" title="Spacing"
-                            data-filter-tags="utilities spacing">
+                            data-filter-tags="Dépense subvention">
                             <span class="nav-link-text" data-i18n="nav.utilities_spacing">Ecole</span>
                         </a>
                     </li>
@@ -135,7 +135,7 @@
             <li class="nav-title">Paramètre</li>
 
             <li>
-                <a href="#" title="Theme Settings">
+                <a href="#" title="Theme Settings" data-filter-tags="paramètre">
                     <i class="fa fa-cog"></i>
                     <span class="nav-link-text" data-i18n="nav.theme_settings">Paramètre de Compte</span>
                 </a>
