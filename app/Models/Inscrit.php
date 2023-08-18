@@ -51,5 +51,9 @@ class Inscrit extends Model
         return $this->hasMany(Contrat::class);
     }
 
+    public function examiners()
+    {
+        return $this->hasMany(Examiner::class);
+    }
     
 }

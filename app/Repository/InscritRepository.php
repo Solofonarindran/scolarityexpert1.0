@@ -18,7 +18,7 @@
         public function researchInscrit($id)
         {
             return $this->model
-                        ->select('*')
+                        //->select('*')
                         ->where('anneescolaire_id',$id)
                         ->where('is_reinscrit',FALSE)
                         ->groupBy('eleve_id')     
@@ -32,10 +32,23 @@
 
         public function nbFraisPayé($id)
         {
-            $this->model::find($id)->mouvements
+           return $this->model::find($id)->mouvements
                                    ->sum(fn(Mouvement $mvt)=>$mvt->nb)
                                    ->where('anneescolaire_id',$anneeScoId)
                                    ->where('libelle','ecolage');
                                    
+        }
+
+
+        // return les inscrit doivent notés
+
+        public function inscritByClassIdAnneSco($classe_id,$annee_id)
+        {
+            return $this->model
+                        ->newQuery()
+                        ->where('classe_id',$classe_id)
+                        ->where('anneescolaire_id',$annee_id)
+                        ->with(['eleve'])
+                        ->get();
         }
     }

@@ -16,14 +16,12 @@
         // Evaluation 
         //4 ème méthode (nouveau)
 
-        public function MatiereDispoNewNote()
+        public function MatiereDispoNewNote($idClasse,$examen_id)
         {
-            $anneeScoActive='2023'; // stocker dans la session 
-            $anneeId=1; //stocker dans la session 
-
+          
             return $this->model::where('classe_id',$idClasse)
-                               ->where('anneescolaire_id',$anneeId)
-                               ->whereDoesntHave('examiners',function(Builder $query)
+                               ->where('dispo',TRUE)
+                               ->whereDoesntHave('examiners',function($query) use($examen_id)
                                {
                                     $query->where('examen_id',$examen_id);
                                })
@@ -34,14 +32,12 @@
 
         //Evaluation 
         //4 ème méthode 
-        public function MatiereDispoReclam()
+        public function MatiereDispoReclam($idClasse,$examen_id)
         {
-            $idClasse=2;
-            $anneeId=1;
-            $anneeScoActive=2023;
+           
             return $this->model::where('classe_id',$idClasse)
-                                ->where('anneescolaire_id',$anneeId)
-                                ->whereHas('examiners',function(Builder $query)
+                                ->where('dispo',TRUE)
+                                ->whereHas('examiners',function($query) use($examen_id)
                                 {
                                     $query->where('examen_id',$examen_id);
                                 })

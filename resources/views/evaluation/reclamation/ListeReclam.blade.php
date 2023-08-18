@@ -21,10 +21,10 @@
     @endsection
 
     @section('contents')
-    <div id="panel-1" class="panel" >
+    <div id="panel-1" class="panel" style="margin-left:15%;margin-right:15%">
         <div class="panel-hdr">
             <h2>
-                Information Classe de:<span class="fw-300 badge badge-warning" style="font-size:15px"><i>3 ème</i></span>
+                Information Classe de:<span class="fw-300 badge badge-warning" style="font-size:15px"><i>{{$examiners[0]->charger->classe->libelle}}</i></span>
             </h2>
         </div>
         <div class="panel-container show">
@@ -47,7 +47,7 @@
                                             Examen :
                                         </span>
                                     </div>
-                                    <input id="input-group-size" name="numCommande" value=''
+                                    <input id="input-group-size" name="exam" value='{{$examiners[0]->examen->examen_title}}'
                                     style="letter-spacing: 2px" type="text" class="form-control" 
                                     placeholder="3 ème inter Trimestre" aria-describedby="input-group-size" readonly>
                                 </div>
@@ -59,22 +59,26 @@
                                             Date---:
                                         </span>
                                     </div>
-                                    <input id="input-group-size" name="numCommande" value=''
+                                    <input id="input-group-size" name="numCommande" value='{{$examiners[0]->date_examen}}'
                                     style="letter-spacing: 2px" type="text" class="form-control" 
                                     placeholder="02/03/2023" aria-describedby="input-group-size" readonly>
                                 </div>
-
                                 <div class="input-group input-group mt-2">
-                                    
+                                
                                     <div class="input-group-append">
                                         <span class="input-group-text" style="letter-spacing: 2px">
-                                            Matière:
+                                            Année Scolaire:
                                         </span>
                                     </div>
-                                    <input id="input-group-size" name="numCommande" value=''
+                                    <?php
+                                        $annee=session('annee');
+                                    ?>
+                                    <input id="input-group-size" name="numCommande" value='{{$annee}}'
                                     style="letter-spacing: 2px" type="text" class="form-control" 
-                                    placeholder="Mathématique" aria-describedby="input-group-size" readonly>
+                                    placeholder="2012-2013" aria-describedby="input-group-size" readonly>
                                 </div>
+
+                              
                             <!-- </div>-->
                             
 
@@ -92,9 +96,21 @@
                                         Proffesseur:
                                     </span>
                                 </div>
-                                <input id="input-group-size" name="numCommande" value=''
+                                <input id="input-group-size" name="numCommande" value='{{$examiners[0]->charger->professeur->name}}'
                                 style="letter-spacing: 2px" type="text" class="form-control" 
                                 placeholder="SOLOFONARINDRA" aria-describedby="input-group-size" readonly>
+                            </div>
+
+                            <div class="input-group input-group mt-2">
+                                    
+                                <div class="input-group-append">
+                                    <span class="input-group-text" style="letter-spacing: 2px">
+                                        Matière:
+                                    </span>
+                                </div>
+                                <input id="input-group-size" name="matiere" value='{{$examiners[0]->charger->matiere->libelle}}'
+                                style="letter-spacing: 2px" type="text" class="form-control" 
+                                placeholder="Mathématique" aria-describedby="input-group-size" readonly>
                             </div>
 
                             <div class="input-group input-group mt-2">
@@ -104,22 +120,12 @@
                                         Coefficient:
                                     </span>
                                 </div>
-                                <input id="input-group-size" name="numCommande" value=''
+                                <input id="input-group-size" name="numCommande" value='{{$examiners[0]->charger->coefficient}}'
                                 style="letter-spacing: 2px" type="text" class="form-control" 
                                 placeholder="3" aria-describedby="input-group-size" readonly>
                             </div>
 
-                            <div class="input-group input-group mt-2">
-                                
-                                <div class="input-group-append">
-                                    <span class="input-group-text" style="letter-spacing: 2px">
-                                        Année Scolaire:
-                                    </span>
-                                </div>
-                                <input id="input-group-size" name="numCommande" value=''
-                                style="letter-spacing: 2px" type="text" class="form-control" 
-                                placeholder="2012-2013" aria-describedby="input-group-size" readonly>
-                            </div>
+                         
                             
                         </div>
                             
@@ -132,7 +138,7 @@
 
     <div class="row">
         <div class="col-xl-12">
-            <div id="panel-1" class="panel">
+            <div id="panel-1" class="panel" style="margin-left:15%;margin-right:15%">
                 <div class="panel-hdr">
                     <h2>
                         Tableau <span class="fw-300"><i>de Recherche</i></span> 
@@ -153,32 +159,34 @@
                         </div>
                         <!-- datatable start -->
                         <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
-                            <thead>
+                            <thead class="bg-primary-600">
                                 <tr>
                                     <th>ID</th>
-                                    <th>Client</th>
-                                    <th>Account#</th>
-                                    <th>Office</th>
-                                    <th>Age.</th>
-                                    <th>Payment date</th>
-                                    <th>Transfer Amount</th>
-                                    <th>Status</th>
-                                    <th></th>
+                                    <th>Clé inscription</th>
+                                    <th>Nom</th>
+                                    <th>Prénom</th>
+                                    <th>Note</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
-                            <tfoot>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Client</th>
-                                    <th>Account#</th>
-                                    <th>Office</th>
-                                    <th>Age.</th>
-                                    <th>Payment date</th>
-                                    <th>Transfer Amount</th>
-                                    <th>Status</th>
-                                    <th></th>
-                                </tr>
-                            </tfoot>
+                            <tbody>
+
+                                @foreach ($examiners as $examiner)
+
+                                    <tr>
+                                        <td>{{$examiner->id}}</td>
+                                        <td>{{$examiner->inscrit->id}}</td>
+                                        <td>{{$examiner->inscrit->eleve->name}}</td>
+                                        <td>{{$examiner->inscrit->eleve->firstname}}</td>
+                                        <td>{{$examiner->note}}</td>
+                                        <td><button type="button" title="modification" data-toggle="modal" data-target=".example-modal-right-transparent" class="select btn btn-sm btn-success"><i class="fal fa-edit"></i></button></td>
+                                    </tr>
+                                    
+                                @endforeach
+                                
+                                
+                            </tbody>
+                    
                         </table>
                         <!-- datatable end -->
                     </div>
@@ -202,7 +210,7 @@
                             <div class="card mb-3" style="box-shadow: 5px 4px 11px 5px #9a9996 ; border:1px solid #584475;">
                                <div class="card-body p-3">
                                    <h5>
-                                       <a href="#" class="badge badge-warning">Classe de 3ème</a>
+                                       <a href="#" class="badge badge-warning">Classe de {{$examiners[0]->charger->classe->libelle}}</a>
                                        <span class="badge badge-primary fw-n position-absolute pos-top pos-right mt-3 mr-3">A</span>
                                    </h5>
                                  
@@ -213,15 +221,16 @@
                                
                                <div class="card-body p-3">
                                
-                               		<form action="" method="post">
+                               		<form action="{{route('update.note')}}" method="post">
+                                        @csrf
                                        <div class="form-group">
 					                        <label class="form-label" for="id" style="font-weight:bold">Clé:</label>
 					                        <input type="text" name="id" id="id" class="form-control"  placeholder="" readonly>
 					                       
 					                    </div>
                                         <div class="form-group">
-					                        <label class="form-label" for="eleve_id" style="font-weight:bold">N Matricul:</label>
-					                        <input type="text" name="eleve_id" id="eleve_id" class="form-control"  placeholder="" readonly>
+					                        <label class="form-label" for="inscrit_id" style="font-weight:bold">N° Inscrit:</label>
+					                        <input type="text" name="inscrit_id" id="inscrit_id" class="form-control"  placeholder="" readonly>
 					                       
 					                    </div>
 					                    <div class="form-group">
@@ -256,6 +265,27 @@
 
     @section('script')
          <script src="/assets/js/datagrid/datatables/datatables.bundle.js"></script>
-         <script src="/assets/js/customJs/tableNoteModif.js"></script> 
+         <script src="/assets/js/datagrid/datatables/datatables.export.js"></script>
+         <script src="/assets/js/customJs/dataTableExport.js"></script> 
+         <script>
+            $(document).ready(function()
+            {
+                $(document).on('click','table button.select',function(){
+                    let tr=$(this).closest('tr')
+
+                    let examiner_id=tr.find('td:eq(0)').text()
+                    let inscrit_id=tr.find('td:eq(1)').text()
+                    let name=tr.find('td:eq(2)').text()
+                    let note=tr.find('td:eq(4)').text()
+
+                    $('input:text[name=id]').val(examiner_id)
+                    $('input:text[name=inscrit_id]').val(inscrit_id)
+                    $('input:text[name=name]').val(name)
+                    $('input[name=note]').val(note)
+
+
+                })
+            })
+         </script>
         
     @endsection

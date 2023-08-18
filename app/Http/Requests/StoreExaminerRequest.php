@@ -13,7 +13,7 @@ class StoreExaminerRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,8 @@ class StoreExaminerRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            ['inscrit_id'=>'required',
+            'note'=>'required']
         ];
     }
 }

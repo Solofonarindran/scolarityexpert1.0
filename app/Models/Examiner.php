@@ -18,7 +18,7 @@ class Examiner extends Model
         'note',
         'examen_id',
         'charger_id',
-        'eleve_id'
+        'inscrit_id'
     ];
 
     public function examen()
@@ -31,9 +31,9 @@ class Examiner extends Model
         return $this->belongsTo(Charger::class);
     }
 
-    public function eleve()
+    public function inscrit()
     {
-        return $this->belongsTo(Eleve::class);
+        return $this->belongsTo(Inscrit::class);
     }
 
 

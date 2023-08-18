@@ -43,8 +43,10 @@ Route::post('/re/e/add/','App\Http\Controllers\ReinscritController@store')->name
 //route evaluation
 Route::get('/ev/opt/','App\Http\Controllers\EvaluationController@index')->name('option');
 Route::get('/ev/opt/ch{opt?}/opt','App\Http\Controllers\EvaluationController@choixClasseExam')->name('choix.classe.exam');
-Route::post('/ev/opt/pst/','App\Http\Controllers\EvaluationController@postClasseExam')->name('postClasseExam');
-
+Route::post('/ev/opt/pst','App\Http\Controllers\EvaluationController@postClasseExam')->name('postClasseExam');
+Route::post('/ev/mt/dsp/pst','App\Http\Controllers\EvaluationController@postMatiereDispo')->name('postMatiereDispo');
+Route::post('/ev/add/','App\Http\Controllers\EvaluationController@add')->name('add.note');
+Route::post('/ev/up/','App\Http\Controllers\EvaluationController@edit')->name('update.note');
 
 Route::get('/',function(){
     return view('financière.fraisScolaire');

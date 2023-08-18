@@ -30,7 +30,7 @@
                 </div>
 
                 
-                <form action="{{route('postClasseExam')}}" class="form-select">
+                <form action="{{route('postClasseExam')}}" method="POST" class="form-select">
                     @csrf
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Veuillez choisir une classe:</label>

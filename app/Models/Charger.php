@@ -40,7 +40,7 @@ class Charger extends Model
 
     public function anneeScolaire()
     { 
-        return $this->belongsTo(AnneeScolaire::class);
+        return $this->belongsTo(Anneescolaire::class);
 
     }
 

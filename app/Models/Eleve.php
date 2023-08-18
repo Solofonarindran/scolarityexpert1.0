@@ -31,8 +31,5 @@ class Eleve extends Model
         return $this->hasMany(Inscrit::class);
     }
     
-    public function examiners()
-    {
-        return $this->hasMany(Examiner::class);
-    }
+   
 }

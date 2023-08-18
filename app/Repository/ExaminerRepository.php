@@ -9,16 +9,15 @@
         public function __construct(Examiner $examiner)
         {
             $this->model=$examiner;
-            $this->relation=['examen','charger','eleve'];
+            $this->relation=['examen','charger','inscrit.eleve'];
         }
 
         // return liste des notes à modifier
         //Evaluation
 
-        public function listeNoteByExam()
+        public function listeNoteByExam($charger_id,$examen_id)
         {
-            $examen_id=1;
-            $charger_id=1;
+            
             return $this->model->where('charger_id',$charger_id)
                                ->where('examen_id',$examen_id)
                                ->with($this->relation)
@@ -41,7 +40,7 @@
             $anneeSco_id=1;// stocker dans la session scolaire active
             return $this->model->where('examen_id',$examen_id)
                                ->where('eleve_id',$eleve_id)
-                               ->whereHas('charger',function(Builder $query) use($anneeSco_id)
+                               ->whereHas('charger',function($query) use($anneeSco_id)
                                         {
                                             $query->where('anneeScolaire_id',$anneeSco_id);
                                             
