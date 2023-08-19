@@ -83,7 +83,7 @@
                                             @endif
                                         </td>
                                  
-                                        <td><button type="button"  data-toggle="modal" data-target="#default-example-modal-lg-center" class="select btn btn-sm btn-outline-success">select</button></td>
+                                        <td><a href="{{route('response.recherche',['id'=>$inscrit->id])}}" class="select btn btn-sm btn-outline-success">select</a></td>
                                     </tr>
                                     
                                 @endforeach

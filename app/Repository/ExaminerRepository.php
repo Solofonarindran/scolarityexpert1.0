@@ -33,19 +33,17 @@
                                ->delete();
         }
 
-        //Résultat (note) by id élève  et id examen 
+        //Résultat (note) by id élève
         //Evaluation particulier
-        public function resultatByIdEleve($examen_id,$eleve_id)
+        public function resultatByIdEleve($inscrit_id)
         {
-            $anneeSco_id=1;// stocker dans la session scolaire active
-            return $this->model->where('examen_id',$examen_id)
-                               ->where('eleve_id',$eleve_id)
-                               ->whereHas('charger',function($query) use($anneeSco_id)
-                                        {
-                                            $query->where('anneeScolaire_id',$anneeSco_id);
-                                            
-                                        })
+           
+            return $this->model->where('inscrit_id',$inscrit_id)
+                               ->groupBy('examen_id')
+                               ->with($this->relation)
                                ->get();
+                             
+                               
         }
 
         //Résultat by id exam

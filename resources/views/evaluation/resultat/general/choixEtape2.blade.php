@@ -38,12 +38,12 @@
                     <button type="button" class="btn btn-outline-primary">Par Elève
                         
                     </button>-->
-                    <a href="" class="btn btn-sm btn-outline-primary d-flex align-items-center" style="height:auto;margin:10px; letter-spacing:2px;font-weight:800" >
+                    <a href="{{route('response.option',['opt'=>1])}}" class="btn btn-sm btn-outline-primary d-flex align-items-center" style="height:auto;margin:10px; letter-spacing:2px;font-weight:800" >
                         <i class="fa-2x fal fa-sticky-note mr-2"></i>Annuel
                         
                     </a>
                    
-                    <a href="" class="btn btn-outline-secondary d-flex align-items-center" style="height:auto;margin:10px; letter-spacing:2px;font-weight:800">
+                    <a href="{{route('response.option',['opt'=>2])}}" class="btn btn-outline-secondary d-flex align-items-center" style="height:auto;margin:10px; letter-spacing:2px;font-weight:800">
                         <i class="fa-2x fal fa-notes-medical mr-2"></i>Par examen
                     </a>
                 </div>

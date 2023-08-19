@@ -50,11 +50,16 @@ Route::post('/ev/up/','App\Http\Controllers\EvaluationController@edit')->name('u
 
     //route résultat
     Route::get('/ev/res/opt/','App\Http\Controllers\ResultatController@index')->name('resultat.option');
+
+    //Gle
     Route::get('/ev/res/gle/ch/','App\Http\Controllers\ResultatController@choixGle')->name('resultat.choixGle');
+    Route::get('/ev/res/{opt?}/','App\Http\Controllers\ResultatController@option')->name('response.option');
+    Route::post('/ev/res/clex/pst','App\Http\Controllers\ResultatController@postClasseExam')->name('postClasseExamResultat');
+    Route::post('/ev/res/cl/pst','App\Http\Controllers\ResultatController@postClasse')->name('postClasseResultat');
+
+    //Particulier
     Route::post('/ev/res/i/search/','App\Http\Controllers\ResultatController@researchInscrit')->name('resultat.recherche');
-Route::get('/',function(){
-    return view('financière.fraisScolaire');
-});
+    Route::get('/ev/{id?}/resp/','App\Http\Controllers\ResultatController@bulletin')->name('response.recherche');
 
 
 

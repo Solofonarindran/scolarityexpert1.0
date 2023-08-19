@@ -10,7 +10,7 @@
         public function __construct(Charger $charger)
         {
             $this->model=$charger;
-            $this->relation=['matiere','classe','professeur','anneeScolaire','examiners'];
+            $this->relation=['matiere','classe','professeur','examiners'];
         }
 
         // Evaluation 
