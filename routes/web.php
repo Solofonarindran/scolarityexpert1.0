@@ -48,6 +48,10 @@ Route::post('/ev/mt/dsp/pst','App\Http\Controllers\EvaluationController@postMati
 Route::post('/ev/add/','App\Http\Controllers\EvaluationController@add')->name('add.note');
 Route::post('/ev/up/','App\Http\Controllers\EvaluationController@edit')->name('update.note');
 
+    //route résultat
+    Route::get('/ev/res/opt/','App\Http\Controllers\ResultatController@index')->name('resultat.option');
+    Route::get('/ev/res/gle/ch/','App\Http\Controllers\ResultatController@choixGle')->name('resultat.choixGle');
+    Route::post('/ev/res/i/search/','App\Http\Controllers\ResultatController@researchInscrit')->name('resultat.recherche');
 Route::get('/',function(){
     return view('financière.fraisScolaire');
 });

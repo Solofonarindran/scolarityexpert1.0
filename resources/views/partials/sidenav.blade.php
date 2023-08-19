@@ -13,7 +13,7 @@
         <div class="nav-filter">
             <div class="position-relative">
                 <input type="text" id="nav_filter_input" placeholder="Filter menu" class="form-control"
-                    tabindex="0" />
+                    tabindex="0"/>
                 <a href="#" onclick="return false;" class="btn-primary btn-search-close js-waves-off"
                     data-action="toggle" data-class="list-filter-active" data-target=".page-sidebar">
                     <i class="fal fa-chevron-up"></i>
@@ -87,14 +87,14 @@
                     </li>
 
                     <li>
-                        <a href="{{route('option')}}" title="Spacing"
+                        <a href="{{route('option')}}" title="Gestion de note"
                             data-filter-tags="gestion de note">
                             <span class="nav-link-text" data-i18n="nav.utilities_spacing">Gestion des
                                 Notes</span>
                         </a>
                     </li>
                     <li>
-                        <a href="utilities_typography.html" title="Typography"
+                        <a href="{{route('resultat.option')}}" title="Résultat"
                             data-filter-tags="résultats">
                             <span class="nav-link-text"
                                 data-i18n="nav.utilities_typography">Résultats</span>

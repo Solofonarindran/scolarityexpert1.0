@@ -38,12 +38,6 @@ class Charger extends Model
         return $this->belongsTo(Professeur::class);
     }
 
-    public function anneeScolaire()
-    { 
-        return $this->belongsTo(Anneescolaire::class);
-
-    }
-
     public function examiners()
     {
         return $this->hasMany(Examiner::class); 

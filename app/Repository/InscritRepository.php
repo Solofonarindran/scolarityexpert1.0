@@ -11,6 +11,15 @@
             $this->model=$inscrit;
             $this->relation=['eleve.geniteur','anneescolaire','classe','mouvements','contrats'];
         }
+        //get by annnescolaire_id
+
+        public function getByAnneeId($annee_id)
+        {
+            return $this->model
+                        ->where('anneescolaire_id',$annee_id)
+                        ->with($this->relation)
+                        ->get();
+        }
 
         // recherche par eleve id et la dernière année scolaire (max id)
         // Gérance Réinscription méthode 1

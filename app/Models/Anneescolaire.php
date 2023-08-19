@@ -24,11 +24,6 @@ class Anneescolaire extends Model
         return $this->hasMany(Inscrit::class);
     }
 
-    public function chargers()
-    {
-        return $this->hasMany(Charger::class);
-    }
-
     public function operations()
     {
         return $this->hasMany(Operation::class);

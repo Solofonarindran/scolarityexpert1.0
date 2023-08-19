@@ -1,14 +1,14 @@
 <?php
     namespace App\Repository;
 
-    use App\Models\AnneeScolaire;
+    use App\Models\Anneescolaire;
 
     class AnneeScolaireRepository extends AbstractRepository
     {
-        public function __construct(AnneeScolaire $anneeSco)
+        public function __construct(Anneescolaire $anneeSco)
         {
             $this->model=$anneeSco;
-            $this->relation=['inscrits','chargers','operations'];
+            $this->relation=['inscrits','operations'];
         }
 
     }
