@@ -9,7 +9,7 @@
         public function __construct(Inscrit $inscrit)
         {
             $this->model=$inscrit;
-            $this->relation=['eleve.geniteur','anneescolaire','classe','mouvements','contrats'];
+            $this->relation=['eleve','anneescolaire','classe','mouvements','contrats'];
         }
         //get by annnescolaire_id
 

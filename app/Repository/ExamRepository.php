@@ -19,4 +19,5 @@
         {
             return $this->model::find($id);
         }
+        
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repository\AnneeScolaireRepository;
 use App\Repository\ClasseRepository;
+use App\Repository\ChargerRepository;
 use App\Repository\ExamRepository;
 use App\Repository\ExaminerRepository;
 use App\Repository\InscritRepository;
@@ -14,14 +15,17 @@ class ResultatController extends Controller
     protected $anneeScoRepo;
     protected $examRepo;
     protected $examinerRepo;
+    protected $chargerRepo;
 
     public function __construct(AnneeScolaireRepository $anneeRepo,
                                 ExamRepository $examRepo,
-                                ExaminerRepository $examinerRepo)
+                                ExaminerRepository $examinerRepo,
+                                ChargerRepository  $chargerRepo)
     {
         $this->anneeScoRepo=$anneeRepo;
         $this->examRepo=$examRepo;
         $this->examinerRepo=$examinerRepo;
+        $this->chargerRepo=$chargerRepo;
     }
     public function index()
     {
@@ -103,11 +107,12 @@ class ResultatController extends Controller
 
 
     //return bulletin by id_inscrit
-    public function bulletin($id)
+    public function bulletin($id,InscritRepository $inscritRepo)
     {
-        
-       $examiners= $this->examinerRepo->resultatByIdEleve($id);
-       return $examiners;
+        $chargers=$this->chargerRepo->getByIdInscrit($id);
+        $inscrit=$inscritRepo->getById($id);
+       //$examiners= $this->examinerRepo->resultatByIdInscrit($id);
+       return view('evaluation.resultat.particulier.bulletin',compact('chargers','inscrit'));
     }
 
 }

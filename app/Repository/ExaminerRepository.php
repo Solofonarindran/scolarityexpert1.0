@@ -35,16 +35,16 @@
 
         //Résultat (note) by id élève
         //Evaluation particulier
-        public function resultatByIdEleve($inscrit_id)
+        /*public function resultatByIdInscrit($inscrit_id)
         {
            
             return $this->model->where('inscrit_id',$inscrit_id)
-                               ->groupBy('examen_id')
+                               ->groupBy('charger_id')
                                ->with($this->relation)
                                ->get();
                              
                                
-        }
+        }*/
 
         //Résultat by id exam
         //Evaluation -Général- par examen

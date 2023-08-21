@@ -30,7 +30,7 @@
 
     @section('contents')
 
-            <div id="panel-1" class="panel" >
+            <div id="panel-1" class="panel" style="margin-left:15%;margin-right:15%">
                 <div class="panel-hdr">
                     <h2>
                         Information Classe de:<span class="fw-300 badge badge-warning" style="font-size:15px"><i>{{$inscrits[0]->classe->libelle}}</i></span>
@@ -255,8 +255,8 @@
 					                   
 				
 					                    <div class="d-inline-flex" style="width:100%;margin-left:40px">
-                                            <button type="button" class="btn btn-sm btn-outline-secondary mr-3" data-dismiss="modal" style="margin-right:30px">Annuler</button>
-                                            <button type="button" id="savenewnote" class="btn btn-sm btn-outline-primary mr-1">Enregistrer</button> 
+                                            <button type="button" data-dismiss="modal" class="btn btn-sm btn-outline-secondary mr-3" style="margin-right:30px">Annuler</button>
+                                            <button type="button" data-dismiss="modal" id="savenewnote" class="btn btn-sm btn-outline-primary mr-1">Enregistrer</button> 
 					                    		
 					                    </div>
 					                    
@@ -294,18 +294,19 @@
 
                     let tr=$(this).closest('tr')
 
-                    var id_inscrit=tr.find('td:eq(0)').text()
+                    let id_inscrit=tr.find('td:eq(0)').text()
                     let name=tr.find('td:eq(1)').text()
 
                     $('input:text[name=inscrit_id]').val(id_inscrit)
                     $('input:text[name=name]').val(name)
                 
-                    $(document).on('click','button#savenewnote',function()
+                    $('button#savenewnote').on('click',function()
                     {
                         
 
                         let note=$('input[name=note]').val()
                         let date=$('input[name=date]').val()
+                        let id_inscrit=$('input:text[name=inscrit_id]').val()
 
                         if(date==="")
                         {
@@ -328,7 +329,7 @@
                                 data:
                                 {
                                     "inscrit_id":id_inscrit,
-                                    "date":date,
+                                    "date_examen":date,
                                     "note":note
                                 },
                 
@@ -340,6 +341,10 @@
                             })
 
                             $('#note'+id_inscrit).html("<h5>"+note+"<i class='fal fa-check ml-2 text-success'></i></h5>")
+
+                            $('input:text[name=inscrit_id]').val("")
+                            $('input:text[name=name]').val("")
+                            $('input[name=note]').val("")
                         }
 
                         

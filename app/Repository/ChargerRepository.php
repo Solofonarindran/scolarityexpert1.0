@@ -4,6 +4,7 @@
     namespace App\Repository;
 
     use App\Models\Charger;
+    use App\Models\Examen;
 
     class ChargerRepository extends AbstractRepository 
     {
@@ -45,6 +46,23 @@
                                 ->get();
 
         }
+
+        //retourner les chargés par idclasse
+        public function getByIdInscrit($id)
+        {
+            return $this->model->newQuery()
+                               ->whereHas('examiners',function($query) use($id) {
+                                  $query->where('inscrit_id',$id);
+                                       
+                                 })
+                                ->with(['examiners'=>function($query) use($id){
+                                    $query->where('inscrit_id',$id);
+                                },'matiere'])
+                                ->get();
+                           
+           
+        }
+
     }
 
 ?>

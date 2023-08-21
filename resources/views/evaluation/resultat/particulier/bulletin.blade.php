@@ -49,7 +49,7 @@
                                         <strong>Matricul :</strong> 
                                     </td>
                                     <td>
-                                       45
+                                       {{$inscrit[0]->eleve->id}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -57,7 +57,7 @@
                                         <strong>Nom :</strong> 
                                     </td>
                                     <td style="text-transform:uppercase">
-                                       solofonarindra
+                                       {{$inscrit[0]->eleve->name}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -65,7 +65,7 @@
                                         <strong>Prénom:</strong>
                                     </td>
                                     <td>
-                                        Herinantenaina
+                                        {{$inscrit[0]->eleve->firstname}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -73,11 +73,7 @@
                                         <strong>Année Scolaire:</strong>
                                     </td>
                                     <td>
-                                        <select class="" id="">
-                                            <option>2012-2013</option>
-                                            <option>2011-2012</option>
-                                            <option>2010-2011</option>
-                                        </select>
+                                       {{$inscrit[0]->anneescolaire->libelle}}
                                     </td>
                                 </tr>
                                
@@ -95,7 +91,7 @@
                                         <strong>Classe:</strong>
                                     </td>
                                     <td>
-                                        4 ème
+                                        {{$inscrit[0]->classe->libelle}}
                                     </td>
                                 </tr>
                                 
@@ -120,7 +116,12 @@
                                         <strong>Décision</strong>
                                     </td>
                                     <td>
-                                        <h4><span class="badge badge-success">Admis(e)</span></h4>
+                                         @if ($inscrit[0]->admis)
+                                                <h4><span class="badge badge-success">Admis(e)</span></h4>
+                                             @else
+                                                <h4><span class="badge badge-secondary">Non Admis(e)</span></h4>
+                                        @endif
+                                        
                                     </td>
                                 </tr>
                                 
@@ -155,47 +156,30 @@
                                 </tr>
                             </thead>
                             <tbody>
+
+                             @foreach ( $chargers as $charger)
+
                                 <tr>
-                                    <td class="text-center fw-700">ANG</td>
-                                    <td class="text-center fw-700">3</td>
-                                    <td class="text-center">13</td>
-                                    <td class="text-center">15</td>
-                                    <td class="text-center">16</td>
-                                    <td class="text-center">17</td>
-                                    <td class="text-center">14</td>
-                                    <td class="text-center">13</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center fw-700">Maths</td>
-                                    <td class="text-center fw-700">3</td>
-                                    <td class="text-center">16</td>
-                                    <td class="text-center">15</td>
-                                    <td class="text-center">17</td>
-                                    <td class="text-center">20</td>
-                                    <td class="text-center">14</td>
-                                    <td class="text-center">19</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center fw-700">FRS</td>
-                                    <td class="text-center fw-700">3</td>
-                                    <td class="text-center">13</td>
-                                    <td class="text-center">15</td>
-                                    <td class="text-center">16</td>
-                                    <td class="text-center">17</td>
-                                    <td class="text-center">14</td>
-                                    <td class="text-center">13</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center fw-700">Histo-Géo</td>
-                                    <td class="text-center fw-700">3</td>
-                                    <td class="text-center">16</td>
-                                    <td class="text-center">15</td>
-                                    <td class="text-center">17</td>
-                                    <td class="text-center">20</td>
-                                    <td class="text-center">14</td>
-                                    <td class="text-center">19</td>
-                                </tr>
+                                    <td class="text-center fw-700">{{$charger->matiere->libelle}}</td>
+                                    <td class="text-center fw-700">{{$charger->coefficient}}</td>
+
+                                    <?php
+                                        $lenExainers=count($charger->examiners);
+                                        $restEmpty=6-$lenExainers;
+                                    ?>
+
+                                    @foreach ( $charger->examiners as $examiner )
+                                      <td class="text-center">{{$examiner->note}}</td>
+                                    @endforeach
+
+                                    @for ($i=0;$i<$restEmpty;$i++)
+                                        <td class="text-center"></td>
+                                    @endfor
                                 
+                                </tr>
+                                 
+                             @endforeach
+                               
                             </tbody>
                             <tfoot>
                                 <tr>

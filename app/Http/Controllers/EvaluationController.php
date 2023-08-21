@@ -10,6 +10,7 @@ use App\Repository\ExaminerRepository;
 use App\Repository\ExamRepository;
 use App\Http\Requests\StoreExamenRequest;
 use App\Http\Requests\UpdateExamenRequest;
+use Carbon\Carbon;
 
 
 class EvaluationController extends Controller
@@ -121,15 +122,23 @@ class EvaluationController extends Controller
     //ajout des notes par ajax
     public function add(Request $request)
     {
+        $request->validate(
+            ['date_examen'=>'required',
+            'note'=>'required',
+            'inscrit_id'=>'required']
+        );
+        $data=$request->input();
+
+        //convert date format
+        $data['date_examen']=date('Y-m-d', strtotime($data['date_examen']));
      
 
-        $data=$request->input();
         $data['charger_id']=session('charger_id');
         $data['examen_id']=session('examen_id');
         
         $this->examinerRepo->edit(null,$data);
 
-       return response()->json($data['inscrit_id']  );
+       return response()->json($data['inscrit_id']);
         
     }
 }
