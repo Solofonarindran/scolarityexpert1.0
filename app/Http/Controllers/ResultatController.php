@@ -69,7 +69,9 @@ class ResultatController extends Controller
         );
 
         $data=$request->input();
-        dd($data);
+        $resultats= $this->examinerRepo->resultatByExamenId($data);
+     
+        return view('evaluation.resultat.general.resultatparExam',compact('resultats'));
     }
 
 
@@ -82,14 +84,14 @@ class ResultatController extends Controller
         );
 
         $data=$request->input();
-        dd($data);
+       
+        $resultats=$this->examinerRepo-> averagAnnuel($data['classe_id'],$data['annee_id']);
+
+        $sumcoeff=$this->chargerRepo->sumCoeff($data['classe_id']);
+        
+        return view('evaluation.resultat.general.resultatAnnuel',compact('resultats','sumcoeff'));
     }
     
-
-
-
-
-
 
 
     //vue particulier
@@ -107,12 +109,29 @@ class ResultatController extends Controller
 
 
     //return bulletin by id_inscrit
-    public function bulletin($id,InscritRepository $inscritRepo)
+    public function bulletin($id,$id_classe,$id_annee,InscritRepository $inscritRepo)
     {
+        //note by id inscrit
         $chargers=$this->chargerRepo->getByIdInscrit($id);
+
+        //info inscrit
         $inscrit=$inscritRepo->getById($id);
-       //$examiners= $this->examinerRepo->resultatByIdInscrit($id);
-       return view('evaluation.resultat.particulier.bulletin',compact('chargers','inscrit'));
+
+        //Moyenne à chaque examen
+        $averages= $this->examinerRepo->averageByIdInscrit($id);
+        
+        //Moyenne des inscrits groupé par examen
+        $tableAVGByexam=$this->examinerRepo->averageGroupByExam($id_classe,$id_annee);
+
+        //Etablissement des rangs
+        $tables=[];
+        foreach($tableAVGByexam as $tableAVG){
+           
+            $tables[$tableAVG->examen_id][]=$tableAVG->inscrit_id;
+        }
+
+        $avg_annuel= $this->examinerRepo-> averagAnnuel($id_classe,$id_annee);
+        return view('evaluation.resultat.particulier.bulletin',compact('chargers','inscrit','averages','tables','avg_annuel'));
     }
 
 }

@@ -60,4 +60,19 @@
                         ->with(['eleve'])
                         ->get();
         }
+
+        //return liste des inscrits non payé les frais 
+
+        public function inscritNonPayé($annee_id)
+        {
+            return $this->model
+                        ->newQuery()
+                        ->where('anneescolaire_id',$annee_id)
+                        ->where(function($query){
+                            $query->where('frais_finish',FALSE);
+                            $query->orWhere('participation_finish',FALSE);
+                            $query->orWhere('friandise_finish',FALSE);
+                        })->get();
+                      
+        }
     }

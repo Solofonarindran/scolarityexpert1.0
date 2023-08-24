@@ -48,8 +48,8 @@
                                 <img src="/assets/img/demo/avatars/avatar-a.png" class="rounded-pill" width="50%" alt=""
                                     srcset="" />
                             </div>
-                            <h2 class="name text-dark" style="font-weight:800">SOLOFONARINDRA</h2>
-                            <h3 class="text-dark mb-4">Herinantenaina</h3>
+                            <h2 class="name text-dark" style="font-weight:800;text-transform:uppercase">{{$inscrit[0]->eleve->name}}</h2>
+                            <h3 class="text-dark mb-4">{{$inscrit[0]->eleve->firstname}}</h3>
                             <div class="mb-3 mt-4">
                                 <div class="btn-payement">
                                     <button class="btn btn-outline-success" data-toggle="modal" data-target=".example-modal-left-transparent">
@@ -72,28 +72,35 @@
                             <div class="row mb-3 align-items-center">
                                 <div class="col-lg-6">
                                     <div class="d-flex align-items-center justify-content-between">
-                                        <div class="p-2" style="font-weight:800">Classe de</div>
-                                        <div class="p-2">3eme</div>
+                                        <div class="p-2 ml-4" style="font-weight:800">Classe de</div>
+                                        <div class="p-2 ml-4">{{$inscrit[0]->classe->libelle}}</div>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between">
-                                        <div class="p-2" style="font-weight:800">Etat</div>
-                                        <div class="p-2">Passant</div>
+                                        <div class="p-2 ml-4" style="font-weight:800">Etat</div>
+                                        <div class="p-2 ml-4">
+                                            @if ($inscrit[0]->passant)
+                                                Passant(e)
+                                            @else
+                                                Redoublant(e)
+                                            @endif
+                                            
+                                        </div>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between">
-                                        <div class="p-2" style="font-weight:800">Matricule</div>
-                                        <div class="p-2">30000</div>
+                                        <div class="p-2 ml-4" style="font-weight:800">Matricule</div>
+                                        <div class="p-2 ml-4">{{$inscrit[0]->eleve->id}}</div>
                                     </div>
                                 </div>
                                 <div class="col-lg-6" style="border-left:1px solid #d1cfd1">
                                     <div class="d-flex align-items-center">
                                         <div class="col-lg-6">
                                             <h2 style="font-weight:800">Ecolage</h2>
-                                            <h4 class="text-bold">6 mois payes</h4>
+                                            <h4 class="text-bold">{{$inscrit[0]->nb_moisPayé}} mois payé(s)</h4>
                                         </div>
                                         <div class="col-lg-6">
-                                            <div class="js-easy-pie-chart color-success-500 position-relative mt-2 d-inline-flex align-items-center justify-content-center" style="" data-percent="20" data-piesize="110" data-linewidth="10" data-scalelength="5">
-                                                <div class="js-easy-pie-chart color-success-400 position-relative position-absolute pos-left pos-right pos-top pos-bottom d-flex align-items-center justify-content-center" data-percent="20" data-piesize="70" data-linewidth="5" data-scalelength="1" data-scalecolor="#fff">
-                                                    <div class="position-absolute pos-top pos-left pos-right pos-bottom d-flex align-items-center justify-content-center fw-800 fs-xl text-dark">20%</div>
+                                            <div class="js-easy-pie-chart color-success-500 position-relative mt-2 d-inline-flex align-items-center justify-content-center" style="" data-percent="{{number_format($inscrit[0]->nb_moisPayé/count($array)*100,2)}}" data-piesize="110" data-linewidth="10" data-scalelength="5">
+                                                <div class="js-easy-pie-chart color-success-400 position-relative position-absolute pos-left pos-right pos-top pos-bottom d-flex align-items-center justify-content-center" data-percent="{{number_format($inscrit[0]->nb_moisPayé/count($array)*100,2)}}" data-piesize="70" data-linewidth="5" data-scalelength="1" data-scalecolor="#fff">
+                                                    <div class="position-absolute pos-top pos-left pos-right pos-bottom d-flex align-items-center justify-content-center fw-800 fs-xl text-dark">{{number_format($inscrit[0]->nb_moisPayé/count($array)*100,2)}}%</div>
                                                 </div>
                                             </div>
 
@@ -105,72 +112,50 @@
                         <div class="panel">
                             <div class="row mb-3">
                                 <div class="col-lg-6">
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <div class="p-2">Septembre 2013</div>
-                                        <div class="p-2">
-                                            <a href="javascript:void(0);" class="btn btn-success btn-sm btn-icon rounded-circle">
-                                                <i class="fal fa-check"></i>
-                                            </a>
+                                    <?php
+
+                                        $len=count($array);
+
+                                    ?>
+                                    @for ($i=0;$i < 5;$i++)
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div class="p-2 ml-4 text-muted">{{$array[$i]}}</div>
+                                            <div class="p-2">
+                                                <a href="javascript:void(0);" 
+                                                
+                                                @if ($i < $inscrit[0]->nb_moisPayé)
+                                                     class="btn btn-success btn-sm btn-icon rounded-circle">
+                                                     <i class="fal fa-check"></i>
+                                                @else
+                                                    class="btn btn-secondary btn-sm btn-icon rounded-circle">
+                                                   
+                                                @endif 
+                                                
+                                                </a>
+                                            </div> 
                                         </div>
-                                    </div>
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <div class="p-2">Septembre 2013</div>
-                                        <div class="p-2">
-                                            <a href="javascript:void(0);" class="btn btn-success btn-sm btn-icon rounded-circle">
-                                                <i class="fal fa-check"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <div class="p-2">Septembre 2013</div>
-                                        <div class="p-2">
-                                            <a href="javascript:void(0);" class="btn btn-success btn-sm btn-icon rounded-circle">
-                                                <i class="fal fa-check"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <div class="p-2">Septembre 2013</div>
-                                        <div class="p-2">
-                                            <a href="javascript:void(0);" class="btn btn-success btn-sm btn-icon rounded-circle">
-                                                <i class="fal fa-check"></i>
-                                            </a>
-                                        </div>
-                                    </div>
+                                    @endfor
                                 </div>
                                 <div class="col-lg-6">
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <div class="p-2">Septembre 2014</div>
-                                        <div class="p-2">
-                                            <a href="javascript:void(0);" class="btn btn-success btn-sm btn-icon rounded-circle">
-                                                <i class="fal fa-check"></i>
-                                            </a>
+                                    @for ($i=5;$i < $len;$i++)
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div class="p-2 ml-4 text-muted">{{$array[$i]}}</div>
+                                            <div class="p-2 mr-4">
+                                                <a href="javascript:void(0);" 
+                                                
+                                                @if ($i < $inscrit[0]->nb_moisPayé)
+                                                     class="btn btn-success btn-sm btn-icon rounded-circle">
+                                                     <i class="fal fa-check"></i>
+                                                @else
+                                                    class="btn btn-secondary btn-sm btn-icon rounded-circle">
+                                                   
+                                                @endif 
+                                                
+                                                </a>
+                                            </div> 
                                         </div>
-                                    </div>
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <div class="p-2">Septembre 2014</div>
-                                        <div class="p-2">
-                                            <a href="javascript:void(0);" class="btn btn-success btn-sm btn-icon rounded-circle">
-                                                <i class="fal fa-check"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <div class="p-2">Septembre 2013</div>
-                                        <div class="p-2">
-                                            <a href="javascript:void(0);" class="btn btn-success btn-sm btn-icon rounded-circle">
-                                                <i class="fal fa-check"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <div class="p-2">Septembre 2013</div>
-                                        <div class="p-2">
-                                            <a href="javascript:void(0);" class="btn btn-success btn-sm btn-icon rounded-circle">
-                                                <i class="fal fa-check"></i>
-                                            </a>
-                                        </div>
-                                    </div>
+                                    @endfor
+                                   
                                 </div>
                             </div>
                         </div>
@@ -181,11 +166,11 @@
                                     <div class="d-flex align-items-center justify-content-between mt-2">
 
                                         <a href="" class="btn btn-light d-flex position-relative ml-4" data-toggle="modal" 
-                                            data-target=".example-modal-right-transparent" style="border-bottom:5px solid #fdda91">Friandise <i class="fw-300 fa-2x fal fa-check text-success position-absolute" style="top:-5px;right:-5px"></i></a>
+                                            data-target=".example-modal-right-transparent" style="border-bottom:5px solid #fdda91">Friandise @if($inscrit[0]->friandise_finish)<i class="fw-300 fa-2x fal fa-check text-success position-absolute" style="top:-5px;right:-5px"></i>@endif</a>
                                         <a href="" class="btn btn-light d-flex position-relative" data-toggle="modal" 
-                                            data-target=".example-modal-right-transparent" style="border-bottom:5px solid #fdda91">T M <i class="fw-300 fa-2x fal fa-check text-success position-absolute" style="top:-5px;right:-5px"></i></a>
+                                            data-target=".example-modal-right-transparent" style="border-bottom:5px solid #fdda91">T M @if($inscrit[0]->tm_finish)<i class="fw-300 fa-2x fal fa-check text-success position-absolute" style="top:-5px;right:-5px"></i>@endif</a>
                                         <a href="" class="btn btn-light d-flex position-relative mr-4" data-toggle="modal"
-                                            data-target=".example-modal-right-transparent" style="border-bottom:5px solid #fdda91">Particpation</a>
+                                            data-target=".example-modal-right-transparent" style="border-bottom:5px solid #fdda91">Particpation @if($inscrit[0]->participation_finish)<i class="fw-300 fa-2x fal fa-check text-success position-absolute" style="top:-5px;right:-5px"></i>@endif</a>
                                      
 
                                     </div>

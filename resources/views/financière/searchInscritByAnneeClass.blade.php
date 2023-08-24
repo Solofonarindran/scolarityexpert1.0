@@ -1,7 +1,11 @@
 @extends('layout')
 
     @section('title')
-        Evaluation
+       Fiancière
+    @endsection
+
+    @section('token')
+        <meta name="csrf-token" content="{{ csrf_token() }}">
     @endsection
 
     @section('style')
@@ -11,11 +15,11 @@
     @endsection
 
     @section('breadcrumbParent')
-        Résultats
+        Frais-Recherche
     @endsection
 
     @section('breadcrumbChild')
-        Liste des inscrits
+        Liste non payé
     @endsection
 
     @section('badge')
@@ -29,7 +33,7 @@
             <div id="panel-1" class="panel">
                 <div class="panel-hdr">
                     <h2>
-                        Tableau <span class="fw-300"><i>de Recherche</i></span> 
+                        Liste des Inscrits<span class="fw-300"><i>l'année dernière</i></span>
                     </h2>
                     <div class="panel-toolbar">
                         <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
@@ -40,24 +44,21 @@
                 <div class="panel-container show">
                     <div class="panel-content">
                         <div class="panel-tag">
-                            <p> 
-                                Tapez sur la plage de recherche si vous en a besoin
-                            </p>
-                            
+                            <p>Tapez sur la plage de recherche ... Cliquer sur le boutton <sup class="badge badge-success">select</sup></p>
+                                
                         </div>
                         <!-- datatable start -->
                         <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
                             <thead class="bg-primary-600">
                                 <tr>
-                                    <th>ID</th>         
+                                    <th>ID</th>
+                                    <th>Matricule</th>
                                     <th>Nom</th>
                                     <th>Prénom</th>
                                     <th>adresse</th>
                                     <th>Père</th>
-                                    <th>Mère</th>
                                     <th>Classe</th>
-                                    <th>status</th>
-                                   
+                                    <th>Reste à payer</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -67,43 +68,34 @@
 
                                     <tr>
                                         <td>{{$inscrit->id}}</td>
-                                        
+                                        <td>{{$inscrit->eleve->id}}</td>
                                         <td>{{$inscrit->eleve->name}}</td>
                                         <td>{{$inscrit->eleve->firstname}}</td>
                                         <td>{{$inscrit->eleve->adress}}</td>
-                                        <td>{{$inscrit->eleve->geniteur->name_father}}</td>
-                                        <td>{{$inscrit->eleve->geniteur->name_mother}}</td>
+                                        <td>{{$inscrit->eleve->geniteur->name_father}}</td>  
                                         <td>{{$inscrit->classe->libelle}}</td>
-                                        
-                                        <td>
-                                            @if ($inscrit->admis)
-                                                <span class="badge badge-success">Admis</span>
-                                            @else
-                                                 <span class="badge badge-secondary">Non admis</span>
-                                            @endif
-                                        </td>
-                                 
-                                        <td><a href="{{route('response.recherche',['id'=>$inscrit->id,'id_classe'=>$inscrit->classe_id,'id_annee'=>$inscrit->anneescolaire_id])}}" class="select btn btn-sm btn-outline-success">select</a></td>
+                                        <td>{{$inscrit->montant_restant}}</td>
+                                        <td><a href="{{route('operation.in.fr',['id'=>$inscrit->id])}}" type="button" class="btn btn-sm btn-outline-success">select</a></td>
                                     </tr>
-                                    
+
                                 @endforeach
-                                
                                 
                             </tbody>
                     
                         </table>
-                        <!-- datatable end -->
                         <!-- datatable end -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+
+   
     @endsection
 
     @section('script')
          <script src="/assets/js/datagrid/datatables/datatables.bundle.js"></script>
          <script src="/assets/js/datagrid/datatables/datatables.export.js"></script>
          <script src="/assets/js/customJs/dataTableExport.js"></script> 
-        
     @endsection

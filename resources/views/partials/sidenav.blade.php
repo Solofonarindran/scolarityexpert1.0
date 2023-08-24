@@ -109,7 +109,7 @@
                 </a>
                 <ul>
                     <li>
-                        <a href="utilities_color_pallet.html" title="Color Pallet"
+                        <a href="{{route('operation.list.ins')}}" title="Color Pallet"
                             data-filter-tags="ecolage frais scolaire">
                             <span class="nav-link-text" data-i18n="nav.utilities_color_pallet">Frais
                                 Scolaire</span>

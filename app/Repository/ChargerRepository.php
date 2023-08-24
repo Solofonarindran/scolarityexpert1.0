@@ -63,6 +63,15 @@
            
         }
 
+          //somme de coefficient
+        //utilisé dans les résultats global annuel
+        public function sumCoeff($idClasse)
+        {
+            return $this->model->selectRaw('SUM(coefficient) as sumcoeff')
+                               ->where('classe_id',$idClasse)
+                               ->get();
+
+        }
     }
 
 ?>

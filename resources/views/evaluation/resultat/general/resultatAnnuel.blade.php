@@ -65,13 +65,25 @@
                             </table>
                         </div>
                     </div>
-                    
+                    <?php
+                        $j=0;
+                        $effectif=0;
+                        foreach($resultats as $resultat){
+                            $avg=number_format($resultat->weighted_sum/($sumcoeff[0]->sumcoeff * 6),2);
+                            
+                            if($avg>=$resultat->inscrit->classe->bareme){
+                                $j++;
+                            }
+                            $effectif++;
+                        }
+
+                    ?>
                     <div class="col-sm-4 ml-sm-auto mr-4" style="">
 
                         <div class="d-flex mr-4 position-relative" style="height:100%;">
-                            <div class="js-easy-pie-chart color-warning-500 position-relative d-inline-flex align-items-center justify-content-center" style="" data-percent="40" data-piesize="110" data-linewidth="10" data-scalelength="5">
-                                                <div class="js-easy-pie-chart color-warning-400 position-relative position-absolute pos-left pos-right pos-top pos-bottom d-flex align-items-center justify-content-center" data-percent="40" data-piesize="70" data-linewidth="5" data-scalelength="1" data-scalecolor="#fff">
-                                                    <div class="position-absolute pos-top pos-left pos-right pos-bottom d-flex align-items-center justify-content-center fw-800 fs-xl text-dark">40%</div>
+                            <div class="js-easy-pie-chart color-warning-500 position-relative d-inline-flex align-items-center justify-content-center" style="" data-percent="{{$j/$effectif}}" data-piesize="110" data-linewidth="10" data-scalelength="5">
+                                                <div class="js-easy-pie-chart color-warning-400 position-relative position-absolute pos-left pos-right pos-top pos-bottom d-flex align-items-center justify-content-center" data-percent="{{$j/$effectif}}" data-piesize="70" data-linewidth="5" data-scalelength="1" data-scalecolor="#fff">
+                                                    <div class="position-absolute pos-top pos-left pos-right pos-bottom d-flex align-items-center justify-content-center fw-800 fs-xl text-dark">{{$j/$effectif}} %</div>
                                                 </div>
                             </div>
                             <label class="mt-md-0 position-absolute" style="font-weight:bold; letter-spacing:2px ; font-size:18px;left:-18px;top:-2px">Taux</label>
@@ -101,8 +113,8 @@
                 <div class="panel-container show">
                     <div class="panel-content">
                         <div class="panel-tag">
-                             <h6 style="letter-spacing:2px">Admis:  35 élèves</h6> 
-                             <h6 style="letter-spacing:2px">Rédoublons: 5 élèves</h6> 
+                             <h6 style="letter-spacing:2px">Admis:  {{$j}} élèves</h6> 
+                             <h6 style="letter-spacing:2px">Rédoublons: {{$effectif-$j}} élèves</h6> 
                             
                             
                         </div>
@@ -116,58 +128,36 @@
                                     <th>Prénom</th>
                                     <th>Moyenne</th>
                                     <th>Status</th>
+                                    <th>More</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php
+                                    $i=1;
+                                ?>
+                                @foreach ( $resultats as $resultat)
                                 <tr>
-                                    <td>1</td>
-                                    <td>46</td>
-                                    <td>Edinburgh</td>
-                                    <td>Edinburgh</td>
-                                    <td>$320,800</td>
-                                    <td>Edinburgh</td>
+                                    <td>{{$i}}</td>
+                                    <td>{{$resultat->inscrit->eleve->id}}</td>
+                                    <td>{{$resultat->inscrit->eleve->name}}</td>
+                                    <td>{{$resultat->inscrit->eleve->firstname}}</td>
+                                    <?php
+                                        $avgAnnuel=number_format($resultat->weighted_sum/($sumcoeff[0]->sumcoeff * 6),2);
+                                    ?>
+                                    <td class="text-center">{{$avgAnnuel}}</td>
+                                    <td class="text-center">
+                                        @if ($avgAnnuel >=$resultat->inscrit->classe->bareme)
+                                            <span class="badge badge-success">succès</span>
+                                        @else
+                                            <span class="badge badge-secondary">échec</span>
+                                        @endif
+                                    </td>
+                                    <td class="text-center"><a href="{{route('response.recherche',['id'=>$resultat->inscrit->id,'id_classe'=>$resultat->inscrit->classe_id,'id_annee'=>$resultat->inscrit->anneescolaire_id])}}" class="select btn btn-sm btn-outline-success">Voir Plus</a></td>
                                 </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>46</td>
-                                    <td>Edinburgh</td>
-                                    <td>Edinburgh</td>
-                                    <td>$320,800</td>
-                                    <td>Edinburgh</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>46</td>
-                                    <td>Edinburgh</td>
-                                    <td>Edinburgh</td>
-                                    <td>$320,800</td>
-                                    <td>Edinburgh</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>46</td>
-                                    <td>Edinburgh</td>
-                                    <td>Edinburgh</td>
-                                    <td>$320,800</td>
-                                    <td>Edinburgh</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>46</td>
-                                    <td>Edinburgh</td>
-                                    <td>Edinburgh</td>
-                                    <td>$320,800</td>
-                                    <td>Edinburgh</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>46</td>
-                                    <td>Edinburgh</td>
-                                    <td>Edinburgh</td>
-                                    <td>$320,800</td>
-                                    <td>Edinburgh</td>
-                                </tr>
-                           
+                                    <?php
+                                        $i++
+                                    ?>
+                                @endforeach
                             </tbody>
                     
                         </table>

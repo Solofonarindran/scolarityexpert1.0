@@ -25,10 +25,7 @@ class Mouvement extends Model
         return $this->belongsTo(Inscrit::class);
     }
 
-    public function anneescolaire()
-    {
-        return $this->belongsTo(AnneeScolaire::class);
-    }
+  
 
     
 }

@@ -99,16 +99,30 @@
                                     <td>
                                         <strong>Rang annuel</strong>
                                     </td>
-                                    <td>
-                                        2
-                                    </td>
+                                    @foreach ($avg_annuel as $i=>$val)
+                                        @if ($inscrit[0]->id == $val->inscrit_id)
+                                        <td>
+                                            {{$i + 1}}
+                                        </td>
+                                        @endif
+                                    @endforeach
+                                    
                                 </tr>
+                                <?php
+                                    $sum=0;
+                                    foreach ( $averages as $average ){
+                                        $sum+=number_format($average->weighted_sum/$average->total_coeff,2);
+                                    }
+
+                                ?>
+                                
+
                                 <tr>
                                     <td>
                                         <strong>Moyenne Générale:</strong>
                                     </td>
                                     <td>
-                                        16.25
+                                        {{number_format($sum/6,2)}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -182,16 +196,17 @@
                                
                             </tbody>
                             <tfoot>
-                                <tr>
-                                    <td class="text-center table-scale-border-top fw-700">Total</td>
-                                    <td class="text-center table-scale-border-top">13</td>
-                                    <td class="text-center table-scale-border-top">183</td>
-                                    <td class="text-center table-scale-border-top">250</td>
-                                    <td class="text-center table-scale-border-top">160</td>
-                                    <td class="text-center table-scale-border-top">177</td>
-                                    <td class="text-center table-scale-border-top">148</td>
-                                    <td class="text-center table-scale-border-top">139</td>
+                            <tr>
+                                <td class="text-center table-scale-border-top fw-700">Total</td>
+                                <td class="text-center table-scale-border-top">{{$averages[0]->total_coeff}}</td>
+                                @foreach ( $averages as $average )
+                                    <td class="text-center table-scale-border-top">{{$average->weighted_sum}}</td>
+                                    
+                                @endforeach
 
+                                @for ($i=0;$i<$restEmpty;$i++)
+                                    <td class="text-center table-scale-border-top"></td>
+                                @endfor
                                 </tr>
                             </tfoot>
                         </table>
@@ -222,24 +237,43 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                    <?php
+                                        $lenAvg=count($averages);
+                                        $restEmptyAvg=6-$lenAvg;
+                                    ?>
+
+                 
                                 <tr>
                                     <td class="text-center fw-700">Moyenne</td>
-                                    <td class="text-center">13</td>
-                                    <td class="text-center">15</td>
-                                    <td class="text-center">16</td>
-                                    <td class="text-center">17</td>
-                                    <td class="text-center">14</td>
-                                    <td class="text-center">13</td>
+                                    @foreach ( $averages as $average )
+                                      <td class="text-center">{{number_format($average->weighted_sum/$average->total_coeff,2)}}</td>
+                                    @endforeach
+
+                                    @for ($i=0;$i<$restEmptyAvg;$i++)
+                                        <td class="text-center"></td>
+                                    @endfor
                                 </tr>
+                                <?php
+                                  $lenTable=count($tables);
+                                  $restRound=6-$lenTable;
+                                ?>
                                 <tr>
                                     
                                     <td class="text-center fw-700">Rang</td>
-                                    <td class="text-center">16</td>
-                                    <td class="text-center">15</td>
-                                    <td class="text-center">17</td>
-                                    <td class="text-center">20</td>
-                                    <td class="text-center">14</td>
-                                    <td class="text-center">19</td>
+
+                                    @foreach ($tables as $table)
+                                        @foreach ($table as $index=>$value)
+                                            @if ($value==$inscrit[0]->id)
+                                                <td class="text-center">{{$index + 1}}</td>
+                                            @endif
+                                        @endforeach
+                                    @endforeach
+
+                                    @for ($i=0;$i<$lenTable;$i++)
+                                         <td class="text-center"></td>
+                                    @endfor
+                                    
+
                                 </tr>
                               
                             </tbody>

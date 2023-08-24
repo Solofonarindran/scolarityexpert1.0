@@ -59,7 +59,11 @@ Route::post('/ev/up/','App\Http\Controllers\EvaluationController@edit')->name('u
 
     //Particulier
     Route::post('/ev/res/i/search/','App\Http\Controllers\ResultatController@researchInscrit')->name('resultat.recherche');
-    Route::get('/ev/{id?}/resp/','App\Http\Controllers\ResultatController@bulletin')->name('response.recherche');
+    Route::get('/ev/{id?}/resp/{id_classe?}/{id_annee?}','App\Http\Controllers\ResultatController@bulletin')->name('response.recherche');
 
+// route financière 
 
+    //opération
+    Route::get('/op/lst/i','App\Http\Controllers\OperationController@searchInscrit')->name('operation.list.ins');
+    Route::get('/op/i{id?}/fr','App\Http\Controllers\OperationController@vuepayementById')->name('operation.in.fr');
 
