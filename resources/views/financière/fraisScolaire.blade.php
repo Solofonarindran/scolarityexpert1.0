@@ -60,9 +60,9 @@
                             </div>
                             <div>
                                 <div class="btn-payement">
-                                    <button class="btn btn-light">
-                                        <span>Operation detailees</span>
-                                    </button>
+                                    <a href="{{route('mouvement.detail.inscrit',['id'=>$inscrit[0]->id])}}" class="btn btn-light">
+                                        <span>Operation detaillées</span>
+                                    </a>
                                 </div>
                             </div>
                         </center>
@@ -165,14 +165,16 @@
                                     
                                     <div class="d-flex align-items-center justify-content-between mt-2">
 
-                                        <a href="" class="btn btn-light d-flex position-relative ml-4" data-toggle="modal" 
-                                            data-target=".example-modal-right-transparent" style="border-bottom:5px solid #fdda91">Friandise @if($inscrit[0]->friandise_finish)<i class="fw-300 fa-2x fal fa-check text-success position-absolute" style="top:-5px;right:-5px"></i>@endif</a>
-                                        <a href="" class="btn btn-light d-flex position-relative" data-toggle="modal" 
-                                            data-target=".example-modal-right-transparent" style="border-bottom:5px solid #fdda91">T M @if($inscrit[0]->tm_finish)<i class="fw-300 fa-2x fal fa-check text-success position-absolute" style="top:-5px;right:-5px"></i>@endif</a>
-                                        <a href="" class="btn btn-light d-flex position-relative mr-4" data-toggle="modal"
-                                            data-target=".example-modal-right-transparent" style="border-bottom:5px solid #fdda91">Particpation @if($inscrit[0]->participation_finish)<i class="fw-300 fa-2x fal fa-check text-success position-absolute" style="top:-5px;right:-5px"></i>@endif</a>
+                                        <a href="#"  class="btn btn-light d-flex position-relative ml-4"  
+                                            @if(!$inscrit[0]->friandise_finish) data-toggle="modal" data-target=".example-modal-right-transparent" @endif style="border-bottom:5px solid #fdda91">Friandise @if($inscrit[0]->friandise_finish)<i class="fw-300 fa-2x fal fa-check text-success position-absolute" style="top:-5px;right:-5px"></i>@endif</a>
+                                        <a href="#" class="btn btn-light d-flex position-relative @if(!$inscrit[0]->eleve->inne) mr-4 @endif" data-toggle="modal" 
+                                            @if(!$inscrit[0]->tm_finish) data-target=".example-modal-right-transparent" @endif style="border-bottom:5px solid #fdda91">T M @if($inscrit[0]->tm_finish)<i class="fw-300 fa-2x fal fa-check text-success position-absolute" style="top:-5px;right:-5px"></i>@endif</a>
+                                        
+                                        @if($inscrit[0]->eleve->inne)
+                                            <a href="" class="btn btn-light d-flex position-relative mr-4" data-toggle="modal"
+                                            @if(!$inscrit[0]->participation_finish) data-target=".example-modal-right-transparent" @endif style="border-bottom:5px solid #fdda91">Particpation @if($inscrit[0]->participation_finish)<i class="fw-300 fa-2x fal fa-check text-success position-absolute" style="top:-5px;right:-5px"></i>@endif</a>
                                      
-
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -209,23 +211,29 @@
                                
                                <div class="card-body p-3">
                                
-                               		<form action="" method="post">
+                               		<form action="{{route('operation.post.fr',['id'=>$inscrit[0]->id])}}" method="post">
+                                        @csrf
 					                    <div class="form-group">
-					                        <label class="form-label" for="mois" style="font-weight:bold">Mois correspondant:</label>
-					                        <input type="text" name="mois" id="mois" class="form-control"  placeholder="Janvier 2014" >
+					                        <label class="form-label" for="libelle" style="font-weight:bold">Mois correspondant:</label>
+					                        <input type="text" name="libelle" id="libelle" class="form-control"  value="{{$array[$inscrit[0]->nb_moisPayé]}}" readonly>
 					                       
 					                    </div>
 					                    <div class="form-group">
-					                        <label class="form-label" for="Parcours normal" style="font-weight:bold">Montant:</label>
-					                        <input type="number" name="Parcours normal" id="Parcours normal" class="form-control" placeholder="17 000" readonly>
+					                        <label class="form-label" for="Parcours normal" style="font-weight:bold">Net un mois:</label>
+					                        <input type="number" name="net" id="Parcours normal" class="form-control" value="{{$inscrit[0]->classe->cycle->frais_scolaire}}" readonly>
 					                      
 					                    </div>
 					                    <div class="form-group">
 					                        <label class="form-label" for="nombre_mois" style="font-weight:bold">Nombre de mois :</label>
-					                        <input type="number" name="nombre_mois" id="nombre_mois" class="form-control" placeholder="10">
+					                        <input type="number" name="nb" id="nombre_mois" class="form-control nb_mois">
 					                       
 					                    </div>
-					                   
+
+					                    <div class="form-group">
+					                        <label class="form-label" for="Parcours normal" style="font-weight:bold">Net à payer:</label>
+					                        <input type="number" name="montant" id="Parcours normal" class="form-control" value="{{$inscrit[0]->classe->cycle->frais_scolaire}}" readonly>
+					                      
+					                    </div>
                                   
 					                    <div class="d-inline-flex" style="width:100%;margin-left:40px">
                                             <button type="button" class="btn btn-sm btn-outline-secondary mr-3" data-dismiss="modal" style="margin-right:30px">Annuler</button>
@@ -270,23 +278,26 @@
                                
                                <div class="card-body p-3">
                                
-                               		<form action="" method="post">
-					                  
+                               		<form action="{{route('operation.divers',['id'=>$inscrit[0]->id,'cycle'=>$inscrit[0]->classe->cycle->id])}}" method="post">
+                                        @csrf
                                         <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" disabled id="customSwitch1">
-                                            <label class="custom-control-label" for="customSwitch1">Friandise</label>
+                                            <input type="checkbox" class="custom-control-input" @if($inscrit[0]->friandise_finish) disabled @endif id="customSwitch1" name="friandise">
+                                            <label class="custom-control-label position-relative" for="customSwitch1">Friandise <sup class="mr-2" style="font-size:15px">{{$inscrit[0]->classe->cycle->friandise}}</sup>@if($inscrit[0]->friandise_finish)<i class="fw-300 fa-2x fal fa-check text-success position-absolute" style="top:-15px;right:-20px"></i>@endif</label>
                                         </div>
 					                    <div class="custom-control custom-switch mt-4">
-                                            <input type="checkbox" class="custom-control-input" id="customSwitch2">
-                                            <label class="custom-control-label" for="customSwitch2">TM</label>
+                                            <input type="checkbox" class="custom-control-input" id="customSwitch2" @if($inscrit[0]->tm_finish) disabled @endif name="tm">
+                                            <label class="custom-control-label position-relative" for="customSwitch2">TM <sup class="mr-2" style="font-size:15px">{{$inscrit[0]->classe->cycle->tm}}</sup> @if($inscrit[0]->tm_finish)<i class="fw-300 fa-2x fal fa-check text-success position-absolute" style="top:-15px;right:-20px"></i>@endif</label>
                                         </div>
-                                        <div class="custom-control custom-switch mt-4 mb-4">
-                                            <input type="checkbox" class="custom-control-input" id="customSwitch3">
-                                            <label class="custom-control-label" for="customSwitch3">Participation</label>
-                                        </div>
+
+                                        @if ($inscrit[0]->eleve->inne)
+                                            <div class="custom-control custom-switch mt-4">
+                                                <input type="checkbox" class="custom-control-input" id="customSwitch3" @if($inscrit[0]->participation_finish) diseabled @endif name="participation">
+                                                <label class="custom-control-label position-relative" for="customSwitch3">Participation <sup class="mr-2" style="font-size:15px">{{$inscrit[0]->classe->cycle->participation}}</sup> @if($inscrit[0]->participation_finish)<i class="fw-300 fa-2x fal fa-check text-success position-absolute" style="top:-15px;right:-20px"></i>@endif</label>
+                                            </div>
+                                        @endif
+                                        
 					                   
-                                  
-					                    <div class="d-inline-flex" style="width:100%;margin-left:40px">
+					                    <div class="d-inline-flex mt-4" style="width:100%;margin-left:40px">
                                             <button type="button" class="btn btn-sm btn-outline-secondary mr-3" data-dismiss="modal" style="margin-right:30px">Annuler</button>
                                             <button type="submit"  class="btn btn-sm btn-outline-primary mr-1">Effectuer</button> 
 					                    		
@@ -307,4 +318,16 @@
 
     @section('script')
         <script src="/assets/js/statistics/easypiechart/easypiechart.bundle.js"></script>
+        <script>
+            $(document).ready(function(){
+                $('#nombre_mois').keyup(function(){
+                    let nb=$('input[name=nb]').val()
+                    let net=$('input[name=net]').val()
+
+
+                    $('input[name=montant]').val(net*nb)
+                    
+                })
+            })
+        </script>
     @endsection

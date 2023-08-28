@@ -10,4 +10,10 @@
             $this->model=$mouvement;
             $this->relation=['inscrit'];
         }
+
+        public function getByIdInscrit($id)
+        {
+            return $this->model->where('inscrit_id',$id)
+                               ->get();
+        }
     }

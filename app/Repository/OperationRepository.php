@@ -1,5 +1,7 @@
 <?php
-
+    namespace App\Repository;
+    use App\Models\Operation;
+    
     class OperationRepository extends AbstractRepository
     {
         public function __construct(Operation $operation)

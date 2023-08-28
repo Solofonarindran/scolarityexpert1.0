@@ -49,7 +49,7 @@
                                         <strong>Matricule :</strong> 
                                     </td>
                                     <td>
-                                       45
+                                       {{$inscrit[0]->eleve->id}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -57,15 +57,15 @@
                                         <strong>Nom :</strong> 
                                     </td>
                                     <td style="text-transform:uppercase">
-                                       solofonarindra
+                                       {{$inscrit[0]->eleve->name}}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <strong>Prénom:</strong>
                                     </td>
-                                    <td>
-                                        Herinantenaina
+                                    <td style="text-transform:capitalize">
+                                        {{$inscrit[0]->eleve->firstname}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -73,7 +73,7 @@
                                         <strong>Classe:</strong>
                                     </td>
                                     <td>
-                                        4 ème
+                                        {{$inscrit[0]->classe->libelle}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -81,11 +81,7 @@
                                         <strong>Année Scolaire:</strong>
                                     </td>
                                     <td>
-                                        <select class="" id="">
-                                            <option>2012-2013</option>
-                                            <option>2011-2012</option>
-                                            <option>2010-2011</option>
-                                        </select>
+                                       {{$inscrit[0]->anneescolaire->libelle}}
                                     </td>
                                 </tr>
                                
@@ -104,7 +100,7 @@
                             <thead>
                              
                                 <tr>
-                                    <th class="text-center fw-700 table-scale-border-right">Matière</th>
+                                   
                                     <th class="text-center fw-700">*</th>
                                     <th class="text-center fw-700"> Motif </th>
                                     <th class="text-center fw-700"> Date d'action</th>
@@ -114,42 +110,19 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                            
-                                    <td class="text-center fw-700">3</td>
-                                    <td class="text-center">Ecolage</td>
-                                    <td class="text-center">15/02/2014</td>
-                                    <td class="text-center">16:00</td>
-                                    <td class="text-center">17 000</td>
-                                 
-                                </tr>
-                                <tr>
-                            
-                                    <td class="text-center fw-700">4</td>
-                                    <td class="text-center">Ecolage</td>
-                                    <td class="text-center">15/03/2014</td>
-                                    <td class="text-center">16:00</td>
-                                    <td class="text-center">17 000</td>
+                                @foreach ($mouvements as $mouv)
+                                    <tr>
                                 
-                                </tr>
-                                <tr>
-                            
-                                    <td class="text-center fw-700">3</td>
-                                    <td class="text-center">Ecolage</td>
-                                    <td class="text-center">15/04/2014</td>
-                                    <td class="text-center">16:00</td>
-                                    <td class="text-center">17 000</td>
-                                
-                                </tr>
-                                <tr>
+                                        <td class="text-center fw-700">{{$mouv->id}}</td>
+                                        <td class="text-center">{{$mouv->libelle}}</td>
+                                        <td class="text-center">{{$mouv->created_at}}</td>
+                                        <td class="text-center">{{$mouv->created_at}}</td>
+                                        <td class="text-center">{{$mouv->montant}}</td>
                                     
-                                    <td class="text-center fw-700">3</td>
-                                    <td class="text-center">Ecolage</td>
-                                    <td class="text-center">15/05/2014</td>
-                                    <td class="text-center">16:00</td>
-                                    <td class="text-center">17 000</td>
-                                
-                                </tr>
+                                    </tr>
+                                @endforeach
+                               
+                               
                                 
                             </tbody>
                             <tfoot>

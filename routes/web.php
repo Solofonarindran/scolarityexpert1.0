@@ -63,7 +63,9 @@ Route::post('/ev/up/','App\Http\Controllers\EvaluationController@edit')->name('u
 
 // route financière 
 
-    //opération
-    Route::get('/op/lst/i','App\Http\Controllers\OperationController@searchInscrit')->name('operation.list.ins');
-    Route::get('/op/i{id?}/fr','App\Http\Controllers\OperationController@vuepayementById')->name('operation.in.fr');
-
+    //mouvement des inscrits
+    Route::get('/op/lst/i','App\Http\Controllers\MouvementController@searchInscrit')->name('operation.list.ins');
+    Route::get('/op/i{id?}/fr','App\Http\Controllers\MouvementController@vuepayementById')->name('operation.in.fr');
+    Route::post('/op/{id?}dv/{cycle?}/fr','App\Http\Controllers\MouvementController@postdivers')->name('operation.divers');
+    Route::post('/op/{id?}fr','App\Http\Controllers\MouvementController@postfrais')->name('operation.post.fr');
+    Route::get('/mv/i{id?}/dt','App\Http\Controllers\MouvementController@getByIdInscrit')->name('mouvement.detail.inscrit');

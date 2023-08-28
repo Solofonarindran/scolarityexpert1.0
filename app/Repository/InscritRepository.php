@@ -75,4 +75,12 @@
                         })->get();
                       
         }
+
+
+       public function increment_nb_moisPayé($id,$nbr)
+       {
+         return $this->model
+                     ->where('id',$id)
+                     ->increment('nb_moisPayé',$nbr);
+       }
     }
