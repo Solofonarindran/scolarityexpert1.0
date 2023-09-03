@@ -9,5 +9,14 @@
             $this->model=$operation;
             $this->relation=['anneescolaire','professeur'];
         }
+
+
+        public function sumCharge($annee_id)
+        {
+            return $this->model->where('anneescolaire_id',$annee_id)
+                        ->get()
+                        ->sum('montant');
+        }
+       
     }
 ?>

@@ -49,7 +49,7 @@
                                         <strong>Identité :</strong> 
                                     </td>
                                     <td>
-                                       45
+                                       {{$prof[0]->id}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -57,7 +57,7 @@
                                         <strong>Nom :</strong> 
                                     </td>
                                     <td style="text-transform:uppercase">
-                                       solofonarindra
+                                       {{$prof[0]->name}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -65,15 +65,15 @@
                                         <strong>Prénom:</strong>
                                     </td>
                                     <td>
-                                        Herinantenaina
+                                        {{$prof[0]->firstname}}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <strong>Classe:</strong>
+                                        <strong>Rôle:</strong>
                                     </td>
                                     <td>
-                                        4 ème
+                                        {{$prof[0]->rule->libelle}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -81,11 +81,7 @@
                                         <strong>Année Scolaire:</strong>
                                     </td>
                                     <td>
-                                        <select class="" id="">
-                                            <option>2012-2013</option>
-                                            <option>2011-2012</option>
-                                            <option>2010-2011</option>
-                                        </select>
+                                        {{$annee}}
                                     </td>
                                 </tr>
                                
@@ -104,7 +100,7 @@
                             <thead>
                              
                                 <tr>
-                                    <th class="text-center fw-700 table-scale-border-right">Matière</th>
+                                    
                                     <th class="text-center fw-700">*</th>
                                     <th class="text-center fw-700"> Motif </th>
                                     <th class="text-center fw-700"> Date d'action</th>
@@ -114,43 +110,19 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                            
-                                    <td class="text-center fw-700">3</td>
-                                    <td class="text-center">Ecolage</td>
-                                    <td class="text-center">15/02/2014</td>
-                                    <td class="text-center">16:00</td>
-                                    <td class="text-center">17 000</td>
-                                 
-                                </tr>
-                                <tr>
-                            
-                                    <td class="text-center fw-700">4</td>
-                                    <td class="text-center">Ecolage</td>
-                                    <td class="text-center">15/03/2014</td>
-                                    <td class="text-center">16:00</td>
-                                    <td class="text-center">17 000</td>
+                                @foreach ($prof[0]->operations as $operation)
+
+                                    <tr>
                                 
-                                </tr>
-                                <tr>
-                            
-                                    <td class="text-center fw-700">3</td>
-                                    <td class="text-center">Ecolage</td>
-                                    <td class="text-center">15/04/2014</td>
-                                    <td class="text-center">16:00</td>
-                                    <td class="text-center">17 000</td>
-                                
-                                </tr>
-                                <tr>
+                                        <td class="text-center fw-700">{{$operation->id}}</td>
+                                        <td class="text-center">{{$operation->motif}}</td>
+                                        <td class="text-center">{{$operation->created_at}}</td>
+                                        <td class="text-center">{{$operation->created_at}}</td>
+                                        <td class="text-center">{{$operation->montant}}</td>
                                     
-                                    <td class="text-center fw-700">3</td>
-                                    <td class="text-center">Ecolage</td>
-                                    <td class="text-center">15/05/2014</td>
-                                    <td class="text-center">16:00</td>
-                                    <td class="text-center">17 000</td>
-                                
-                                </tr>
-                                
+                                    </tr>
+                                @endforeach
+                  
                             </tbody>
                             <tfoot>
       

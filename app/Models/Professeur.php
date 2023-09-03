@@ -36,12 +36,5 @@ class Professeur extends Model
         return $this->hasMany(Operation::class);
     }
 
-    public function nbrSalairePayé(): Attribute
-    {
-        return  Attribute::make(
-            fn()=>$this->operations->sum(
-                fn(Operation $operation)=>$operation->nb
-            )
-        );
-    }
+    
 }

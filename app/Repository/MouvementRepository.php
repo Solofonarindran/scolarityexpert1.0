@@ -16,4 +16,16 @@
             return $this->model->where('inscrit_id',$id)
                                ->get();
         }
+
+        //somme total payé des mouvements
+        public function sumMontant($annee_id)
+        {
+            return $this->model ->whereHas('inscrit',function($query) use($annee_id)
+                                {
+                                    $query->where('anneescolaire_id',$annee_id);
+                                })
+                                ->get()
+                                ->sum('montant');
+        }
+        
     }

@@ -36,16 +36,56 @@
                         ->get();
         }
 
-        //recherche inscrit par id avec le nombre de mois frais payé
-        // Gestion financière - frais scolaire
-
-        public function nbFraisPayé($id)
+       // T M PAYÉ
+        public function TMpaye($annee_id)
         {
-           return $this->model::find($id)->mouvements
-                                   ->sum(fn(Mouvement $mvt)=>$mvt->nb)
-                                   ->where('anneescolaire_id',$anneeScoId)
-                                   ->where('libelle','ecolage');
-                                   
+            return $this->model->where('anneescolaire_id',$annee_id)
+                               ->where('tm_finish',TRUE)
+                               ->with('classe.cycle')
+                               ->get();
+                               
+        }
+
+        //nombre des friandise PAYÉ
+        public function FriandisePaye($annee_id)
+        {
+            return $this->model->where('anneescolaire_id',$annee_id)
+                               ->where('friandise_finish',TRUE)
+                               ->with('classe.cycle')
+                               ->get();
+                              
+        }
+
+        //nombre des Ecolage PAYÉ
+        public function nbEcolagepaye($annee_id)
+        {
+            return $this->model->where('anneescolaire_id',$annee_id)
+                               ->get()
+                               ->sum('nb_moisPayé');
+        }
+
+        //nombre des participations payées
+        public function ParticipationPaye($annee_id)
+        {
+            return $this->model->where('anneescolaire_id',$annee_id)
+                               ->where('participation_finish',TRUE)
+                               ->whereHas('eleve',function($query){
+                                    $query->where('inne',TRUE);
+                               })
+                               ->with('classe.cycle')
+                               ->get();
+                               
+        }
+
+        //nombre des participations payantes(que doivent être payées)
+        public function nbParticipation($annee_id)
+        {
+            return $this->model->where('anneescolaire_id',$annee_id)
+                               ->whereHas('eleve',function($query){
+                                    $query->where('inne',TRUE);
+                               })
+                               ->get()
+                               ->count('id');
         }
 
 
@@ -76,6 +116,7 @@
                       
         }
 
+                         
 
        public function increment_nb_moisPayé($id,$nbr)
        {

@@ -17,7 +17,7 @@
     @endsection
     
     @section('badge')
-        <sup class='badge badge-warning fw-800' style="letter-spacing:2px;font-size:12px">Identité Professeur: 45</sup>
+        <sup class='badge badge-warning fw-800' style="letter-spacing:2px;font-size:12px">Identité Professeur: {{$prof[0]->id}}</sup>
     @endsection
 
     @section('contents')
@@ -49,40 +49,43 @@
                                         </div>
                                         <div class="col-8">
                                             <div  style="">
-                                                <h2 class="name" style="font-weight:800;">SOLOFONARINDRA</h2>
-                                                <h3>Herinantenaina</h3>
+                                                <h2 class="name" style="font-weight:800;text-transform:uppercase">{{$prof[0]->name}}</h2>
+                                                <h3 style="text-transform:capitalize">{{$prof[0]->firstname}}</h3>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="panel mt-3 mb-3" style="">
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <strong class="p-2" style="font-weight:800">Septembre 2013</strong>
-                                        <div class="p-2">
-                                            <button class="btn btn-light py-1 px-5">
-                                                20 H
-                                            </button>
-                                        </div>
-                                        <div class="p-2">
-                                            <a href="javascript:void(0);" class="btn btn-success btn-sm btn-icon rounded-circle">
-                                                <i class="fal fa-check"></i>
+
+                                    <?php
+                                        $len=count($array);
+                                    ?>
+
+                                    @for ($i=0;$i<$len;$i++)
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <strong class="p-2" style="font-weight:800;width: 150px">{{$array[$i]}}</strong>
+                                            <div class="p-2">
+                                                <button class="btn btn-light py-1 px-5">
+                                                    {{$heure}} H
+                                                </button>
+                                            </div>
+                                            <div class="p-2">
+
+                                            <a href="javascript:void(0);" 
+                                                 @if ($i < $nb)
+                                                     class="btn btn-success btn-sm btn-icon rounded-circle">
+                                                     <i class="fal fa-check"></i>
+                                                @else
+                                                    class="btn btn-secondary btn-sm btn-icon rounded-circle">
+                                                    <i class=""></i>
+                                                @endif 
                                             </a>
+                                                
+                                            </div>
                                         </div>
-                                    </div> 
-                                    
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <strong class="p-2" style="font-weight:800">Septembre 2013</strong>
-                                        <div class="p-2">
-                                            <button class="btn btn-light py-1 px-5">
-                                                20 H
-                                            </button>
-                                        </div>
-                                        <div class="p-2">
-                                            <a href="javascript:void(0);" class="btn btn-success btn-sm btn-icon rounded-circle">
-                                                <i class="fal fa-check"></i>
-                                            </a>
-                                        </div>
-                                    </div> 
+                                    @endfor
+                                     
+                                   
                                    
                                
                                 </div>
@@ -93,22 +96,30 @@
                                         <div class="col-lg-6">
                                             <div style="" class="d-flex align-items-center justify-content-between">
                                                 <div class="p-2" style="font-weight:800">Role</div>
-                                                <div class="p-2">Vacataire</div>
+                                                <div class="p-2">{{$prof[0]->rule->libelle}}</div>
                                             </div>
                                             <div class="d-flex align-items-center justify-content-between">
                                                 <div class="p-2" style="font-weight:800">Horaire mensuel</div>
-                                                <div class="p-2">20 H</div>
+                                                <div class="p-2">{{$heure}} H</div>
                                             </div>
-                                            <div class="d-flex align-items-center justify-content-between">
-                                                <div class="p-2" style="font-weight:800">Salaire par H</div>
-                                                <div class="p-2">10 000 Ar</div>
-                                            </div>
+                                            @if ($prof[0]->rule_id == 1)
+                                                <div class="d-flex align-items-center justify-content-between">
+                                                    <div class="p-2" style="font-weight:800">Coût par Heure</div>
+                                                    <div class="p-2">{{$prof[0]->coutparheure}} Ar</div>
+                                                </div>
+                                                @else
+                                                <div class="d-flex align-items-center justify-content-between">
+                                                    <div class="p-2" style="font-weight:800">Salaire Mensuel</div>
+                                                    <div class="p-2">{{$prof[0]->salaire}} Ar</div>
+                                                </div>
+                                            @endif
+                                           
                                         </div>
                                         <div class="col-lg-6 d-flex justify-content-center align-items-center">
                                             
-                                                <div class="js-easy-pie-chart color-success-500 position-relative mt-2 d-inline-flex align-items-center justify-content-center" style="" data-percent="20" data-piesize="110" data-linewidth="10" data-scalelength="5">
-                                                        <div class="js-easy-pie-chart color-success-400 position-relative position-absolute pos-left pos-right pos-top pos-bottom d-flex align-items-center justify-content-center" data-percent="20" data-piesize="70" data-linewidth="5" data-scalelength="1" data-scalecolor="#fff">
-                                                            <div class="position-absolute pos-top pos-left pos-right pos-bottom d-flex align-items-center justify-content-center fw-800 fs-xl text-dark">20%</div>
+                                                <div class="js-easy-pie-chart color-success-500 position-relative mt-2 d-inline-flex align-items-center justify-content-center" style="" data-percent="{{number_format($nb/count($array)*100,2)}}" data-piesize="110" data-linewidth="10" data-scalelength="5">
+                                                        <div class="js-easy-pie-chart color-success-400 position-relative position-absolute pos-left pos-right pos-top pos-bottom d-flex align-items-center justify-content-center" data-percent="{{number_format($nb/count($array)*100,2)}}" data-piesize="70" data-linewidth="5" data-scalelength="1" data-scalecolor="#fff">
+                                                            <div class="position-absolute pos-top pos-left pos-right pos-bottom d-flex align-items-center justify-content-center fw-800 fs-xl text-dark">{{number_format($nb/count($array)*100,2)}}%</div>
                                                         </div>
                                                 </div>
                                               
@@ -116,6 +127,12 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <?php
+
+                                    $chargers=$prof[0]->chargers;
+
+                                ?>
                                 <div class="panel">
                                     <div class="row mb-3 align-items-center">
                                         <div class="col-lg-12 p-3">
@@ -125,19 +142,22 @@
                                                         <th style="font-weight:800">Matiere</th>
                                                         <th style="font-weight:800">Classe</th>
                                                         <th style="font-weight:800" >Heure</th>
+                                                      
+
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+
+                                                @foreach ( $chargers as $charger)
                                                     <tr>
-                                                        <td>Mathematique</td>
-                                                        <td>3</td>
-                                                        <td>12</td>
+                                                        <td>{{$charger->matiere->libelle}}</td>
+                                                        <td>{{$charger->classe->libelle}}</td>
+                                                        <td>{{$charger->heurechargerparmois}}</td>
+                                                    
                                                     </tr>
-                                                    <tr>
-                                                        <td>Mathematique</td>
-                                                        <td>4eme</td>
-                                                        <td>8</td>
-                                                    </tr>
+                                                @endforeach
+                                                    
+                                                   
                                                 </tbody>
                                             </table>
                                         </div>
@@ -153,16 +173,12 @@
                                                     </button>
                                                 </div>
                                                 <div>
-                                                    <button class="btn btn-outline-warning">
-                                                        Avance
-                                                    </button>
+                                                    <a href="{{route('operation.detail.sal',['id'=>$prof[0]->id])}}" type="button" class="btn btn-outline-secondary">
+                                                        Operations detaillees
+                                                    </a>
                                                 </div>
                                             </div>
-                                            <center class="mt-3">
-                                                <button class="btn btn-outline-secondary">
-                                                    Operations detaillees
-                                                </button>
-                                            </center>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -189,7 +205,7 @@
                             <div class="card mb-3" style="box-shadow: 5px 4px 11px 5px #9a9996 ; border:1px solid #584475;">
                                <div class="card-body p-3">
                                    <h5>
-                                       <a href="#" class="badge badge-warning">Vacataire</a>
+                                       <a href="#" class="badge badge-warning">{{$prof[0]->rule->libelle}}</a>
                                        <span class="badge badge-primary fw-n position-absolute pos-top pos-right mt-3 mr-3">P</span>
                                    </h5>
                                  
@@ -200,24 +216,43 @@
                                
                                <div class="card-body p-3">
                                
-                               		<form action="" method="post">
+                               		<form action="{{route('operation.post.sal',['id'=>$prof[0]->id])}}" method="post">
+                                        @csrf
 					                    <div class="form-group">
 					                        <label class="form-label" for="mois" style="font-weight:bold">Mois correspondant:</label>
-					                        <input type="text" name="mois" id="mois" class="form-control"  placeholder="Janvier 2014" >
+					                        <input type="text" name="motif" id="mois" class="form-control"  value="{{$array[$nb]}}" readonly>
 					                       
 					                    </div>
 					                    <div class="form-group">
-					                        <label class="form-label" for="Parcours normal" style="font-weight:bold">Durée :</label>
-					                        <input type="number" name="Parcours normal" id="Parcours normal" class="form-control" placeholder="20" readonly>
+					                        <label class="form-label" for="Parcours normal" style="font-weight:bold">Parcours normal :</label>
+					                        <input type="number" name="Parcours normal" id="Parcours normal" class="form-control" placeholder="{{$heure}} H" readonly>
 					                      
 					                    </div>
-					                    <div class="form-group">
-					                        <label class="form-label" for="Parcours effectué" style="font-weight:bold">Durée :</label>
-					                        <input type="number" name="Parcours effectué" id="Parcours effectué" class="form-control" placeholder="10">
+
+                                        <div class="form-group">
+					                        <label class="form-label" for="salaire" style="font-weight:bold">Salaire :</label>
+                                            @if ($prof[0]->rule_id == 1)
+                                                <input type="number" name="salaire" value="{{$heure*$prof[0]->coutparheure}}"
+                                                id="salaire" class="form-control" readonly>
+
+                                            @else
+                                                <input type="number" name="salaire" value="{{$prof[0]->salaire}}"
+                                                id="salaire" class="form-control" readonly>
+                                            @endif
+					                        
 					                       
 					                    </div>
-					                   
-                                  
+
+                                        <div class="form-group">
+                                                <label class="form-label" for="montant" style="font-weight:bold">Montant :</label>
+                                                <input type="number" name="montant" id="montant" class="form-control" readonly> 
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="form-label" for="nb" style="font-weight:bold">Nombre de mois:</label>
+                                            <input type="number" name="nb" id="nb" class="form-control"> 
+                                        </div>
+
 					                    <div class="d-inline-flex" style="width:100%;margin-left:40px">
                                             <button type="button" class="btn btn-sm btn-outline-secondary mr-3" data-dismiss="modal" style="margin-right:30px">Annuler</button>
                                             <button type="submit"  class="btn btn-sm btn-outline-primary mr-1">Effectuer</button> 
@@ -239,4 +274,14 @@
 
     @section('script')
         <script src="/assets/js/statistics/easypiechart/easypiechart.bundle.js"></script>
+        <script>
+            $(document).ready(function(){
+                $('#nb').keyup(function(){
+                    let salaire=$('input[name=salaire]').val()
+                    let nb=$('input[name=nb]').val()
+
+                    $('input[name=montant]').val(salaire*nb)
+                })
+            })
+        </script>
     @endsection

@@ -51,8 +51,9 @@
                         <div class="subheader">
                             <h1 class="subheader-title">
                                 <i class='subheader-icon fal fa-window'></i> @yield('breadcrumbChild') @yield('badge')
-                               
+                                
                             </h1>
+                            @yield('headerDash')
                         </div>
 
                         @yield('contents')

@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('charger', function (Blueprint $table) {
             $table->id();
             $table->unsignedSmallInteger('heurechargerparmois');
-            $table->float('coutparheure');
             $table->boolean('dispo')->default(TRUE);
             $table->unsignedSmallInteger('coefficient');
             $table->foreignId('matiere_id')->constrained('matiere')

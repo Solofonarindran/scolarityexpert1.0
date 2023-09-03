@@ -16,13 +16,13 @@ class Operation extends Model
         'motif',
         'montant',
         'nb',
-        'annee_scolaire_id',
+        'anneescolaire_id',
         'professeur_id'
     ];
 
-    public function anneeScolaire()
+    public function anneescolaire()
     {
-        return $this->belongsTo(AnneeScolaire::class);
+        return $this->belongsTo(Anneescolaire::class);
     }
 
     public function professeur()

@@ -39,7 +39,7 @@
         </div>
         <ul id="js-nav-menu" class="nav-menu">
             <li>
-                <a href="#" title="Dashboard" data-filter-tags="tableau bord">
+                <a href="{{route('dashboard')}}" title="Dashboard" data-filter-tags="tableau bord">
                     <i class="fas fa-tachometer-alt"></i>
                     <span class="nav-link-text" data-i18n="nav.application_intel">Tableau de Bord</span>
                 </a>
@@ -103,13 +103,13 @@
                 </ul>
             </li>
             <li>
-                <a href="#" title="Utilities" data-filter-tags="finance">
+                <a href="#" title="Financement" data-filter-tags="finance">
                     <i class="fa fa-chart-line"></i>
                     <span class="nav-link-text" data-i18n="nav.utilities">Gérance Financière</span>
                 </a>
                 <ul>
                     <li>
-                        <a href="{{route('operation.list.ins')}}" title="Color Pallet"
+                        <a href="{{route('operation.list.ins')}}" title="Ecolage"
                             data-filter-tags="ecolage frais scolaire">
                             <span class="nav-link-text" data-i18n="nav.utilities_color_pallet">Frais
                                 Scolaire</span>
@@ -117,14 +117,14 @@
                     </li>
 
                     <li>
-                        <a href="utilities_spacing.html" title="Spacing"
+                        <a href="{{route('operation.list.prof')}}" title="Salaire des Profs"
                             data-filter-tags="salariés payement">
                             <span class="nav-link-text" data-i18n="nav.utilities_spacing">Salariés</span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="utilities_spacing.html" title="Spacing"
+                        <a href="utilities_spacing.html" title="Approvisionnement"
                             data-filter-tags="Dépense subvention">
                             <span class="nav-link-text" data-i18n="nav.utilities_spacing">Ecole</span>
                         </a>
