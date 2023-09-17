@@ -13,11 +13,11 @@
         }
 
 
-        public function incrementEffActu($id)
+       /* public function incrementEffActu($id)
         {
            return $this->model->where('id',$id)
                               ->increment('effectifActu',1);
-        }
+        }*/
 
         //return la classe qui a le prédecesseur
         public function getByForeignIdClass($id)
@@ -30,39 +30,46 @@
 
         //retourner les classes de presco
         //Dashboard classe
-        public function getPrescoClass()
+        public function getPrescoClass($annee_id)
         {
             return $this->model
                         ->newQuery()
                         ->where('cycle_id',1)
-                        ->with($this->relation)
+                        ->with(['inscrits'=>function($query) use($annee_id){
+                            $query->where('anneescolaire_id',$annee_id);
+
+                        }])
                         ->get();
         }
 
         //retourner les classes de primaire
         //Dashboard classe
-        public function getPrimaryClass()
+        public function getPrimaryClass($annee_id)
         {
             return $this->model
                         ->newQuery()
                         ->where('cycle_id',2)
-                        ->with($this->relation)
+                        ->with(['inscrits'=>function($query) use($annee_id){
+                            $query->where('anneescolaire_id',$annee_id);
+                        }])
                         ->get();
         }
 
-         //retourner les classes de sécondaire
-         //Dashboard classe
-         public function getSecondaryClass()
-         {
-             return $this->model
+        //retourner les classes de sécondaire
+        //Dashboard classe
+        public function getSecondaryClass($annee_id)
+        {
+            return $this->model
                          ->newQuery()
                          ->where('cycle_id',3)
-                         ->with($this->relation)
+                         ->with(['inscrits'=>function($query) use($annee_id){
+                            $query->where('anneescolaire_id',$annee_id);
+                         }])
                          ->get();
-         }
+        }
          
 
-          //return classes par id cycle
+        //return classes par id cycle
         //function 1 gérance Inscription
         public function getClassesDispo($id)
         {

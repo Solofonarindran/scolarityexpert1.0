@@ -226,11 +226,15 @@
                                 class="rounded-circle profile-image" alt="Dr. Codex Lantern" />
                         </span>
                         <div class="info-card-text">
-                            <div class="fs-lg text-truncate text-truncate-lg">
-                                Dr. SOAZARA
-                            </div>
-                            <span
-                                class="text-truncate text-truncate-md opacity-80">soazarambaraky@gmail.com</span>
+                            @if (Auth()->user())
+                                <div class="fs-lg text-truncate text-truncate-lg">
+                                    Dr. SOAZARA
+                                </div>
+                                <span
+                                    class="text-truncate text-truncate-md opacity-80">{{Auth()->user()->email}}</span>
+                                
+                            @endif
+                            
                         </div>
                     </div>
                 </div>
@@ -250,9 +254,12 @@
                 </a>
 
                 <div class="dropdown-divider m-0"></div>
-                <a class="dropdown-item fw-500 pt-3 pb-3" href="page_login-alt.html">
+                <a class="dropdown-item fw-500 pt-3 pb-3" href="{{route('logout')}}">
                     <span data-i18n="drpdwn.page-logout">Logout</span>
-                    <span class="float-right fw-n">&commat;codexlantern</span>
+                    @if (Auth()->user())
+                        <span class="float-right fw-n">&commat;{{Auth()->user()->email}}</span>
+                    @endif
+                    
                 </a>
             </div>
         </div>

@@ -42,18 +42,18 @@ class ClasseController extends Controller
         $data=$request->input();
         $id=$data['id'];
         $this->repo->edit($id,$data);
-
+        
         return to_route('classe.show');
     }
  
     public function showDashboard()
     {
-        //
-        $prescolaires=$this->repo->getPrescoClass();
-        $primarys=$this->repo->getPrimaryClass();
-        $secondarys=$this->repo->getSecondaryClass();
+        $annee_id=session('annee_id');
+        $prescolaires=$this->repo->getPrescoClass($annee_id);
+        $primarys=$this->repo->getPrimaryClass($annee_id);
+        $secondarys=$this->repo->getSecondaryClass($annee_id);
 
-        
+        //return $prescolaires;
         return view('gerance_classe',compact('prescolaires','primarys','secondarys'));
     }
 

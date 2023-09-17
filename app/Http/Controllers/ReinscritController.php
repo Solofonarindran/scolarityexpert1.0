@@ -28,7 +28,7 @@ class ReinscritController extends Controller
 
         //anneescolaire_id stocké dans la session
         $data=$request->input();
-        $data['anneescolaire_id']=1;
+        $data['anneescolaire_id']=session('annee_id');
         
         $inscrit= $this->inscritRepo->edit(null,$data);
         $dataInscrit=$inscrit->getOriginal();
@@ -42,7 +42,7 @@ class ReinscritController extends Controller
         //enregistrer le mouvement ecolage 1mois + droit
         $dataMouv['inscrit_id']=$dataInscrit['id'];
         $dataMouv['libelle']='Droit + Ecolage 1 mois';
-        $dataMouv['anneescolaire_id']=1;
+        $dataMouv['anneescolaire_id']=session('annee_id');
         $dataMouv['montant']=$data['somme'];
         $mouvRepo->edit(null,$dataMouv);
 
@@ -77,8 +77,13 @@ class ReinscritController extends Controller
 
        
         //années sco dans la session()
-        $anneeSco_id=1;
-        $inscrits=$this->inscritRepo->researchInscrit($anneeSco_id);
+        $annee_id=session('annee_id');
+
+        //année scolaire précedante
+        $anneeScoPred_id=$annee_id-1;
+
+        //récupère les inscrits de l'année dernière
+        $inscrits=$this->inscritRepo->researchInscrit($anneeScoPred_id);
 
         return view('reinscription.searchInscrit',compact('inscrits'));
     }

@@ -11,6 +11,12 @@
             $this->relation=['inscrits','operations'];
         }
 
+        public function getActif()
+        {
+            return $this->model->where('actif',TRUE)
+                               ->get();
+        }
+
 
         //return array mois pour le payement de frais
         public function tableau($id_annee)

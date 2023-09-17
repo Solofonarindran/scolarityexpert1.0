@@ -31,10 +31,10 @@ class OperationController extends Controller
 
     public function vuepayementById($id,AnneescolaireRepository $anneeRepo,ChargerRepository $chargerRepo)
     {
-        //$annee_id=session('annee_id')
-        $annee_id=1;
+        $annee_id=session('annee_id');
+    
 
-        $array=$anneeRepo->tableau(1);
+        $array=$anneeRepo->tableau($annee_id);
         $prof=$this->profRepo->_getById($id,$annee_id);
         
         //$heure charger par mois
@@ -48,8 +48,7 @@ class OperationController extends Controller
 
     public function postsalaire($id,Request $request)
     {
-        //$annee_id=session('annee_id')
-        $annee_id=1;
+        $annee_id=session('annee_id');
 
        $data=$request->input();
        $data['anneescolaire_id']=$annee_id;
@@ -62,11 +61,8 @@ class OperationController extends Controller
 
     public function getByIdProf($id)
     {
-        //$annee_id=session('annee_id')
-        //$annee=session('annee')
-
-        $annee_id=1;
-        $annee='2023-2024';
+        $annee_id=session('annee_id');
+        $annee=session('annee');
 
         $prof=$this->profRepo->_getById($id,$annee_id);
 

@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('libelle',20);
             $table->unsignedSmallInteger('effectifmax');
             $table->float('bareme');
-            $table->unsignedSmallInteger('effectifActu')->default(0);
             $table->float('tauxreussite')->default(0);
             $table->boolean('dispo')->default(TRUE);
             

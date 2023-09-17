@@ -20,8 +20,8 @@ class MouvementController extends Controller
 
     public function searchInscrit()
     {
-        $id_annee=1;
-        //$id_annee=session('annee_id')
+       
+        $id_annee=session('annee_id');
 
         $inscrits= $this->inscritRepo->inscritNonPayé($id_annee);   
         return view('financière.searchInscritByAnneeClass',compact('inscrits'));               
@@ -31,8 +31,8 @@ class MouvementController extends Controller
     public function vuepayementById($id,
                                     AnneeScolaireRepository $anneeRepo)
     {
-       //$annee=session('annee');
-        $array=$anneeRepo->tableau(1);
+        $annee_id=session('annee_id');
+        $array=$anneeRepo->tableau($annee_id);
         $inscrit=$this->inscritRepo->getById($id);
        return view('financière.fraisScolaire',compact('array','inscrit'));
     }

@@ -57,11 +57,11 @@
                             </div>
                             <div class="info-item">
                                 <h5><strong>Etudiant actuel:</strong></h5>
-                                <span><i class="fa fa-user"></i>{{$prescolaire->effectifActu}}</span>
+                                <span><i class="fa fa-user"></i>{{count($prescolaire->inscrits)}}</span>
                             </div>
                             <div class="info-item">
                                 <h5><strong>Place disponnible:</strong></h5>
-                                <span><i class="fa fa-bullhorn"></i>{{$prescolaire->effectifmax - $prescolaire->effectifActu}}</span>
+                                <span><i class="fa fa-bullhorn"></i>{{$prescolaire->effectifmax - count($prescolaire->inscrits)}}</span>
                             </div>
                         </div>
 
@@ -111,11 +111,11 @@
                             </div>
                             <div class="info-item">
                                 <h5><strong>Etudiant actuel:</strong></h5>
-                                <span><i class="fa fa-user"></i>{{$primary->effectifActu}}</span>
+                                <span><i class="fa fa-user"></i>{{count($primary->inscrits)}}</span>
                             </div>
                             <div class="info-item">
                                 <h5><strong>Place disponnible:</strong></h5>
-                                <span><i class="fa fa-bullhorn"></i>{{$primary->effectifmax - $primary->effectifActu}}</span>
+                                <span><i class="fa fa-bullhorn"></i>{{$primary->effectifmax - count($prescolaire->inscrits)}}</span>
                             </div>
                         </div>
 
@@ -164,11 +164,11 @@
                             </div>
                             <div class="info-item">
                                 <h5><strong>Etudiant actuel:</strong></h5>
-                                <span><i class="fa fa-user"></i>{{$secondary->effectifActu}}</span>
+                                <span><i class="fa fa-user"></i>{{count($secondary->inscrits)}}</span>
                             </div>
                             <div class="info-item">
                                 <h5><strong>Place disponnible:</strong></h5>
-                                <span><i class="fa fa-bullhorn"></i>{{$secondary->effectifmax - $secondary->effectifActu}}</span>
+                                <span><i class="fa fa-bullhorn"></i>{{$secondary->effectifmax - count($prescolaire->inscrits)}}</span>
                             </div>
                         </div>
 

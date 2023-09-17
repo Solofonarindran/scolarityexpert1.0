@@ -78,13 +78,13 @@ class EvaluationController extends Controller
         $classe_id=session('classe_id');
         
 
-        $anne_id=1;
+        $annee_id=session('annee_id');
 
         if($option==1)
         {
             $charger=$chargeRepo->getById($request->input('charger_id'));
             $examen=$examRepo->find($examen_id);
-            $inscrits=$this->inscritRepo->inscritByClassIdAnneSco($classe_id,$anne_id);
+            $inscrits=$this->inscritRepo->inscritByClassIdAnneSco($classe_id,$annee_id);
             return view('evaluation.nouvel.liste_a_RemplirEtape3',compact('inscrits','examen','charger'));
         }else
         {

@@ -75,6 +75,10 @@
                                         Secure login
                                     </h1>
                                     <div class="card p-4 rounded-plus bg-faded">
+                                    @if(session('failed'))
+                                        <center class="alert alert-danger">Votre connexion a été échouée</center>
+                                        
+                                    @endif
                                         <form id="js-login" method="post" action="{{route('sendlogin')}}">
                                             @csrf
                                             <div class="form-group">

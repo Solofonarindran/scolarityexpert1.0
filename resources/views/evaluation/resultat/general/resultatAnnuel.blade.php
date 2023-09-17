@@ -35,14 +35,26 @@
                         <div class="table-responsive">
                             <table class="table table-clean table-sm align-self-end">
                                 <tbody>
-                                   
+                                <?php
+                                    $j=0;
+                                    $effectif=0;
+                                    foreach($resultats as $resultat){
+                                        $avg=number_format($resultat->weighted_sum/($sumcoeff[0]->sumcoeff * 6),2);
+                                        
+                                        if($avg>=$resultat->inscrit->classe->bareme){
+                                            $j++;
+                                        }
+                                        $effectif++;
+                                    }
+
+                                ?>
                                     <tr>
                                         <td>
                                             <h4 style="letter-spacing:2px">Année Scolaire:</h4> 
                                        
                                         </td>
                                         <td>
-                                           <strong>2012-2013</strong>
+                                           <strong>{{$anneeSco[0]->libelle}}</strong>
                                         </td>
                                     </tr>    
                                     <tr>
@@ -50,7 +62,7 @@
                                             <h4 style="letter-spacing:2px">Classe :</h4> 
                                         </td>
                                         <td>
-                                        4 ème A
+                                         {{$classe[0]->libelle}}
                                         </td>
                                     </tr>
                                     <tr>
@@ -58,32 +70,20 @@
                                             <h4 style="letter-spacing:2px">Effectif :</h4> 
                                         </td>
                                         <td>
-                                            40
+                                            {{$effectif}}
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                    <?php
-                        $j=0;
-                        $effectif=0;
-                        foreach($resultats as $resultat){
-                            $avg=number_format($resultat->weighted_sum/($sumcoeff[0]->sumcoeff * 6),2);
-                            
-                            if($avg>=$resultat->inscrit->classe->bareme){
-                                $j++;
-                            }
-                            $effectif++;
-                        }
-
-                    ?>
+                    
                     <div class="col-sm-4 ml-sm-auto mr-4" style="">
 
                         <div class="d-flex mr-4 position-relative" style="height:100%;">
-                            <div class="js-easy-pie-chart color-warning-500 position-relative d-inline-flex align-items-center justify-content-center" style="" data-percent="{{$j/$effectif}}" data-piesize="110" data-linewidth="10" data-scalelength="5">
-                                                <div class="js-easy-pie-chart color-warning-400 position-relative position-absolute pos-left pos-right pos-top pos-bottom d-flex align-items-center justify-content-center" data-percent="{{$j/$effectif}}" data-piesize="70" data-linewidth="5" data-scalelength="1" data-scalecolor="#fff">
-                                                    <div class="position-absolute pos-top pos-left pos-right pos-bottom d-flex align-items-center justify-content-center fw-800 fs-xl text-dark">{{$j/$effectif}} %</div>
+                            <div class="js-easy-pie-chart color-warning-500 position-relative d-inline-flex align-items-center justify-content-center" style="" data-percent="@if($effectif==0) {{$effectif}} @else{{$j/$effectif}}@endif" data-piesize="110" data-linewidth="10" data-scalelength="5">
+                                                <div class="js-easy-pie-chart color-warning-400 position-relative position-absolute pos-left pos-right pos-top pos-bottom d-flex align-items-center justify-content-center" data-percent="@if($effectif==0){{$effectif}} @else {{$j/$effectif}} @endif" data-piesize="70" data-linewidth="5" data-scalelength="1" data-scalecolor="#fff">
+                                                    <div class="position-absolute pos-top pos-left pos-right pos-bottom d-flex align-items-center justify-content-center fw-800 fs-xl text-dark">@if($effectif==0){{$effectif}} @else {{$j/$effectif}}@endif %</div>
                                                 </div>
                             </div>
                             <label class="mt-md-0 position-absolute" style="font-weight:bold; letter-spacing:2px ; font-size:18px;left:-18px;top:-2px">Taux</label>

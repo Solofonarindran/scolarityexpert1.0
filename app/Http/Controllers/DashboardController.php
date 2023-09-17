@@ -15,8 +15,8 @@ class DashboardController extends Controller
                              OperationRepository $operationRepo,
                              Anneescolaire $anneesco)
     {
-        //$annee_id=session('annee_id');
-        $annee_id=1;
+        $annee_id=session('annee_id');
+      
         $annee=$anneesco::find($annee_id);
 
         $inscrits=$inscritRepo->getByAnneeId($annee_id);
@@ -76,7 +76,7 @@ class DashboardController extends Controller
         $arrayNb['participationpaye']=$participation_paye->count('id');
         $arrayNb['participationpayant']=$inscritRepo->nbParticipation($annee_id);
 
-      
+        //return $effectif;
         return view('dashboard',compact('arrayNb','arrayDetail','effectif','ressource','charge','annee'));
     }
 

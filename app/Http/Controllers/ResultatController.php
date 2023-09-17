@@ -70,13 +70,14 @@ class ResultatController extends Controller
 
         $data=$request->input();
         $resultats= $this->examinerRepo->resultatByExamenId($data);
+       
      
         return view('evaluation.resultat.general.resultatparExam',compact('resultats'));
     }
 
 
     //post classe pour obtenir les résultats global annuel
-    public function postClasse(Request $request)
+    public function postClasse(Request $request,ClasseRepository $classeRepo)
     {
         $request->validate(
             ['classe_id'=>'required',
@@ -84,12 +85,15 @@ class ResultatController extends Controller
         );
 
         $data=$request->input();
-       
+
+        $anneeSco=$this->anneeScoRepo->getById($data['annee_id']);
+        $classe=$classeRepo->getById($data['classe_id']);
+
         $resultats=$this->examinerRepo-> averagAnnuel($data['classe_id'],$data['annee_id']);
 
         $sumcoeff=$this->chargerRepo->sumCoeff($data['classe_id']);
         
-        return view('evaluation.resultat.general.resultatAnnuel',compact('resultats','sumcoeff'));
+        return view('evaluation.resultat.general.resultatAnnuel',compact('anneeSco','classe','resultats','sumcoeff'));
     }
     
 

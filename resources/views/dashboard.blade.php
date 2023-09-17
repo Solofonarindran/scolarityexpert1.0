@@ -23,18 +23,18 @@
     @section('headerDash')
            
             <div class="d-flex mr-4">
-                <div class="js-easy-pie-chart color-warning-500 position-relative d-inline-flex align-items-center justify-content-center" data-percent="{{number_format($charge/$ressource*100,2)}}" data-piesize="105" data-linewidth="10" data-scalelength="5">
-                                    <div class="js-easy-pie-chart color-warning-400 position-relative position-absolute pos-left pos-right pos-top pos-bottom d-flex align-items-center justify-content-center" data-percent="{{number_format($charge/$ressource*100,2)}}" data-piesize="70" data-linewidth="5" data-scalelength="1" data-scalecolor="#fff">
-                                        <div class="position-absolute pos-top pos-left pos-right pos-bottom d-flex align-items-center justify-content-center fw-500 fs-xl text-dark">{{number_format($charge/$ressource*100,2)}}%</div>
+                <div class="js-easy-pie-chart color-warning-500 position-relative d-inline-flex align-items-center justify-content-center" data-percent="@if($ressource == 0){{ $ressource }} @else{{number_format($charge/$ressource*100,2)}} @endif" data-piesize="105" data-linewidth="10" data-scalelength="5">
+                                    <div class="js-easy-pie-chart color-warning-400 position-relative position-absolute pos-left pos-right pos-top pos-bottom d-flex align-items-center justify-content-center" data-percent="@if($ressource==0){{0}} @else{{number_format($charge/$ressource*100,2)}}@endif" data-piesize="70" data-linewidth="5" data-scalelength="1" data-scalecolor="#fff">
+                                        <div class="position-absolute pos-top pos-left pos-right pos-bottom d-flex align-items-center justify-content-center fw-500 fs-xl text-dark">@if($ressource==0) {{0}} @else {{number_format($charge/$ressource*100,2)}} @endif%</div>
                                     </div>
                </div>
                <label class="mb-0 mt-2 mt-md-0" style="font-weight:bold; letter-spacing:2px ; font-size:18px">Charges</label>
                
             </div>
             <div class="d-flex mr-4">
-               <div class="js-easy-pie-chart color-success-500 position-relative d-inline-flex align-items-center justify-content-center" data-percent="{{number_format(($ressource-$charge)/$ressource*100,2)}}" data-piesize="105" data-linewidth="10" data-scalelength="5">
-                                    <div class="js-easy-pie-chart color-success-400 position-relative position-absolute pos-left pos-right pos-top pos-bottom d-flex align-items-center justify-content-center" data-percent="{{number_format(($ressource-$charge)/$ressource*100,2)}}" data-piesize="70" data-linewidth="5" data-scalelength="1" data-scalecolor="#fff">
-                                        <div class="position-absolute pos-top pos-left pos-right pos-bottom d-flex align-items-center justify-content-center fw-500 fs-xl text-dark">{{number_format(($ressource-$charge)/$ressource*100,2)}}%</div>
+               <div class="js-easy-pie-chart color-success-500 position-relative d-inline-flex align-items-center justify-content-center" data-percent="@if($ressource==0){{0}} @else{{number_format(($ressource-$charge)/$ressource*100,2)}}@endif" data-piesize="105" data-linewidth="10" data-scalelength="5">
+                                    <div class="js-easy-pie-chart color-success-400 position-relative position-absolute pos-left pos-right pos-top pos-bottom d-flex align-items-center justify-content-center" data-percent="@if($ressource==0){{0}} @else {{number_format(($ressource-$charge)/$ressource*100,2)}} @endif" data-piesize="70" data-linewidth="5" data-scalelength="1" data-scalecolor="#fff">
+                                        <div class="position-absolute pos-top pos-left pos-right pos-bottom d-flex align-items-center justify-content-center fw-500 fs-xl text-dark">@if($ressource==0){{0}} @else{{number_format(($ressource-$charge)/$ressource*100,2)}} @endif%</div>
                                     </div>
                </div>
                <label class="mb-0 mt-2 mt-md-0" style="font-weight:bold; letter-spacing:2px ; font-size:18px">Marge</label>
@@ -94,11 +94,19 @@
 
 
         <?php
+            if($ressource==0){
+                $ecolageDetail=0.00;
+                $droitDetail=0.00;
+                $tm_friandiseDetail=0.00;
+                $participationDetail=0.00;
 
-            $ecolageDetail=number_format(($ressource-($arrayDetail['droit']+$arrayDetail['participation']+$arrayDetail['friandise']+$arrayDetail['tm']))/$ressource*100,2);
-            $droitDetail=number_format($arrayDetail['droit']/$ressource*100,2);
-            $tm_friandiseDetail=number_format(($arrayDetail['tm']+$arrayDetail['friandise'])/$ressource*100,2);
-            $participationDetail=number_format($arrayDetail['participation']/$ressource,2);
+            }else{
+                $ecolageDetail=number_format(($ressource-($arrayDetail['droit']+$arrayDetail['participation']+$arrayDetail['friandise']+$arrayDetail['tm']))/$ressource*100,2);
+                $droitDetail=number_format($arrayDetail['droit']/$ressource*100,2);
+                $tm_friandiseDetail=number_format(($arrayDetail['tm']+$arrayDetail['friandise'])/$ressource*100,2);
+                $participationDetail=number_format($arrayDetail['participation']/$ressource,2);
+            }
+            
 
         ?>
 
@@ -179,11 +187,29 @@
                     </div>
 
                     <?php
+                        if($effectif==0)
+                        {
+                            $tmPaiement=0.00;
+                            $ecolagePaiement=0.00;
+                            $friandisePaiement=0.00;
+                            $participationPaiement=0.00;
 
-                        $tmPaiement=number_format($arrayNb['tmpaye']/$effectif*100,2);
-                        $ecolagePaiement=number_format($arrayNb['ecolagepaye']/($effectif*$annee->nb_mois)*100,2);
-                        $friandisePaiement=number_format($arrayNb['friandisepaye']/$effectif*100,2);
-                        $participationPaiement=number_format($arrayNb['participationpaye']/$arrayNb['participationpayant']*100,2);
+                        }else{
+                            $tmPaiement=number_format($arrayNb['tmpaye']/$effectif*100,2);
+                            $ecolagePaiement=number_format($arrayNb['ecolagepaye']/($effectif*$annee->nb_mois)*100,2);
+    
+                            $friandisePaiement=number_format($arrayNb['friandisepaye']/$effectif*100,2);
+
+                            if($arrayNb['participationpayant']==0){
+                                $participationPaiement=0.00;
+                            }else{
+                                $participationPaiement=number_format($arrayNb['participationpaye']/$arrayNb['participationpayant']*100,2);
+                            }
+                           
+                            
+
+                        }
+                        
                     ?>
                     <div class="panel-container show">
                         <div class="panel-content position-relative">
