@@ -17,7 +17,7 @@ class Mouvement extends Model
         'nb',
         'montant',
         'inscrit_id',
-        'anneescolaire_id'
+        
     ];
 
     public function inscrit()
