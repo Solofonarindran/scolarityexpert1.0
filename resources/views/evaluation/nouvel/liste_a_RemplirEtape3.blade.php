@@ -33,7 +33,7 @@
             <div id="panel-1" class="panel" style="margin-left:15%;margin-right:15%">
                 <div class="panel-hdr">
                     <h2>
-                        Information Classe de:<span class="fw-300 badge badge-warning" style="font-size:15px"><i>{{$inscrits[0]->classe->libelle}}</i></span>
+                        Information Classe de:<span class="fw-300 badge badge-warning" style="font-size:15px"><i>{{$classe->libelle}}</i></span>
                     </h2>
                 </div>
                 <div class="panel-container show">
@@ -216,7 +216,7 @@
                             <div class="card mb-3" style="box-shadow: 5px 4px 11px 5px #9a9996 ; border:1px solid #584475;">
                                <div class="card-body p-3">
                                    <h5>
-                                       <a href="#" class="badge badge-warning">Classe de {{$inscrits[0]->classe->libelle}}</a>
+                                       <a href="#" class="badge badge-warning">Classe de {{$classe->libelle}}</a>
                                        <span class="badge badge-primary fw-n position-absolute pos-top pos-right mt-3 mr-3">A</span>
                                    </h5>
                                  

@@ -124,7 +124,7 @@
                     </li>
 
                     <li>
-                        <a href="utilities_spacing.html" title="Approvisionnement"
+                        <a href="utilities_spacing.html" title="Approvisionnement" style="pointer-events:none"
                             data-filter-tags="Dépense subvention">
                             <span class="nav-link-text" data-i18n="nav.utilities_spacing">Ecole</span>
                         </a>

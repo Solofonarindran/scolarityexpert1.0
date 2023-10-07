@@ -65,7 +65,7 @@ class EvaluationController extends Controller
         return view('evaluation.matiereDispoEtape3',compact('chargers'));
     }
 
-    public function postMatiereDispo(Request $request,ExamRepository $examRepo,ChargerRepository $chargeRepo)
+    public function postMatiereDispo(Request $request,ExamRepository $examRepo,ChargerRepository $chargeRepo,ClasseRepository $classeRepo)
     {
         $request->validate(
             ['charger_id'=>'required']
@@ -79,13 +79,16 @@ class EvaluationController extends Controller
         
 
         $annee_id=session('annee_id');
+        $classe=$classeRepo->find($classe_id);
 
         if($option==1)
         {
             $charger=$chargeRepo->getById($request->input('charger_id'));
             $examen=$examRepo->find($examen_id);
             $inscrits=$this->inscritRepo->inscritByClassIdAnneSco($classe_id,$annee_id);
-            return view('evaluation.nouvel.liste_a_RemplirEtape3',compact('inscrits','examen','charger'));
+            
+            
+            return view('evaluation.nouvel.liste_a_RemplirEtape3',compact('inscrits','examen','charger','classe'));
         }else
         {
             $examiners=$this->examinerRepo->listeNoteByExam($request->input('charger_id'),$examen_id);

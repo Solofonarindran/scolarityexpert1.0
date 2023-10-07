@@ -13,13 +13,11 @@
         }
 
 
-       /* public function incrementEffActu($id)
-        {
-           return $this->model->where('id',$id)
-                              ->increment('effectifActu',1);
-        }*/
+       public function find($id)
+       {
+            return $this->model::find($id);
+       }
 
-        //return la classe qui a le prédecesseur
         public function getByForeignIdClass($id)
         {
             return $this->model->newQuery()
