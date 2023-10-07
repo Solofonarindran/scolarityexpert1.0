@@ -79,7 +79,7 @@
                 </a>
                 <ul>
                     <li>
-                        <a href="#" title="Programme"
+                        <a href="#" title="Programme" style="pointer-events:none"
                             data-filter-tags="programme scolaire">
                             <span class="nav-link-text" data-i18n="nav.utilities_color_pallet">Programme
                                 Scolaire</span>
@@ -135,7 +135,7 @@
             <li class="nav-title">Paramètre</li>
 
             <li>
-                <a href="#" title="Theme Settings" data-filter-tags="paramètre">
+                <a href="#" title="Theme Settings" style="pointer-events:none" data-filter-tags="paramètre">
                     <i class="fa fa-cog"></i>
                     <span class="nav-link-text" data-i18n="nav.theme_settings">Paramètre de Compte</span>
                 </a>

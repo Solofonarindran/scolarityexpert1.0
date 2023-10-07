@@ -34,11 +34,7 @@ class ReinscritController extends Controller
         $dataInscrit=$inscrit->getOriginal();
          //update réinscription success
         $test=$this->inscritRepo->edit($data['inscrit_id'],['is_reinscrit'=>TRUE]);
-     
-    
-        $this->classeRepo->incrementEffActu($data['classe_id']);
-
-        
+             
         //enregistrer le mouvement ecolage 1mois + droit
         $dataMouv['inscrit_id']=$dataInscrit['id'];
         $dataMouv['libelle']='Droit + Ecolage 1 mois';
